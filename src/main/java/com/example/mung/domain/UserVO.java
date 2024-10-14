@@ -30,4 +30,5 @@ public class UserVO {
     private LocalDateTime updated_at;
     private String business_number;
     private String business_sns_url;
+
 }
