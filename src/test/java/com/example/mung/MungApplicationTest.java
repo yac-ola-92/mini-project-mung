@@ -9,18 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class MungApplicationTest {
 
-    @Autowired
-    private UserMapper mapper;
-    @Autowired
-    private CompanyMapper companyMapper;
 
     @Test
     void contextLoads() {
     }
 
-    @Test
-    public void testListAll() {
-        mapper.listAll().stream().forEach(System.out::println);
-    }
 
 }
