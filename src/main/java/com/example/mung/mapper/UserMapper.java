@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    // User 전체 조회
+/*    // User 전체 조회
     @Select("select * from user")
     public List<UserDTO> listAll();
 
@@ -30,6 +30,6 @@ public interface UserMapper {
             "nickname=#{nickname},role=#{role},user_address=#{user_address},profile_image_url=#{profile_image_url},pet_info=#{pet_info},business_number=#{business_number},business_sns_url=#{business_sns_url}" +
             "where user_id = ${user_id}")
     public void update(int user_id);
-    // User 삭제
+    // User 삭제*/
 
 }

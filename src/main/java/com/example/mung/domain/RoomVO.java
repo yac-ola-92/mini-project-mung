@@ -2,11 +2,14 @@ package com.example.mung.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class RoomVO {
     private int room_id;
+    private int accom_id;
     private String room_name;
     private String room_type;
     private int room_price;
