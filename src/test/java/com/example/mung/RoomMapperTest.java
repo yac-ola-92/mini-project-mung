@@ -29,7 +29,7 @@ public class RoomMapperTest {
         vo.setRoom_type("패밀리");
         vo.setRoom_price(150000);
         vo.setRoom_images_url("images.room2_1, images.room2_2");
-        vo.setRoom_info("그냥뭐");
+        vo.setRoom_info("그냥뭐s");
         vo.setRoom_amount(4);
         vo.setPet_kind("소형견");
         mapper.insert(vo);
