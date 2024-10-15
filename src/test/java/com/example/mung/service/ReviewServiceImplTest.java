@@ -1,4 +1,4 @@
-package com.example.mung;
+package com.example.mung.service;
 
 public class ReviewServiceImplTest {
 }

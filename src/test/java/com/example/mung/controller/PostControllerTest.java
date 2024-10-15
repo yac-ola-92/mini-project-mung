@@ -1,7 +1,6 @@
-package com.example.mung;
+package com.example.mung.controller;
 
 
-import com.example.mung.controller.PostController;
 import com.example.mung.domain.PostDTO;
 import com.example.mung.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +49,7 @@ public class PostControllerTest {
                 .andExpect(model().attributeExists("post"))
                 /*응답 모델에 post라는 속성이 존재하는지 확인.*/
                 .andReturn(); /*결과 반환*/
+
     }
 
     @Test // 특정 게시글 조회
