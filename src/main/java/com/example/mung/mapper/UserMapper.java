@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
+
     // User 전체 조회
     @Select("select * from user where user_id > 0 ")
     List<UserDTO> getList();
@@ -36,5 +37,6 @@ public interface UserMapper {
     void update(UserVO vo);
 
     // User 삭제
+
 
 }
