@@ -13,4 +13,5 @@ public interface AccomService {
     public List<AccomDTO>getListByLocation(String location);
     public AccomVO insert(AccomVO vo);
     public AccomVO update(AccomVO vo);
+    public AccomVO delete(AccomVO vo);
 }
