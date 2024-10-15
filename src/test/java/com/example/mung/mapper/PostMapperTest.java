@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @SpringBootTest
 public class PostMapperTest {
     @Autowired
-    PostMapper dao;
+    private PostMapper dao;
 
     @Test
     void testAllList() {dao.getList().stream().forEach(System.out::println);}

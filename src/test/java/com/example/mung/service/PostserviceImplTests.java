@@ -4,13 +4,14 @@ import com.example.mung.domain.PostDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @SpringBootTest
 public class PostserviceImplTests {
     @Autowired
-    PostService postService;
+    private PostService postService;
 
     @Test // 게시글 전체 조회
     void testFindAll() {postService.findAll().stream().forEach(System.out::println);}
@@ -34,12 +35,14 @@ public class PostserviceImplTests {
     }
 
     @Test // 게시글 삭제
+    @Transactional
     void testRemove() {
         System.out.println(postService.remove(2));
         postService.findAll().stream().forEach(System.out::println);
     }
 
     @Test // 게시글 등록
+    @Transactional
     void testRegister() {
         PostDTO post = new PostDTO();
         post.setUser_id(1);
