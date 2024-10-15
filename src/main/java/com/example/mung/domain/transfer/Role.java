@@ -1,25 +1,18 @@
 package com.example.mung.domain.transfer;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class Role {
-    private List<String> role;
 
-    public Role(String role) {
-        this.role = Arrays.asList(role.split(","));
-    }
+    private String[] role_arr;
 
-    public void setRole(String role) {
-        this.role = Arrays.asList(role.split(","));
-    }
-
-    public String getRoleAdString() {
-        return String.join(",", this.role);
+    public Role(String[] str){
+        this.role_arr = str;
     }
 }
