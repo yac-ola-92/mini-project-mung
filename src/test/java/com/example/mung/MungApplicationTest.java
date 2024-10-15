@@ -10,5 +10,4 @@ class MungApplicationTest {
     void contextLoads() {
     }
 
-
 }

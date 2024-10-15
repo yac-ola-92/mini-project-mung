@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class RoomDTO {
     private int room_id;
+    private int accom_id;
     private String room_name;
     private String room_type;
     private int room_price;
