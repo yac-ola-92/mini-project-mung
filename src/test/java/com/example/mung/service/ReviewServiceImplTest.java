@@ -1,4 +1,4 @@
-package com.example.mung;
+package com.example.mung.service;
 
 import com.example.mung.domain.ReviewDTO;
 import com.example.mung.service.ReviewService;

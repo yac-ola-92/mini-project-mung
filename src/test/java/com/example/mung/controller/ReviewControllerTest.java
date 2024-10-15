@@ -1,4 +1,4 @@
-package com.example.mung;
+package com.example.mung.controller;
 
 import com.example.mung.controller.ReviewController;
 import com.example.mung.domain.ReviewDTO;

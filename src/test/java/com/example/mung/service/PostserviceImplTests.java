@@ -1,7 +1,6 @@
-package com.example.mung;
+package com.example.mung.service;
 
 import com.example.mung.domain.PostDTO;
-import com.example.mung.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

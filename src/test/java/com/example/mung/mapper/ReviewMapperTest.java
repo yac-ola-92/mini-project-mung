@@ -1,7 +1,6 @@
-package com.example.mung;
+package com.example.mung.mapper;
 
 import com.example.mung.domain.ReviewDTO;
-import com.example.mung.mapper.ReviewMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
