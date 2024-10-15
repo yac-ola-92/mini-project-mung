@@ -24,6 +24,7 @@ public class AccomServiceImpl implements AccomService {
 
     @Override
     public List<AccomDTO>getListByLocation(String location){
+        System.out.println(location+" 지역에 있는 숙소를 출력합니다");
         return accomDAO.getListByLocation(location);  // 위치에 따른 숙소 출력
     }
 

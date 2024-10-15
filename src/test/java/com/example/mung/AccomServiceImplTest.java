@@ -36,4 +36,19 @@ public class AccomServiceImplTest  {
         service.insert(vo);
         service.getList().stream().forEach(System.out::println);
     }
+
+    @Test
+    public void testUpdate(){
+        AccomVO vo = new AccomVO();
+        vo.setAccom_id(8);
+        vo.setAccom_name("에어비엔비아님");
+        vo.setAccom_location("경기도 안양");
+        vo.setAccom_phone("010-0321-5130");
+        vo.setAccom_amenities("데시벨 조건 있음");
+        vo.setAccom_caution("강아지는 데시벨 조건 없음");
+        vo.setAccom_description("강아지를 위한 해먹 준비됨");
+        vo.setAccom_images_url("images.notAirbnb.png");
+        service.update(vo);
+        service.getList().stream().forEach(System.out::println);
+    }
 }
