@@ -1,12 +1,9 @@
-package com.example.mung;
+package com.example.mung.mapper;
 
-import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
-import com.example.mung.mapper.AccomMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class AccomMapperTest {
