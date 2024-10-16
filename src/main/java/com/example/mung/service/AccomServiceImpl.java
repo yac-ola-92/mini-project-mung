@@ -24,6 +24,7 @@ public class AccomServiceImpl implements AccomService {
 
     @Override
     public List<AccomDTO>getListByLocation(String location){
+        System.out.println(location+" 지역에 있는 숙소를 출력합니다");
         return accomDAO.getListByLocation(location);  // 위치에 따른 숙소 출력
     }
 
@@ -31,16 +32,16 @@ public class AccomServiceImpl implements AccomService {
     public AccomVO insert(AccomVO vo){
         List<AccomVO>checkAccom = accomDAO.getListByUserAndAccom_name(vo);
         System.out.println(checkAccom.isEmpty());
-       if(!checkAccom.isEmpty()) {
-           System.out.println("이미 존재해서 등록 안할거~!");
-           throw new IllegalArgumentException("이미 존재하는 숙소");
-           // 유저아이디와 숙소명으로 찾아낸 숙소를 checkAccom에 넣고 그 값이 존재하면
-           // 존재하는 숙소임을 확인!
-       }else {
-           System.out.println(" 숙소 등록 성공");
+        if(!checkAccom.isEmpty()) {
+            System.out.println("이미 존재해서 등록 안할거~!");
+            throw new IllegalArgumentException("이미 존재하는 숙소");
+            // 유저아이디와 숙소명으로 찾아낸 숙소를 checkAccom에 넣고 그 값이 존재하면
+            // 존재하는 숙소임을 확인!
+        }else {
+            System.out.println(" 숙소 등록 성공");
             accomDAO.insert(vo);
-           //그렇지 않다면 숙소를 삽입하고 객체반환;
-       }
+            //그렇지 않다면 숙소를 삽입하고 객체반환;
+        }
         return vo;
     }
 
@@ -48,6 +49,12 @@ public class AccomServiceImpl implements AccomService {
     public AccomVO update(AccomVO vo){
         System.out.println("숙소 업데이트 성공");
         accomDAO.update(vo);
+        return vo;
+    }
+
+    @Override
+    public AccomVO delete(AccomVO vo){
+        System.out.println("숙소 삭제 성공 ");
         return vo;
     }
 }
