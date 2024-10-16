@@ -18,9 +18,9 @@ public interface PostMapper {
             "WHERE post_id = #{post_id}")
     boolean update(PostDTO post);
 
-    @Insert("INSERT INTO post (user_id, title, content, view_count, category, created_at, password, files) " +
-            "VALUES (#{user_id}, #{title}, #{content}, #{view_count}, #{category}, #{created_at}, #{password}, #{files})")
-    boolean insert(PostDTO post); // 유저아이디, 제목, 내용, 조회수, 카테고리, 등록날짜, 수정날짜, 비밀번호, 파일을 게시글로 등록
+    @Insert("INSERT INTO post (user_id, title, content, category, created_at, password, files) " +
+            "VALUES (#{user_id}, #{title}, #{content}, #{category}, #{created_at}, #{password}, #{files})")
+    boolean insert(PostDTO post); // 유저아이디, 제목, 내용, 조회수, 등록날짜, 수정날짜, 비밀번호, 파일을 게시글로 등록
 
     @Delete("delete from post where post_id = #{post_id}")
     boolean delete(@Param("post_id") int post_id); // 게시글 번호로 삭제
