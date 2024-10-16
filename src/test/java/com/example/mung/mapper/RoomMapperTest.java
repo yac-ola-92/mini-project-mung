@@ -12,6 +12,11 @@ public class RoomMapperTest {
     private RoomMapper mapper;
 
     @Test
+    public void testGetList(){
+        mapper.getList().stream().forEach(System.out::println);
+    }
+
+    @Test
     public void testGetListByAccom_id(){
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
@@ -54,7 +59,7 @@ public class RoomMapperTest {
 
     @Test
     public void testDelete() {
-        mapper.delete(2);
+        mapper.delete(3);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
 }
