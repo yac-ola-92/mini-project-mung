@@ -24,6 +24,7 @@ public class AccomServiceImplTest  {
     public void testInsert(){
         AccomVO vo = new AccomVO();
         vo.setUser_id(1);
+
         vo.setAccom_name("언덕아래");
         vo.setAccom_location("강원도 감자구");
         vo.setAccom_phone("010-1234-3333");
@@ -34,6 +35,7 @@ public class AccomServiceImplTest  {
         service.insert(vo);
         service.getList().stream().forEach(System.out::println);
     }
+
 
     @Test
     public void testUpdate(){
@@ -56,4 +58,5 @@ public class AccomServiceImplTest  {
     service.delete(12);
         service.getList().stream().forEach(System.out::println);
     }
+
 }

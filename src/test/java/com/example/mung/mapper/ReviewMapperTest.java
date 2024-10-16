@@ -44,7 +44,6 @@ public class ReviewMapperTest {
 
     @Test
     void testDelete() {
-        ReviewDTO dto = new ReviewDTO();
         System.out.println(dao.delete(1));
         dao.getList().forEach(System.out::println);
     }
