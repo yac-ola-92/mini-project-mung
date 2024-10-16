@@ -5,6 +5,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ public class UserDTO {
     private String user_loginId;
     private String user_name;
     private String user_email;
+    private String password;
     private String user_phone;
     private LocalDateTime user_birth;
     private int user_gender; // 1,3: 남자 / 2,4: Female,
@@ -28,6 +30,14 @@ public class UserDTO {
     private String business_number;
     private String business_sns_url;
 
+    public UserDTO (String user_loginId,String password){
+        this.user_loginId = user_loginId;
+        this.password=password;
+    }
+    //날짜 값으로 전달된 것을 String으로 전환하는 메서드
+    public String dateChanegeToString(LocalDateTime time){
+        return new SimpleDateFormat("yyyy-MM-dd").format(time);
+    }
     //하.. 반려견 정보 출력하는 메서드
     public String getPet_infoToString() {
         if (this.pet_info == null) {
