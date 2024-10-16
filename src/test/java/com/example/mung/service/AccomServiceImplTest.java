@@ -1,8 +1,6 @@
-package com.example.mung;
+package com.example.mung.service;
 
 import com.example.mung.domain.AccomVO;
-import com.example.mung.mapper.AccomMapper;
-import com.example.mung.service.AccomService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
