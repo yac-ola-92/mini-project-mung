@@ -41,7 +41,6 @@ public class PostMapperTest {
         dto.setUser_id(1);
         dto.setTitle("여기 괜찮아요");
         dto.setContent("나쁘지 않은거 같아요. 댕댕이랑 같이 가보세용");
-        dto.setView_count(0);
         dto.setCategory(PostDTO.Category.general);
         dto.setCreated_at(LocalDateTime.now());
         dto.setPassword("2345");

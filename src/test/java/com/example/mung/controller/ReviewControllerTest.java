@@ -1,6 +1,5 @@
 package com.example.mung.controller;
 
-import com.example.mung.controller.ReviewController;
 import com.example.mung.domain.ReviewDTO;
 import com.example.mung.service.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
