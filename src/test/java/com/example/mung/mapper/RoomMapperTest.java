@@ -1,7 +1,9 @@
 package com.example.mung.mapper;
 
 import com.example.mung.domain.RoomVO;
+
 import com.example.mung.mapper.RoomMapper;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,14 +31,18 @@ public class RoomMapperTest {
         vo.setRoom_type("패밀리");
         vo.setRoom_price(150000);
         vo.setRoom_images_url("images.room2_1, images.room2_2");
-        vo.setRoom_info("그냥뭐s");
+
+        vo.setRoom_info("그냥뭐");
+
         vo.setRoom_amount(4);
         vo.setPet_kind("소형견");
         mapper.insert(vo);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
 
+
     @Test
+
     public void testUpdate(){
         RoomVO vo = new RoomVO();
         vo.setRoom_id(5);
@@ -47,9 +53,11 @@ public class RoomMapperTest {
         vo.setRoom_info("오직 가족만");
         vo.setRoom_amount(7);
         vo.setPet_kind("소형견");
-        System.out.println(vo);
+
+         System.out.println(vo);
         mapper.update(vo);
-        mapper.getListByAccom_id(1).stream().forEach(System.out::println);
+       mapper.getListByAccom_id(1).stream().forEach(System.out::println);
+
     }
 
     @Test
@@ -57,4 +65,4 @@ public class RoomMapperTest {
         mapper.delete(2);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
-}
+
