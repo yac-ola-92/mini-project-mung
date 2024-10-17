@@ -13,7 +13,7 @@ public interface Comment_likeMapper {
 
     // 특정 유저가 선택한 댓글 좋아요, 싫어요
     @Select("SELECT  * FROM comment_like WHERE user_id = #{user_id}")
-    List<Comment_likeDTO> getLikeByUserId(int user_id);
+    List<Comment_likeDTO> getLikeByUserId(@Param("userId") int user_id);
 
     @Insert("INSERT INTO comment_like (comment_id, user_id, type) " +
             "VALUES (#{comment_id}, #{user_id}, #{type})")

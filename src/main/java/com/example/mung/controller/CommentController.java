@@ -38,10 +38,10 @@ public class CommentController {
 
     // 특정 게시물에 달린 댓글 목록 조회
     @GetMapping("/post/{post_id}")
-    public String getPostByPostId(@PathVariable int post_id, Model model) {
+    public String getCommentsByPostId(@PathVariable int post_id, Model model) {
         List<CommentDTO> comments = commentService.readByPostId(post_id);
         model.addAttribute("comments", comments);
-        return "comments";
+        return "comments/post"; // 게시물에 대한 댓글 페이지
     }
 
     // 댓글 등록

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 
 @SpringBootTest
-public class CommnetMapperTest {
+public class CommentMapperTest {
     @Autowired
     private CommentMapper dao;
 
@@ -44,6 +44,18 @@ public class CommnetMapperTest {
     @Test
     void testDelete() {
         System.out.println(dao.delete(14));
+        dao.getList().stream().forEach(System.out::println);
+    }
+
+    @Test
+    void testInsertParent() {
+        CommentDTO comment = new CommentDTO();
+        comment.setPost_id(1);
+        comment.setContent("너무 좋죠?");
+        comment.setCreated_at(LocalDateTime.now());
+        comment.setUser_id(1);
+        comment.setParent_comment_id(4); // 부모 댓글 아이디 설정
+        dao.insertReply(comment);
         dao.getList().stream().forEach(System.out::println);
     }
 
