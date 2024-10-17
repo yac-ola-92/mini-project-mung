@@ -2,14 +2,19 @@ package com.example.mung.domain;
 
 import com.example.mung.domain.transfer.PetInfo;
 import com.example.mung.domain.transfer.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserVO {
     private int user_id;
     private String user_loginId;
@@ -29,7 +34,13 @@ public class UserVO {
     private String business_number;
     private String business_sns_url;
 
-    public void setUser_birth(String birth){
+
+    public UserVO(String user_loginId,String password){
+        this.user_loginId =user_loginId;
+        this.password = password;
+    }
+
+    public void setUser_birthToString(String birth){
         this.user_birth = LocalDate.parse(birth).atStartOfDay();
     }
 

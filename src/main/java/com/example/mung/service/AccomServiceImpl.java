@@ -3,13 +3,13 @@ package com.example.mung.service;
 import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
 import com.example.mung.mapper.AccomMapper;
-import com.fasterxml.jackson.annotation.JacksonInject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-// 스프링에서 빈으로 인식하기위한 이노테이션
+// 스프링에서 빈으로 인식하기위한 어노테이션
 @Service
 public class AccomServiceImpl implements AccomService {
     // AccomServiceImpl는 DAO 메소드 호출 구현
@@ -17,19 +17,19 @@ public class AccomServiceImpl implements AccomService {
     private AccomMapper accomDAO;  //AccomMapper 받아서 accomDAO 객체 생성
 
     @Override
-    public List<AccomDTO>getList() {
+    public List<AccomDTO>getList() { //전체 숙소 출력
         // 숙소 리스트 DAO클래스의 메소드 호출
-        return accomDAO.getList(); //전체 숙소 출력
+        return accomDAO.getList();
     }
 
     @Override
-    public List<AccomDTO>getListByLocation(String location){
+    public List<AccomDTO>getListByLocation(String location){  // 위치에 따른 숙소 출력
         System.out.println(location+" 지역에 있는 숙소를 출력합니다");
-        return accomDAO.getListByLocation(location);  // 위치에 따른 숙소 출력
+        return accomDAO.getListByLocation(location);
     }
 
     @Override
-    public AccomVO insert(AccomVO vo){
+    public boolean insert(AccomVO vo){ //숙소 등록
         List<AccomVO>checkAccom = accomDAO.getListByUserAndAccom_name(vo);
         System.out.println(checkAccom.isEmpty());
         if(!checkAccom.isEmpty()) {
@@ -39,22 +39,21 @@ public class AccomServiceImpl implements AccomService {
             // 존재하는 숙소임을 확인!
         }else {
             System.out.println(" 숙소 등록 성공");
-            accomDAO.insert(vo);
+            return  accomDAO.insert(vo);
             //그렇지 않다면 숙소를 삽입하고 객체반환;
         }
-        return vo;
     }
 
+    @Transactional
     @Override
-    public AccomVO update(AccomVO vo){
+    public boolean update(AccomVO vo){ //숙소 수정
         System.out.println("숙소 업데이트 성공");
-        accomDAO.update(vo);
-        return vo;
+        return  accomDAO.update(vo);
     }
 
     @Override
-    public AccomVO delete(AccomVO vo){
+    public boolean delete(int accom_id){ //숙소 삭제
         System.out.println("숙소 삭제 성공 ");
-        return vo;
+        return accomDAO.delete(accom_id);
     }
 }
