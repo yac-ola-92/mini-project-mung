@@ -15,4 +15,6 @@ public class CommentDTO {
     private int user_id;
     private String content;
     private LocalDateTime created_at;
+    private int parent_comment_id;
+
 }

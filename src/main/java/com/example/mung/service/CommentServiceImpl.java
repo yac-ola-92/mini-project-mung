@@ -36,7 +36,6 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.insert(comment);
     }
 
-
     @Override
     public boolean modify(CommentDTO comment) {
         return commentMapper.update(comment);
