@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserVO {
     private int user_id;
-    private String user_loginId;
     private String user_name;
     private String user_email;
     private String password;
@@ -33,6 +32,7 @@ public class UserVO {
     private LocalDateTime updated_at;
     private String business_number;
     private String business_sns_url;
+    private String user_loginId;
 
 
     public UserVO(String user_loginId,String password){
@@ -51,14 +51,18 @@ public class UserVO {
         if (birth >= 2000) {
             if (gender.equals("남자")) {
                 genderNum = 3;
-            } else {
+            } else if(gender.equals("여자")){
                 genderNum = 4; // "여자"인 경우
+            }else {
+                return;
             }
         } else { //2000년생 미만일 경우
             if (gender.equals("남자")) {
                 genderNum = 1;
-            } else {
+            } else if(gender.equals("여자")){
                 genderNum = 2; // "여자"인 경우
+            }else {
+                return;
             }
         }
 

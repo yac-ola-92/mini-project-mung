@@ -38,7 +38,7 @@ public class UserMapperTest {
     public void insertTest() {
         UserVO vo = new UserVO();
         vo.setUser_name("김길동");
-        vo.setUser_loginId("user8");
+        vo.setUser_loginId("user9");
         vo.setUser_email("example1234@kmail.com");
         vo.setPassword("1234");
         vo.setUser_phone("010-0000-0000");
@@ -52,7 +52,7 @@ public class UserMapperTest {
         vo.setProfile_image_url("/bbangbbang.png");
         PetInfo petInfo = new PetInfo("뽀삐", "샤모에드", "2", "15kg");
         vo.setPet_info(petInfo);
-        int result = mapper.insert(vo);
+        boolean result = mapper.insert(vo);
         System.out.println("등록 완료 : " + result);
         System.out.println("insertTest 완료!!");
     }
@@ -62,7 +62,7 @@ public class UserMapperTest {
         UserVO vo = new UserVO();
         vo.setUser_id(1);
         vo.setUser_name("김옥지");
-        //vo.setUser_loginId("user5");
+        vo.setUser_loginId("user5");
         vo.setUser_email("example4444@kmail.com");
         vo.setPassword("12345");
         vo.setUser_phone("010-1234-1234");
@@ -76,13 +76,21 @@ public class UserMapperTest {
         vo.setProfile_image_url("/okji.png");
         PetInfo petInfo = new PetInfo("빵빵이", "요크셔테리어", "3", "4kg");
         vo.setPet_info(petInfo);
-        int result = mapper.update(vo);
+        boolean result = mapper.update(vo);
         System.out.println("update 완료!!! result :" + result);
     }
 
     @Test
+    public void update1Test(){
+        UserVO vo = new UserVO();
+        vo.setUser_id(16);
+        vo.setUser_loginId("dwi");
+        mapper.update1(vo);
+    }
+
+    @Test
     public void deleteTest() {
-        int result = mapper.delete(5);
+        boolean result = mapper.delete(5);
         System.out.println("delete완료!!: " + result);
     }
 

@@ -15,11 +15,11 @@ public interface UserService {
     UserDTO read(int id);
 
     //회원 등록
-    int register(UserVO vo);
+    boolean register(UserVO vo);
 
     //회원 수정
-    int modify(UserVO vo);
+    boolean modify(UserVO vo);
 
     //회원 삭제
-    int remove(int id);
+    boolean remove(int id);
 }
