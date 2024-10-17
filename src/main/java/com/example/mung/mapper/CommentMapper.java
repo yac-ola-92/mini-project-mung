@@ -18,13 +18,19 @@ public interface CommentMapper {
     List<CommentDTO> getListByPostId(@Param("post_id") int post_id);
 
     // 댓글 삽입
-    @Insert("INSERT INTO comment (post_id, content, created_at, user_id) " +
-            "VALUES (#{post_id}, #{content}, #{created_at}, #{user_id})")
+    @Insert("INSERT INTO comment (post_id, content, user_id) " +
+            "VALUES (#{post_id}, #{content}, #{user_id})")
     @Options(useGeneratedKeys = true, keyProperty = "comment_id")
     boolean insert(CommentDTO comment);
 
+    // 대댓글 삽입
+    @Insert("INSERT INTO comment (post_id, content, created_at, user_id, parent_comment_id) " +
+            "VALUES (#{post_id}, #{content}, #{created_at}, #{user_id}, #{parent_comment_id})")
+    @Options(useGeneratedKeys = true, keyProperty = "comment_id")
+    boolean insertReply(CommentDTO comment);
+
     // 댓글 수정
-    @Update("UPDATE comment SET content = #{content}, created_at = #{created_at} " +
+    @Update("UPDATE comment SET content = #{content} " +
             "WHERE comment_id = #{comment_id} AND post_id = #{post_id}")
     boolean update(CommentDTO comment);
 

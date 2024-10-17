@@ -47,4 +47,16 @@ public class CommentMapperTest {
         dao.getList().stream().forEach(System.out::println);
     }
 
+    @Test
+    void testInsertParent() {
+        CommentDTO comment = new CommentDTO();
+        comment.setPost_id(1);
+        comment.setContent("너무 좋죠?");
+        comment.setCreated_at(LocalDateTime.now());
+        comment.setUser_id(1);
+        comment.setParent_comment_id(4); // 부모 댓글 아이디 설정
+        dao.insertReply(comment);
+        dao.getList().stream().forEach(System.out::println);
+    }
+
 }
