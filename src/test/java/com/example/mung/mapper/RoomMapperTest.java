@@ -14,22 +14,22 @@ public class RoomMapperTest {
     private RoomMapper mapper;
 
     @Test
-    public void testGetList(){
+    public void testGetList() {
         mapper.getList().stream().forEach(System.out::println);
     }
 
     @Test
-    public void testGetListByAccom_id(){
+    public void testGetListByAccom_id() {
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
 
     @Test
-    public void testGetListByPet_kind(){
+    public void testGetListByPet_kind() {
         mapper.getListByPet_kind("소형견").stream().forEach(System.out::println);
     }
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         RoomVO vo = new RoomVO();
         vo.setAccom_id(1);
         vo.setRoom_name("패밀리룸");
@@ -45,8 +45,10 @@ public class RoomMapperTest {
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
 
-@Test
+
+    @Test
     public void testUpdate(){
+
         RoomVO vo = new RoomVO();
         vo.setRoom_id(5);
         vo.setRoom_name("우리가족룸");
@@ -56,9 +58,13 @@ public class RoomMapperTest {
         vo.setRoom_info("오직 가족만");
         vo.setRoom_amount(7);
         vo.setPet_kind("소형견");
-         System.out.println(vo);
+
+
+        System.out.println(vo);
         mapper.update(vo);
-       mapper.getListByAccom_id(1).stream().forEach(System.out::println);
+        mapper.getListByAccom_id(1).stream().forEach(System.out::println);
+
+
     }
 
     @Test
@@ -66,4 +72,7 @@ public class RoomMapperTest {
         mapper.delete(3);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
+
 }
+
+

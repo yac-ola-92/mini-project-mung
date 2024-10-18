@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
@@ -46,3 +47,4 @@ public class LoginServiceImplTest {
 //        System.out.println(service.login(new LoginDTO("user","12345")));
 //    }
 }
+*/

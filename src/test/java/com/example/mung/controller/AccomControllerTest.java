@@ -1,6 +1,7 @@
 package com.example.mung.controller;
 
 import com.example.mung.domain.AccomDTO;
+import com.example.mung.domain.AccomVO;
 import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-
 @SpringBootTest
 public class AccomControllerTest {
 
@@ -54,7 +54,7 @@ public class AccomControllerTest {
         param.add("accom_images_url","images.Kosa.jpg");
         //parameter의 값들을 넣어줌
 
-        mockMvc.perform(post("/accom_registration")
+        mockMvc.perform(post("/accom_register")
                         .params(param)
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                         .andExpect(status().isOk())
@@ -87,18 +87,26 @@ public class AccomControllerTest {
                 .andDo(print());
     }
 
-    @Test
-    public void accom_list() throws Exception{
+        @Test
+        public void accom_list() throws Exception {
+            mockMvc.perform(get("/accomByLocation")
+                            .param("accom_location","서울")
+                            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string("여기에 뷰의 이름을 반환할테야"))
+                    .andDo(print());
+     //아직 미완...
+            //param 단일 파라미터를 추가할 때 사용
+        }
 
+        @Test
+    public void accom_delete() throws Exception{
+            mockMvc.perform(post("/accom_delete")
+                    .param("accom_id","29")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string("redirect:다시리스트페이지로"))
+                    .andDo(print());
+        }
 
-    }
-   /* @GetMapping("accom_list")
-    public String accom_list(Model model){
-        List<AccomDTO> list = service.getList();
-        // list 에 service의 getlist(전체 숙소를 조회한 것) 한 것을 넣어줌
-        model.addAttribute("accom_list",list);
-        // list에 전체 숙소의 값들이 있으니까 이걸 model에 담아 뷰에서 사용할 수 있게 함
-
-        return "여기에 뷰의 이름을 반환할테야";
-    }*/
 }

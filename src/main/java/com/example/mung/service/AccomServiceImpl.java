@@ -17,20 +17,20 @@ public class AccomServiceImpl implements AccomService {
     private AccomMapper accomDAO;  //AccomMapper 받아서 accomDAO 객체 생성
 
     @Override
-    public List<AccomDTO>getList() { //전체 숙소 출력
+    public List<AccomDTO>findAll() { //전체 숙소 출력
         // 숙소 리스트 DAO클래스의 메소드 호출
         return accomDAO.getList();
     }
 
     @Override
-    public List<AccomDTO>getListByLocation(String location){  // 위치에 따른 숙소 출력
+    public List<AccomDTO>readByLocation(String location){  // 위치에 따른 숙소 출력
         System.out.println(location+" 지역에 있는 숙소를 출력합니다");
-        return accomDAO.getListByLocation(location);
+        return accomDAO.getOnetByLocation(location);
     }
 
     @Override
-    public boolean insert(AccomVO vo){ //숙소 등록
-        List<AccomVO>checkAccom = accomDAO.getListByUserAndAccom_name(vo);
+    public boolean register(AccomVO vo){ //숙소 등록
+        List<AccomVO>checkAccom = accomDAO.getoneByUserAndAccom_name(vo);
         System.out.println(checkAccom.isEmpty());
         if(!checkAccom.isEmpty()) {
             System.out.println("이미 존재해서 등록 안할거~!");
@@ -46,13 +46,13 @@ public class AccomServiceImpl implements AccomService {
 
     @Transactional
     @Override
-    public boolean update(AccomVO vo){ //숙소 수정
+    public boolean modify(AccomVO vo){ //숙소 수정
         System.out.println("숙소 업데이트 성공");
         return  accomDAO.update(vo);
     }
 
     @Override
-    public boolean delete(int accom_id){ //숙소 삭제
+    public boolean remove(int accom_id){ //숙소 삭제
         System.out.println("숙소 삭제 성공 ");
         return accomDAO.delete(accom_id);
     }

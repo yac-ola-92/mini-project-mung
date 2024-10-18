@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class AccomController {
     @Autowired
     private AccomService service;
 
-    @PostMapping("/accom_registration") //숙소 등록
+    @PostMapping("/accom_register") //숙소 등록
     @ResponseBody
     /* 우선 테스트 할 때 반환된 문자열이 자꾸 뷰 템플릿 이름으로 해석 되서
      @ResponseBody를 추가하니까 Spring이 반환된 문장열을 템플릿으로 해석하지 않고
@@ -39,7 +40,7 @@ public class AccomController {
         vo.setAccom_description(req.getParameter("accom_description"));
         vo.setAccom_images_url(req.getParameter("accom_images_url"));
         vo.setAccom_amenities(req.getParameter("accom_amenities"));
-        service.insert(vo);
+        service.register(vo);
         return "testSuccess";
     }
 
@@ -55,24 +56,34 @@ public class AccomController {
         vo.setAccom_description(req.getParameter("accom_description"));
         vo.setAccom_images_url(req.getParameter("accom_images_url"));
         vo.setAccom_amenities(req.getParameter("accom_amenities"));
-        service.update(vo);
+        service.modify(vo);
         return "testSuccess";
     }
 
+    @ResponseBody
     @GetMapping("accomByLocation")
     public String accom_list(Model model, HttpServletRequest req){
-        List<AccomDTO> list = service.getListByLocation(req.getParameter("accom_location"));
-        // list 에 service의 getListByLocation(위치에 따른 숙소 조회) 한 것을 넣어줌
+        String location = req.getParameter("accom_location");
+        // 클라이언트로부터 위치 정보를 받아온다
+        List<AccomDTO> list;
+        if(location == null || location.isEmpty()){
+            list = service.findAll();
+            //위치를 지정하지 않았다면 전체 숙소를 출력
+        }else{
+            list = service.readByLocation(req.getParameter("accom_location"));
+            // list 에 service의 getListByLocation(위치에 따른 숙소 조회) 한 것을 넣어줌
+        }
         model.addAttribute("accom_list",list);
-        // list에 전체 숙소의 값들이
-        // 있으니까 이걸 model에 담아 뷰에서 사용할 수 있게 함
+        // list에 전체 숙소의 값 or 해당 지역의 숙소의 값이 있기때문에
+        // 이걸 model에 담아 뷰에서 사용할 수 있게 함
 
         return "여기에 뷰의 이름을 반환할테야";
     }
 
-
-    public String  accom_delete(){
-
-        return "deleteSuccess";
+    @ResponseBody
+    @PostMapping("accom_delete")
+    public String  accom_delete(@RequestParam int accom_id){
+        service.remove(accom_id);
+        return "redirect:다시리스트페이지로";
     }
 }

@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
@@ -20,3 +21,4 @@ public interface LoginService {
 //    //로그인 정보
 //    UserVO loginService(LoginDTO dto);
 }
+*/
