@@ -13,11 +13,14 @@ public class AccomServiceImplTest  {
     @Test
     public void testGetList() {
         service.findAll().stream().forEach(System.out::println);
+
     }
 
     @Test
     public void testGetListByLocation() {
+
         service.readByLocation("강원").stream().forEach(System.out::println);
+
     }
 
     @Test
@@ -26,12 +29,14 @@ public class AccomServiceImplTest  {
         vo.setUser_id(1);
 
         vo.setAccom_name("언덕아래");
+
         vo.setAccom_location("강원도 감자구");
         vo.setAccom_phone("010-1234-3333");
         vo.setAccom_amenities("감자무료");
         vo.setAccom_caution("감자만 먹을 수 있음");
         vo.setAccom_description("감자외 식사 금지");
         vo.setAccom_images_url("images/potato.jpg");
+
         service.register(vo);
         service.findAll().stream().forEach(System.out::println);
     }
