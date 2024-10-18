@@ -59,7 +59,7 @@ public class PostController {
     }
 
     //수정시 비밀번호 확인
-    @PutMapping("/{post_id}")
+    @PutMapping("/check/{post_id}")
     public boolean updatePost(@PathVariable int post_id, @RequestBody PostDTO post, @RequestParam String password) {
         if (postService.checkPassword(post_id, password)) {
             post.setPost_id(post_id);
