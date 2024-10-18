@@ -48,7 +48,6 @@ public class UserMapperTest {
         String[] str = {"USER", "HOST"};
         Role role = new Role(str);
         vo.setRole(role);
-        vo.setUser_address("서울시 송파구 가락동");
         vo.setProfile_image_url("/bbangbbang.png");
         PetInfo petInfo = new PetInfo("뽀삐", "샤모에드", "2", "15kg");
         vo.setPet_info(petInfo);
@@ -72,7 +71,6 @@ public class UserMapperTest {
         String[] str = {"USER"};
         Role role = new Role(str);
         vo.setRole(role);
-        vo.setUser_address("서울시 송파구 문정동");
         vo.setProfile_image_url("/okji.png");
         PetInfo petInfo = new PetInfo("빵빵이", "요크셔테리어", "3", "4kg");
         vo.setPet_info(petInfo);
