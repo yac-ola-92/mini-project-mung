@@ -19,7 +19,6 @@ public interface LoginMapper {
     //profile_image_url //pet_info //business_number //business_sns_url
 
 
-
     //아이디 비밀번호로 정보 조회
     @Select("select * from user where user_loginId =#{user_loginId} and password = #{password}")
     UserVO loginActive(LoginDTO dto);

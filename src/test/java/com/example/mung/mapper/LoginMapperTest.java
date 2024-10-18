@@ -18,6 +18,7 @@ public class LoginMapperTest {
         System.out.println("loginActive 완료!!");
     }
 
+
     @Test
     public void loginByIdCheck(){
         System.out.println(mapper.loginByIdCheck("dwi"));
