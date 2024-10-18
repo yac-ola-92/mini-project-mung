@@ -21,7 +21,6 @@ public class UserDTO {
     private int user_gender; // 1,3: 남자 / 2,4: Female,
     private String nickname;
     private String role; //USER, HOST, ADMIN
-    private String user_address;
     private String profile_image_url;
     private String pet_info; //JSON
     private LocalDateTime created_at;
@@ -71,7 +70,7 @@ public class UserDTO {
     }
 
     //문자열인 권한을 배열로 하나씩 담아서 보내기 어디든..
-    public String[] getRole(){
+    public String[] splitRole(){
 
         return role.split(",");
     }

@@ -20,15 +20,15 @@ public interface UserMapper {
 
 
     // User 등록
-    @Insert("INSERT INTO user (user_name,user_loginId, user_email, password, user_phone, user_birth, user_gender, nickname, role, user_address, profile_image_url, pet_info, business_number, business_sns_url) " +
-            "VALUES (#{user_name},#{user_loginId}, #{user_email}, #{password}, #{user_phone}, #{user_birth}, #{user_gender}, #{nickname}, #{role}, #{user_address}, #{profile_image_url}, #{pet_info}, #{business_number}, #{business_sns_url})")
+    @Insert("INSERT INTO user (user_name,user_loginId, user_email, password, user_phone, user_birth, user_gender, nickname, role, profile_image_url, pet_info, business_number, business_sns_url) " +
+            "VALUES (#{user_name},#{user_loginId}, #{user_email}, #{password}, #{user_phone}, #{user_birth}, #{user_gender}, #{nickname}, #{role}, #{profile_image_url}, #{pet_info}, #{business_number}, #{business_sns_url})")
     boolean insert(UserVO vo);
 
 
     // User 수정
     @Update("UPDATE user SET user_loginId=#{user_loginId},user_name = #{user_name}, user_email = #{user_email}, password = #{password}, " +
             "user_phone = #{user_phone}, user_birth = #{user_birth}, user_gender = #{user_gender}, " +
-            "nickname = #{nickname}, role = #{role}, user_address = #{user_address}, " +
+            "nickname = #{nickname}, role = #{role}, " +
             "profile_image_url = #{profile_image_url}, pet_info = #{pet_info} ,business_number=#{business_number},business_sns_url=#{business_sns_url} " +
             "WHERE user_id = #{user_id}")
     boolean update(UserVO vo);

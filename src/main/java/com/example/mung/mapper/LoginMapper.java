@@ -17,6 +17,8 @@ public interface LoginMapper {
     //user_name //user_loginId //user_email //password //user_phone //user_birth //user_gender //nickname //role //user_address
     //profile_image_url //pet_info //business_number //business_sns_url
 
+
+
     //아이디 비밀번호로 정보 조회
     @Select("select * from user where user_loginId =#{user_loginId} and password = #{password}")
     UserVO loginActive(LoginDTO dto);
@@ -30,9 +32,9 @@ public interface LoginMapper {
     String nameCheck(String user_loginId);
 
     //일반 회원 회원가입
-    @Insert("insert into user (user_name,user_loginId,user_email,password,user_phone,user_birth,user_gender,nickname,role,user_address) " +
+    @Insert("insert into user (user_name,user_loginId,user_email,password,user_phone,user_birth,user_gender,nickname,role) " +
             "values " +
-            "(#{user_name},#{user_loginId},#{user_email},#{password},#{user_phone},#{user_birth},#{user_gender},#{nickname},#{role},#{user_address})")
+            "(#{user_name},#{user_loginId},#{user_email},#{password},#{user_phone},#{user_birth},#{user_gender},#{nickname},#{role})")
     public boolean generalJoin(UserDTO dto);
 
     //일반 회원 로그인

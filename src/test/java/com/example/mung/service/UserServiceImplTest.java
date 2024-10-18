@@ -33,7 +33,6 @@ public class UserServiceImplTest {
         vo.setUser_name("드와이트");
         vo.setUser_loginId("dwight111");
         vo.setPassword("123456");
-        vo.setUser_address("경기도 분당구 구미동");
         vo.setUser_birthToString("2002-12-12");
         vo.setUser_gender("남자");
         vo.setUser_email("dwight70@dundermifflin.net");
@@ -52,7 +51,6 @@ public class UserServiceImplTest {
         vo.setUser_id(16);
         vo.setUser_loginId("dwight22");
         vo.setUser_name("드와이트");
-        vo.setUser_address("경기도 분당구 구미동");
         vo.setUser_birthToString("1970-12-12");
         vo.setPassword("123456");
         vo.setUser_gender("남자");
