@@ -22,12 +22,16 @@ public class LoginController {
 
 //    //user 정보
 //    @Autowired
-//    private UserService service;
+//    private UserService userService;
 //    //로그인한 사람의 정보 추출 경로
+//    //login 서비스
+//    @Autowired
+//    private LoginService loginService;
 //
 //
 //    @GetMapping("/login")
-//    public String loginView() {
+//    public String loginView(Model model) {
+//        model.addAttribute("user_loginId",userService.findAll());
 //        System.out.println("로그인 화면 출력");
 //        return "login";
 //    }
