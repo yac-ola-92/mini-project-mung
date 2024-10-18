@@ -28,6 +28,7 @@ public class LoginMapperTest {
         System.out.println(mapper.nameCheck("dwi"));
         System.out.println("nameCheck 완료!!");
     }
+    //제발좀 올라가주세요
 //
 //    @Test
 //    public void loginIdCheckById() {
