@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 //@RequestMapping("/member")
 public class LoginController {
 
+
 //    //user 정보
 //    @Autowired
 //    private UserService userService;
