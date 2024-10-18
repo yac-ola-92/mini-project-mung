@@ -1,4 +1,3 @@
-/*
 package com.example.mung.mapper;
 
 import com.example.mung.domain.LoginDTO;
@@ -52,4 +51,3 @@ public class LoginMapperTest {
 
 
 }
-*/

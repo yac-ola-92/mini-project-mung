@@ -1,4 +1,4 @@
-/*
+
 package com.example.mung.mapper;
 
 import com.example.mung.domain.LoginDTO;
@@ -70,4 +70,4 @@ public interface LoginMapper {
 //    Optional<UserVO> findIdAll(String user_loginId);
 
 }
-*/
+
