@@ -12,14 +12,16 @@ public interface AccomMapper {
                 " FROM ACCOMMODATION")
     public List<AccomDTO> getList(); //숙소 전체 리스트 불러오기
 
+    // filtering : accom_location, capacity_standard , capacity_max, pet_kind
+
     @Select("SELECT accom_name, accom_location, accom_phone, accom_caution, accom_description, accom_images_url, accom_amenities " +
                     "FROM ACCOMMODATION WHERE accom_location like  '%${location}%'")
-    public List<AccomDTO>getListByLocation(String location); //지역 기반으로 숙소 불러오기 (강원 지역, 경기지역)
+    public List<AccomDTO>getOnetByLocation(String location); //지역 기반으로 숙소 불러오기 (강원 지역, 경기지역)
 
     @Select("SELECT  accom_name, accom_location " +
             " FROM accommodation " +
             "WHERE user_id = #{user_id} AND accom_name = #{accom_name}")
-    public List<AccomVO>getListByUserAndAccom_name(AccomVO vo);
+    public List<AccomVO>getoneByUserAndAccom_name(AccomVO vo);
     //한 유저가 동일한 숙소를 등록하는지 확인하기위해
 
     @Insert("INSERT INTO ACCOMMODATION (user_id, accom_name, accom_location, accom_phone, accom_caution, accom_description, accom_images_url, accom_amenities)" +

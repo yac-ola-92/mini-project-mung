@@ -12,12 +12,12 @@ public class AccomServiceImplTest  {
 
     @Test
     public void testGetList() {
-        service.getList().stream().forEach(System.out::println);
+        service.findAll().stream().forEach(System.out::println);
     }
 
     @Test
     public void testGetListByLocation() {
-        service.getListByLocation("강원").stream().forEach(System.out::println);
+        service.readByLocation("강원").stream().forEach(System.out::println);
     }
 
     @Test
@@ -32,8 +32,8 @@ public class AccomServiceImplTest  {
         vo.setAccom_caution("감자만 먹을 수 있음");
         vo.setAccom_description("감자외 식사 금지");
         vo.setAccom_images_url("images/potato.jpg");
-        service.insert(vo);
-        service.getList().stream().forEach(System.out::println);
+        service.register(vo);
+        service.findAll().stream().forEach(System.out::println);
     }
 
 
@@ -48,15 +48,15 @@ public class AccomServiceImplTest  {
         vo.setAccom_caution("영하 30도 유지 중");
         vo.setAccom_description("사우나 보유 추우면 거기들어갈 것");
         vo.setAccom_images_url("images.iceicy.jpg");
-        service.update(vo);
-        service.getList().stream().forEach(System.out::println);
+        service.modify(vo);
+        service.findAll().stream().forEach(System.out::println);
     }
 
     @Test
     public void testDelete(){
     AccomVO vo = new AccomVO();
-    service.delete(12);
-        service.getList().stream().forEach(System.out::println);
+    service.remove(12);
+        service.findAll().stream().forEach(System.out::println);
     }
 
 }

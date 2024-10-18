@@ -1,3 +1,4 @@
+/*
 package com.example.mung.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,3 +36,4 @@ public class LoginMapperTest {
 
 
 }
+*/

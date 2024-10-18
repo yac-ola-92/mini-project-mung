@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
@@ -44,3 +45,4 @@ public class LoginServiceImpl implements LoginService {
         return null;
     }
 }
+*/
