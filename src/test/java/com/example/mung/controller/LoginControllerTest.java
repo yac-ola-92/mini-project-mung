@@ -8,7 +8,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class LoginControllerTest {
 
-
     //MockMvc 객체 생성
    // private MockMvc mockMvc;
 

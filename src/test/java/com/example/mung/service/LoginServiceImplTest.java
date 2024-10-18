@@ -33,7 +33,7 @@ public class LoginServiceImplTest {
         System.out.println(service.printName("dwi"));
         System.out.println("loginSuccess 성공!!");
     }
-
+//제발
 
 //    @Test
 //    public void findByUserLoginIdTest(){
