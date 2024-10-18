@@ -19,4 +19,5 @@ public class AccomDTO {
     private String accom_images_url;
     private String accom_amenities;
 
+
 }

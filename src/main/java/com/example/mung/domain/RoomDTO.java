@@ -1,13 +1,11 @@
 package com.example.mung.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class RoomDTO {
     private int room_id;
@@ -19,6 +17,6 @@ public class RoomDTO {
     private String room_info;
     private int room_amount;
     private String pet_kind;
-
-
+    private int capacity_standard;
+    private int capacity_max;
 }
