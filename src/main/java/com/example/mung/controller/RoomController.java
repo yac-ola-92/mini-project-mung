@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,7 @@ public class RoomController {
     @Autowired
     private RoomService service;
 
-    @ResponseBody
+
     @PostMapping("/room_register")
     public String room_registration(HttpServletRequest req){
         RoomVO vo = new RoomVO();
@@ -37,7 +34,14 @@ public class RoomController {
         return "register success";
     }
 
-    @ResponseBody
+   /* @GetMapping("/myAccom/room/{accom_id}/edit") // 숙소 수정에 사용될 정보
+    public Model room_edit(@PathVariable int accom_id, Model model){
+        List<RoomDTO> rm = service.readByAccom_id(accom_id);
+        model.addAttribute("rmInfo",rm);
+        return rm;
+    }*/
+
+
     @PostMapping("/room_update")
     public String room_update(HttpServletRequest req){
         RoomVO vo = new RoomVO();
@@ -52,7 +56,7 @@ public class RoomController {
         return "update success";
     }
 
-    @ResponseBody
+
     @GetMapping("roomByAccom")
     public String room_list(Model model, HttpServletRequest req){
         int accomId = Integer.parseInt(req.getParameter("accom_id"));
@@ -64,7 +68,7 @@ public class RoomController {
         return "여기에 뷰의 이름을 반환할테야";
     }
 
-    @ResponseBody
+
     @PostMapping("/room_delete")
     public String room_delete(@RequestParam int room_id){
         service.remove(room_id);

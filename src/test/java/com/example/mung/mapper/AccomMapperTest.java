@@ -20,7 +20,7 @@ public class AccomMapperTest {
 
     @Test
     public void testGetOnetByLocation(){
-        accomDAO.getOnetByLocation("강원").stream().forEach(System.out::println);
+        accomDAO.getListByLocation("강원",2).stream().forEach(System.out::println);
     }
 
     @Test
@@ -29,6 +29,10 @@ public class AccomMapperTest {
         vo.setUser_id(1);
         vo.setAccom_name("언덕위");
         accomDAO.getoneByUserAndAccom_name(vo).stream().forEach(System.out::println);
+    }
+
+    public void testGetListByRating(){
+        accomDAO.getListByRating().stream().forEach(System.out::println);
     }
 
     @Test

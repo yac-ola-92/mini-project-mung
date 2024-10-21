@@ -19,7 +19,7 @@ public class AccomServiceImplTest  {
     @Test
     public void testGetListByLocation() {
 
-        service.readByLocation("강원").stream().forEach(System.out::println);
+        service.readByLocation("강원",2).stream().forEach(System.out::println);
 
     }
 
