@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default_layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>게시글 수정</title>
+    <meta name="description" content="게시글 수정 페이지">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header>
+    <!-- Header Start -->
+    <div class="header-area" style="background-color: #fff9f0;">
+        <div class="main-header">
+            <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="index.html">숙소 예약</a></li>
+                                        <li><a href="postMain.html">게시판</a>
+                                            <ul class="submenu">
+                                                <li><a href="postMain.html">게시판</a></li>
+                                                <li><a href="postReview.html">후기 게시판</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">마이페이지</a></li>
+                                        <li><a href="packages.html">로그인</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 게시글 수정 폼 -->
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div layout:fragment="content">
+                <div>
+                    <!-- 게시글 수정 폼 -->
+                    <form name="update-form" th:action="@{'/update/' + ${post.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <input type="hidden" name="post_id" th:value="${post.id}">
+                        <!-- 제목 수정 필드 -->
+                        <div class="form-group">
+                            <label for="title">제목</label>
+                            <input type="text" id="title" name="title" class="form-control" th:value="${post.title}" required>
+                        </div>
+                        <!-- 카테고리 선택 -->
+                        <div class="form-group">
+                            <label for="category">카테고리</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="숙소추천" th:selected="${post.category == '숙소추천'}">숙소 추천</option>
+                                <option value="자유게시판" th:selected="${post.category == '자유게시판'}">자유 게시판</option>
+                                <option value="여행TIP" th:selected="${post.category == '여행TIP'}">여행 TIP</option>
+                            </select>
+                        </div>
+                        <!-- 내용 수정 필드 -->
+                        <div class="form-group">
+                            <label for="content">내용</label>
+                            <textarea id="content" name="content" class="form-control" rows="10" required th:text="${post.content}"></textarea>
+                        </div>
+                        <!-- 파일 첨부 -->
+                        <div class="form-group">
+                            <label for="file">파일 첨부</label>
+                            <input type="file" id="file" name="file" class="form-control">
+                            <div th:if="${post.file}">
+                                <p>현재 첨부된 파일: <a th:href="@{'/file/download/' + ${post.file}}"><span th:text="${post.file}"></span></a></p>
+                            </div>
+                        </div>
+                        <!-- 비밀번호 확인 -->
+                        <div class="form-group">
+                            <label for="password">비밀번호</label>
+                            <input type="password" id="password" name="password" maxlength="4" class="form-control" required placeholder="4자리 비밀번호 입력">
+                        </div>
+                        <!-- 수정 확인 버튼 -->
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-outline-primary" style="background-color: #f2e2cc; color: black;" value="수정">
+                            <a th:href="@{'/post/postdetail?post_id=' + ${post.id}}" class="btn btn-outline-secondary">취소</a>
+                        </div>
+                    </form>
+                    <!-- 오류 메시지 출력 -->
+                    <div th:if="${error}" class="alert alert-danger" role="alert">
+                        <span th:text="${error}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-area footer-padding" style="background-color: #fff9f0;">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="assets/img/logo/logo.png" alt="" style="height: 5em;"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                    <div class="footer-tittle">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Report a Payment Issue</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JS Files -->
+<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>
