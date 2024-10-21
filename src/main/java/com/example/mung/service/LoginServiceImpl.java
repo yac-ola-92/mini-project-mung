@@ -2,6 +2,7 @@
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
+import com.example.mung.domain.UserDTO;
 import com.example.mung.domain.UserVO;
 import com.example.mung.mapper.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,22 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private LoginMapper mapper;
+
+    @Override
+    public UserVO loginSuccess(LoginDTO dto){
+        return mapper.loginActive(dto);
+    }
+
+    @Override
+    public boolean idCheck(String user_loginId){
+        return mapper.loginByIdCheck(user_loginId);
+    }
+
+    @Override
+    public String printName(String user_loginId){
+        return mapper.nameCheck(user_loginId);
+    }
+
 
 //    public UserVO loginCheck(LoginDTO dto) {
 //        UserVO user = mapper.findByUserLoginId(dto.getUser_loginId());
@@ -35,14 +52,15 @@ public class LoginServiceImpl implements LoginService {
 //
 
 
-    @Override
-    public UserVO findUserLoginId(String id) {
-        return null;
-    }
 
-    @Override
-    public UserVO loginService(LoginDTO dto) {
-        return null;
-    }
+//    @Override
+//    public UserVO findUserLoginId(String id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public UserVO loginService(LoginDTO dto) {
+//        return null;
+//    }
 }
 */

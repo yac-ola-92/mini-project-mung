@@ -10,15 +10,15 @@ import org.springframework.web.context.WebApplicationContext;
 public class LoginControllerTest {
 
     //MockMvc 객체 생성
-    private MockMvc mockMvc;
+   // private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext ctx;
-
-    @BeforeEach
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-    }
+//    @Autowired
+//    private WebApplicationContext ctx;
+//
+//    @BeforeEach
+//    public void setup() {
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+//    }
 
 
 }

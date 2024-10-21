@@ -46,6 +46,7 @@ public class RoomMapperTest {
     }
 
 
+
     @Test
     public void testUpdate(){
 
@@ -58,12 +59,9 @@ public class RoomMapperTest {
         vo.setRoom_info("오직 가족만");
         vo.setRoom_amount(7);
         vo.setPet_kind("소형견");
-
-
         System.out.println(vo);
         mapper.update(vo);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
-
 
     }
 
@@ -72,7 +70,5 @@ public class RoomMapperTest {
         mapper.delete(3);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);
     }
-
 }
-
 

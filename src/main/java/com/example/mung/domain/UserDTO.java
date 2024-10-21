@@ -1,19 +1,18 @@
 package com.example.mung.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.Range;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Getter
 @ToString
+@AllArgsConstructor
 public class UserDTO {
     private int user_id;
-    private String user_loginId;
     private String user_name;
     private String user_email;
     private String password;
@@ -22,13 +21,13 @@ public class UserDTO {
     private int user_gender; // 1,3: 남자 / 2,4: Female,
     private String nickname;
     private String role; //USER, HOST, ADMIN
-    private String user_address;
     private String profile_image_url;
     private String pet_info; //JSON
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private String business_number;
     private String business_sns_url;
+    private String user_loginId;
 
     public UserDTO (String user_loginId,String password){
         this.user_loginId = user_loginId;
@@ -59,23 +58,21 @@ public class UserDTO {
         if (pet_info == null) {
             return new HashMap<>();
         }
-        JSONObject jo = new JSONObject(pet_info);
+        JSONObject json = new JSONObject(pet_info);
         System.out.println("펫 정보 리스트 변환 출력");
         HashMap<String, String> list = new HashMap<>();
-        list.put("이름", jo.optString("이름"));
-        list.put("종", jo.optString("종"));
-        list.put("나이", jo.optString("나이"));
-        list.put("무게", jo.optString("무게"));
+        list.put("이름", json.optString("이름"));
+        list.put("종", json.optString("종"));
+        list.put("나이", json.optString("나이"));
+        list.put("무게", json.optString("무게"));
 
         return list;
     }
 
     //문자열인 권한을 배열로 하나씩 담아서 보내기 어디든..
-    public String[] getRole(){
+    public String[] splitRole(){
 
-        String [] roles = role.split(",");
-
-        return roles;
+        return role.split(",");
     }
 
 

@@ -17,7 +17,7 @@ public class PostVO {
     private final Category category;
 
     public enum Category {
-        rec, general, travell
+        rec, general, travel
     }
 
     public PostVO(int post_id, int user_id, String title, String content, int view_count,

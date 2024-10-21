@@ -31,9 +31,8 @@ public class UserServiceImplTest {
         System.out.println("Service Implements 실행 = register");
         UserVO vo = new UserVO();
         vo.setUser_name("드와이트");
-        vo.setUser_loginId("dwight");
+        vo.setUser_loginId("dwight111");
         vo.setPassword("123456");
-        vo.setUser_address("경기도 분당구 구미동");
         vo.setUser_birthToString("2002-12-12");
         vo.setUser_gender("남자");
         vo.setUser_email("dwight70@dundermifflin.net");
@@ -41,7 +40,7 @@ public class UserServiceImplTest {
         vo.setRole(new Role(new String[]{"USER,HOST"}));
         vo.setUser_phone("010-0000-1234");
         vo.setPet_info(new PetInfo("", "인간", "100", "80kg"));
-        int result = service.register(vo);
+        boolean result = service.register(vo);
         System.out.println("서비스단 등록 성공 : " + result);
     }
 
@@ -49,13 +48,18 @@ public class UserServiceImplTest {
     public void modifyTest() {
         System.out.println("Service Implements 실행 = modify");
         UserVO vo = new UserVO();
+        vo.setUser_id(16);
+        vo.setUser_loginId("dwight22");
         vo.setUser_name("드와이트");
         vo.setUser_birthToString("1970-12-12");
+        vo.setPassword("123456");
         vo.setUser_gender("남자");
-        vo.setRole(new Role(new String[]{"HOST"}));
-        vo.setUser_phone("010-0000-1234");
-        vo.setPet_info(new PetInfo("", "인간", "100", "80kg"));
-        int result = service.modify(vo);
+        vo.setUser_email("dwight70@dundermifflin.net");
+        vo.setNickname("manager");
+        vo.setRole(new Role(new String[]{"HOST,ADMIN"}));
+        vo.setUser_phone("010-0000-1232");
+        vo.setPet_info(new PetInfo("안젤라", "인간", "101", "81kg"));
+        boolean result = service.modify(vo);
         System.out.println("서비스단 수정 성공 : " + result);
 
     }
@@ -63,7 +67,7 @@ public class UserServiceImplTest {
     @Test
     public void removeTest() {
         System.out.println("Service Implements 실행 = remove");
-        int result = service.remove(7);
+        boolean result = service.remove(7);
         System.out.println("서비스단 삭제 성공 : " + result);
     }
 

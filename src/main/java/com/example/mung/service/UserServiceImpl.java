@@ -27,19 +27,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int register(UserVO vo) {
+    public boolean register(UserVO vo) {
         System.out.println("Service단 : register 실행");
         return mapper.insert(vo);
     }
 
     @Override
-    public int modify(UserVO vo) {
+    public boolean modify(UserVO vo) {
         System.out.println("Service단 : modify 실행");
         return mapper.update(vo);
     }
 
     @Override
-    public int remove(int id) {
+    public boolean remove(int id) {
         System.out.println("Service단 : remove 실행");
         return mapper.delete(id);
     }
