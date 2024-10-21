@@ -17,4 +17,6 @@ public class RoomVO {
     private String room_info;
     private int room_amount;
     private String pet_kind;
+    private int capacity_standard;
+    private int capacity_max;
 }

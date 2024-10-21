@@ -1,0 +1,438 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Travel HTML-5 Template </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="../static/assets/img/favicon.ico">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="../static/assets/css/flaticon.css">
+            <link rel="stylesheet" href="../static/assets/css/slicknav.css">
+            <link rel="stylesheet" href="../static/assets/css/animate.min.css">
+            <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="../static/assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="../static/assets/css/themify-icons.css">
+            <link rel="stylesheet" href="../static/assets/css/slick.css">
+            <link rel="stylesheet" href="../static/assets/css/nice-select.css">
+            <link rel="stylesheet" href="../static/assets/css/style.css">
+            <style>
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                }
+                li {
+                    float: left;
+                }
+                /*range start*/
+                #control {
+                position: relative;
+                width: 600;
+                padding: 10px; 
+            }
+            #control form div {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                height: 40px;
+            }
+            #control form div input{
+                -webkit-appearance: none;
+                width:90%;
+                height: 6px;
+                background: linear-gradient(#e69e39);
+                border-radius: 10px;
+                box-shadow : 0 0 10px 0 #c37a15,
+                0 0 10px 0 #c37a15,
+                0 0 10px 0 #c37a15;
+            }
+            #control form div input::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 40px;
+                height: 40px;
+                background: url('assets/img/icon/강쥐발바닥.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                filter:drop-shadow(0 0 5px rgb(181, 108, 19));
+
+            }
+            #control form div i{
+                color: #fff;
+                font-size: 25px;
+                width : 70px;
+                height: 70px;
+                background: rgb(255, 174, 0);
+                text-align: center;
+                line-height: 70px;
+            }      
+            #control form div p{
+                font-size: 18px;
+                font-weight: 600;
+                font-family: 'Courier New', Courier, monospace;
+                padding-left: 10px;
+                color: #bc915e;
+            }
+             /*range 끝*/
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropbtn {
+                background-color: #bc915e;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+           /*드롭다운 끝*/
+
+                .facility {
+                    
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    
+                }
+
+                .toggle-btn {
+                    margin-left: 900px;
+                    background-color:#bc915e;
+                    color: white;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: none;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+ 
+                .checkbox-facility {
+                    display: flex;
+                    flex-direction: column; /* 체크박스를 세로로 배치 */
+                    margin-left: 10px; /* 버튼과 체크박스 사이의 간격 */
+                    position: absolute; /* 체크박스 컨테이너의 위치를 절대적으로 설정 */
+                    left: calc(900px + 150px); /* 버튼의 오른쪽에 배치 */
+                 }
+                 .checkbox-facility label {
+                    margin-right: 10px;
+                 } 
+
+            </style>
+   
+    </head>
+
+   <body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="../static/assets/img/logo/멍로고.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+             <!-- slider Area Start-->
+        <div class="single-slider slider-height2 d-flex align-items-center" style="background-color: #fff9f0;">
+               <div class="header-bottom  header-sticky" style="background-color:#fff9f0;"> 
+                        <div class="row align-items-center" >
+                            <!-- Logo -->
+                            <div class="col-xl-2 col-lg-2 col-md-1"></div>
+                                <div class="logo" style="margin-left: 400px;" >
+                                  <a href="index.html"><img style="margin :auto; width : 100px;" src="../static/assets/img/logo/멍로고.png" alt=""></a>
+                                </div>
+                            <nav>
+                                <ul>
+                                    <li><a href="myAccomList.html" style="color: #bc915e; display: block;">나의 숙소</a></li>
+                                    <li><a href="accomList.html" style="color:#bc915e;">숙소예약</a></li>
+                                    <li><a href="board.html" style="color:#bc915e;">게시판</a></li>
+                                    <li><a href="myPage.html" style="color:#bc915e;">마이페이지</a></li>
+                                    <li><a href="login.html" id="login" onclick="login()">로그인</a></li>
+                                    <li><a href="mainPage.html" id="logout" style="display: none;" onclick="logout()">로그아웃</a></li>
+                                </ul>
+                            </nav>
+                            <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <!-- form -->
+                                        <form action="/accomByLocation" method="get" class="search-box" style="margin-left: 50px;">
+                                            <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;" >
+                                                <input name="accom_location" type="text" style="border:4px solid #bc915e;" value="${accom_location}">
+                                            </div>
+                                            <div class="input-form mb-30" style="margin-right:10px;">
+                                                <div class="select-itms" >
+                                                    <input name="rv_start_date" type="date" style="border:4px solid #bc915e;" id="st_date" value="${st_date}">
+                                                </div>
+                                            </div>
+                                            <div class="input-form mb-30" style="margin-right:10px;">
+                                                <div class="select-itms" >
+                                                    <input name="rv_end_date" type="date" style="border:4px solid #bc915e;" id="lt_date" value="${lt_date}">
+                                                </div>
+                                            </div>
+                                            <div class="input-form mb-30"style="margin-right:10px; width: 150px;">
+                                                <input name="capacity" type="number" style="border: 4px solid #bc915e; " value="${capacity}">
+                                            </div> <!---->
+                                            <div class="search-form mb-30">
+                                                <a href="/accomList.html" id="search" style="background-color:#ecd9bf;" >Search</a>
+                                            </div>
+                                        </form>
+                                </div>
+                            </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+                         <!-- slider Area End-->
+                        <!-- Header End -->
+    </header>
+    <main>
+        <!-- Favourite Places Start -->
+        <div class="favourite-place place-padding" >
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <h2>"지역"의 숙소</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 mt-sm-30" style="margin-right : 70px;">
+                        <div class="single-element-widget mt-30">
+                            <h3 class="mb-30">편의시설</h3>
+                            <div class="switch-wrap d-flex justify-content-between">
+                                <p>애견수영장</p>
+                                <div class="primary-checkbox">
+                                    <input type="checkbox" id="p-checkbox" checked>
+                                    <label for="p-checkbox"></label>
+                                </div>
+                            </div>
+                            <div class="switch-wrap d-flex justify-content-between">
+                                <p>WI-FI</p>
+                                <div class="primary-checkbox">
+                                    <input type="checkbox" id="pr-checkbox" checked>
+                                    <label for="pr-checkbox"></label>
+                                </div>
+                            </div>
+                            <div id="control">
+                            <form>
+                                <h3 class="mb-30">금액</h3>
+                                    <div>
+                                        <input type="range" value="0" min="0" max="100" oninput="rangeValue.innerText=this.value"> 
+                                        <p id="rangeValue">0</p>      
+                                    </div>
+                                </form>
+                            </div>
+                           
+                        </div>
+                        <div class="single-element-widget mt-30">
+                            <h3 class="mb-30">나의 반려견</h3>
+                            <div class="switch-wrap d-flex justify-content-between">
+                                <p>소형견</p>
+                                <div class="primary-radio">
+                                    <input type="checkbox" id="default-radio1">
+                                    <label for="default-radio"></label>
+                                </div>
+                            </div>
+                            <div class="switch-wrap d-flex justify-content-between">
+                                <p>중형견</p>
+                                <div class="primary-radio">
+                                    <input type="checkbox" id="default-radio2">
+                                    <label for="default-radio"></label>
+                                </div>
+                            </div>
+                            <div class="switch-wrap d-flex justify-content-between">
+                                <p>대형견</p>
+                                <div class="primary-radio">
+                                    <input type="checkbox" id="default-radio">
+                                    <label for="default-radio"></label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    <div th:if="${accomRating}">
+                        <div class="row" th:each=" vo,status : ${accomRating}">
+                            <div class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
+                                <div class="single-place mb-30">
+                                    <a href="@{accom_list/details/${accom.id} style= display: block;}">
+                                        <div class="single-place mb-30">
+                                            <img th:src="${vo.accom_images_url}"  alt="accom_img">
+                                        </div>
+                                        <div class="place-cap">
+                                            <div class="place-cap-top">
+                                                <span><i class="fas fa-star"></i><span th:text="${vo.rating}"></span> </span>
+                                                <h3 th:text="${vo.accom_name}"><a href="@{accom_list/details/${accom.id} style= display: block;}"></a></h3>
+                                                <p class="dolor" th:text="${vo.room_price}"><span>/ 1박</span></p>
+                                            </div>
+                                            <div class="place-cap-bottom">
+                                                <ul>
+                                                    <li th:text="$vo.pet_kind}"><i class="far fa-clock"></i></li>
+                                                    <li th:text="${vo.accom_location}"><i class="fas fa-map-marker-alt"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Favourite Places End -->
+   
+        </div>
+    </div>
+
+        <!-- Pagination-area Start -->
+        <div class="pagination-area pb-100 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                  <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted left-arrow"></span></a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                  <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
+                                </ul>
+                              </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination-area End -->
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
+            <div class="container">
+                
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="index.html"><img src="../static/assets/img/logo/멍로고.png" style="width: 150px;" alt=""></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <ul>
+                                        <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;" >고객문의</a></li>
+                                        <li><a href="#"  style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
+                                    </ul>
+                                </div>
+                       </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row pt-padding" style="padding: 0px;">
+                 <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                 </div>
+             </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+
+
+	<!-- JS here -->
+
+  
+        <script>
+            document.querySelector('.toggle-btn').addEventListener('click', function() {
+        const checkboxContainer = document.querySelector('.checkbox-facility');
+        checkboxContainer.style.display = checkboxContainer.style.display === 'block' ? 'none' : 'block';
+    });
+        </script>
+    <script>
+        function login() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('logout').style.display = 'block';
+        }
+        function logout() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('logout').style.display = 'none';
+        }
+    </script>
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="../static/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="../static/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="../static/assets/js/popper.min.js"></script>
+        <script src="../static/assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="../static/assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="../static/assets/js/owl.carousel.min.js"></script>
+        <script src="../static/assets/js/slick.min.js"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="../static/assets/js/wow.min.js"></script>
+		<script src="../static/assets/js/animated.headline.js"></script>
+        <script src="../static/assets/js/jquery.magnific-popup.js"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="../static/assets/js/jquery.scrollUp.min.js"></script>
+        <script src="../static/assets/js/jquery.nice-select.min.js"></script>
+		<script src="../static/assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="../static/assets/js/contact.js"></script>
+        <script src="../static/assets/js/jquery.form.js"></script>
+        <script src="../static/assets/js/jquery.validate.min.js"></script>
+        <script src="../static/assets/js/mail-script.js"></script>
+        <script src="../static/assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="../static/assets/js/plugins.js"></script>
+        <script src="../static/assets/js/main.js"></script>
+        
+    </body>
+</html>
