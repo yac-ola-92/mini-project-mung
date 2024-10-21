@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>게시판</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <style>
+        .blog_details h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .blog-info-link li {
+            display: inline-block;
+            margin-right: 20px;
+            color: #666;
+        }
+
+        .blog_details {
+            padding: 20px;
+            background-color: #fff9f0;
+            border: 1px solid #f2e2cc;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-primary, .btn-danger {
+            margin-top: 10px;
+            background-color: #f2e2cc;
+            color: black;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover, .btn-danger:hover {
+            background-color: #e5d3b8;
+        }
+
+        .comment-area {
+            margin-top: 20px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination li {
+            margin-right: 5px;
+        }
+
+        .pagination li a {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .pagination li a:hover {
+            background-color: #f2e2cc;
+            color: black;
+        }
+
+        .single_sidebar_widget {
+            padding: 20px;
+            background-color: #fff9f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="/assets/img/logo/logo.png" alt="Loading...">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader End -->
+
+<header>
+    <div class="header-area" style="background-color: #fff9f0;">
+        <div class="main-header">
+            <div class="header-top top-bg d-none d-lg-block" style="background-color: #f2e2cc;">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-8">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li>needhelp@gotrip.com</li>
+                                    <li>666 569 025077</li>
+                                    <li>Brooklyn Street, New York</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="header-info-right f-right">
+                                <ul class="header-social">
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="index.html">숙소 예약</a></li>
+                                        <li><a href="postMain.html">게시판</a>
+                                            <ul class="submenu">
+                                                <li><a href="postMain.html">게시판</a></li>
+                                                <li><a href="postReview.html">후기 게시판</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">마이페이지</a></li>
+                                        <li><a href="packages.html">로그인</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 게시판 영역 -->
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <!-- 메인 페이지로 이동하는 버튼 -->
+                    <div class="main-button-container" style="margin-bottom: 20px;">
+                        <button type="button" class="btn btn-main" onclick="location.href='postMain.html'">메인으로</button>
+                    </div>
+
+                    <!-- 게시글 내용 표시 -->
+                    <article class="blog_item">
+                        <div class="blog_details">
+                            <a href="#" class="d-inline-block">
+                                <h2 class="blog-head" th:text="${post.title}">게시글 제목</h2>
+                            </a>
+                            <ul class="blog-info-link">
+                                <li><span th:text="${post.user_id}">작성자</span></li>
+                                <li><span th:text="${#dates.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
+                                <li><span th:text="${post.view_count}">조회수</span></li>
+                            </ul>
+                            <div th:text="${post.content}" style="margin-top: 10px;"></div>
+                        </div>
+                    </article>
+
+                    <!-- 글 수정/삭제 버튼 -->
+                    <div th:if="${session.loginUser != null}">
+                        <form th:action="@{'/post/update/' + ${post.post_id}}" method="get">
+                            <button type="submit" class="btn btn-primary">글 수정</button>
+                        </form>
+
+                        <form th:action="@{'/post/delete/' + ${post.post_id}}" method="get">
+                            <button type="submit" class="btn btn-danger">글 삭제</button>
+                        </form>
+                    </div>
+
+                    <div th:if="${session.loginUser == null}">
+                        <p>로그인 후 게시글 수정/삭제가 가능합니다.</p>
+                    </div>
+
+
+                    <!-- 댓글 -->
+                    <div class="comment-area">
+                        <h4>댓글 <span th:text="${post.comments.size()}"></span>개</h4>
+                        <div class="comment-list">
+                            <div th:each="comment : ${post.comments}" class="single-comment">
+                                <div class="user d-flex">
+                                    <div class="thumb">
+                                        <img src="assets/img/comment/user1.png" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <h5><a href="#" th:text="${comment.userName}"></a></h5>
+                                        <p class="comment" th:text="${comment.content}"></p>
+                                        <!-- 댓글 좋아요/싫어요 (로그인된 사용자만 가능) -->
+                                        <div class="like-dislike-buttons">
+                                            <button class="btn-like" onclick="checkLogin(event, 'like')">&#128077;</button>
+                                            <button class="btn-dislike" onclick="checkLogin(event, 'dislike')">&#128078;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 댓글 작성 -->
+                        <div class="comment-form">
+                            <h4>댓글 작성</h4>
+
+                            <!-- 로그인된 사용자의 댓글 작성 폼 -->
+                            <form th:action="@{/comments/add}" method="post" id="commentForm" th:if="${session.loginUser != null}">
+                                <textarea rows="5" name="content" placeholder="댓글을 입력하세요"></textarea>
+                                <button type="submit" class="btn btn-primary">댓글 작성</button>
+                            </form>
+
+                            <!-- 비로그인 사용자의 경고 버튼 -->
+                            <div th:if="${session.loginUser == null}">
+                                <button type="button" class="btn btn-primary" onclick="checkLogin()">댓글 작성</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" class="page-link"><i class="ti-angle-left"></i></a></li>
+                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link"><i class="ti-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- 검색 -->
+                <aside class="single_sidebar_widget search_widget">
+                    <form action="/search" method="get">
+                        <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요">
+                        <button class="btn btn-primary w-100" style="margin-top: 10px;">검색</button>
+                    </form>
+                </aside>
+
+                <!-- 카테고리 -->
+                <aside class="single_sidebar_widget post_category_widget">
+                    <h4 class="widget_title">카테고리</h4>
+                    <ul class="list cat-list">
+                        <li><a href="#" class="d-flex"><p>숙소 추천</p></a></li>
+                        <li><a href="#" class="d-flex"><p>자유 게시판</p></a></li>
+                        <li><a href="#" class="d-flex"><p>여행 TIP</p></a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em;"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                    <div class="footer-tittle">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Report a Payment Issue</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom -->
+            <div class="row pt-padding">
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made by Colorlib</p>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-5">
+                    <div class="footer-social f-right">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    function checkLogin(event, action) {
+        var isLoggedIn = /* [[${session.loginUser != null}]] */ false;
+
+        if (!isLoggedIn) {
+            // 로그인이 안되어 있으면 경고 메시지 띄우고 동작 취소
+            event.preventDefault();
+            alert("로그인 후 " + (action === 'like' ? '좋아요' : '싫어요') + "를 할 수 있습니다.");
+            // 로그인 페이지로 리다이렉트
+            window.location.href = '/login';
+        } else {
+            // 로그인이 되어 있으면 서버로 요청을 보냄
+            // 실제로 서버로 좋아요/싫어요 요청을 보내는 코드 추가 가능
+            console.log(action + " clicked");
+        }
+    }
+</script>
+
+<!-- JS Files -->
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.slicknav.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/jquery.scrollUp.min.js"></script>
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery.sticky.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
