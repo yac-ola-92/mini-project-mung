@@ -1,6 +1,7 @@
 package com.example.mung.service;
 
 import com.example.mung.domain.PostDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public interface PostService {
     // 게시글 수정, 삭제시 비밀번호 확인
     boolean checkPassword(int post_id, String password);
 
+    // 추가: ID로 게시글 조회
+    PostDTO readById(int post_id);
 }
 
 
