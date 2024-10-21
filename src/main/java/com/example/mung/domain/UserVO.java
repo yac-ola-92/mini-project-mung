@@ -33,6 +33,32 @@ public class UserVO {
     private String business_sns_url;
     private String user_loginId;
 
+    //일반 회원가입
+    public UserVO(String user_name,String user_email,String password,String user_phone,LocalDateTime user_birth,int user_gender,String nickname,String user_loginId){
+        this.user_name =user_name;
+        this.user_email = user_email;
+        this.password = password;
+        this.user_phone = user_phone;
+        this.user_birth =user_birth;
+        this.user_gender = user_gender;
+        this.nickname = nickname;
+        this.role = "USER";
+        this.user_loginId =user_loginId;
+    }
+
+    //사업자 회원가입
+    public UserVO(String user_name,String user_email,String password,String user_phone,LocalDateTime user_birth,int user_gender,String nickname,String user_loginId,String business_number){
+        this.user_name =user_name;
+        this.user_email = user_email;
+        this.password = password;
+        this.user_phone = user_phone;
+        this.user_birth =user_birth;
+        this.user_gender = user_gender;
+        this.nickname = nickname;
+        this.role = "USER,HOST";
+        this.business_number = business_number;
+        this.user_loginId =user_loginId;
+    }
 
     public UserVO(String user_loginId,String password){
         this.user_loginId =user_loginId;

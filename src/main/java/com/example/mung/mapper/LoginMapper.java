@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -16,6 +18,11 @@ public interface LoginMapper {
     //USER 테이블 안에 있는 컬럼 전체
     //user_name //user_loginId //user_email //password //user_phone //user_birth //user_gender //nickname //role //user_address
     //profile_image_url //pet_info //business_number //business_sns_url
+
+
+    //아이디 전체 출력하여 담기
+    @Select("select user_loginId from user")
+    List<String> idList();
 
 
     //아이디 비밀번호로 정보 조회
@@ -35,6 +42,25 @@ public interface LoginMapper {
             "values " +
             "(#{user_name},#{user_loginId},#{user_email},#{password},#{user_phone},#{user_birth},#{user_gender},#{nickname},#{role})")
     public boolean generalJoin(UserDTO dto);
+
+
+    //아이디 찾기
+    @Select("select user_loginId from user where user_name = #{name} and user_email = #{email} and user_birth = #{birth}")
+    public String findId(String name,String email, LocalDateTime birth);
+
+    //비번 수정 전 아이디 확인
+    @Select("select user_name from user where user_loginId = #{id} and user_email = #{email} and user_birth = #{birth}")
+    public String idCheckForModifyPassword(String id,String email, LocalDateTime birth);
+
+    //비번 수정
+    @Update("UPDATE user SET password=${newPassword} WHERE user_loginId = #{id}")
+    int updatePassword(String id, String newPassword);
+
+
+
+
+
+
 
     //일반 회원 로그인
     //@Select("select * from user where user_loginId =#{user_loginId} and password=#{password}")

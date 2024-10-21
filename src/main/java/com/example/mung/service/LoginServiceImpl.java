@@ -7,6 +7,9 @@ import com.example.mung.mapper.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -28,6 +31,27 @@ public class LoginServiceImpl implements LoginService {
         return mapper.nameCheck(user_loginId);
     }
 
+    @Override
+    public List<String> idList(){
+
+        return mapper.idList();
+    }
+
+    @Override
+    public String findId(String name, String email, LocalDateTime birth){
+        return mapper.findId(name,email,birth);
+    }
+
+
+    @Override
+    public String idCheckForModifyPassword(String id, String email, LocalDateTime birth) {
+        return mapper.idCheckForModifyPassword(id,email,birth);
+    }
+
+    @Override
+    public int updatePassword(String id, String newPassword) {
+        return mapper.updatePassword(id,newPassword);
+    }
 
 //    public UserVO loginCheck(LoginDTO dto) {
 //        UserVO user = mapper.findByUserLoginId(dto.getUser_loginId());
