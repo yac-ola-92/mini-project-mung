@@ -1,4 +1,3 @@
-/*
 package com.example.mung.controller;
 
 import com.example.mung.domain.LoginDTO;
@@ -14,10 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class LoginController {
 
     //로그인 성공시 session에 로그인 정보 담기
     @PostMapping("/login")
-    public String join(HttpSession session, LoginDTO dto){
+    public String join(HttpSession session, LoginDTO dto) {
         UserVO user = loginService.loginSuccess(dto);
 
         if (user != null) {
@@ -67,15 +67,15 @@ public class LoginController {
         String email = requestData.get("email");
         String birth = requestData.get("birth");
 
-        String year ="";
-        String month ="";
-        String day ="";
-        int count = Integer.parseInt (birth.substring(0,2));
-        if(count < 50){
+        String year = "";
+        String month = "";
+        String day = "";
+        int count = Integer.parseInt(birth.substring(0, 2));
+        if (count < 50) {
 
             year = "20" + birth.substring(0, 2); // "20" + "02"
 
-        }else {
+        } else {
             year = "19" + birth.substring(0, 2);
         }
         month = birth.substring(2, 4); // "08"
@@ -83,7 +83,7 @@ public class LoginController {
 
         String date = year + "-" + month + "-" + day;
         System.out.println(date);
-        System.out.println(name+email+birth);
+        System.out.println(name + email + birth);
         LocalDate formatBirth = LocalDate.parse(date);
         System.out.println(formatBirth);
         LocalDateTime localDateTime = formatBirth.atStartOfDay(); // LocalDateTime으로 변환
@@ -110,15 +110,15 @@ public class LoginController {
         String email = requestData.get("email");
         String birth = requestData.get("birth");
 
-        String year ="";
-        String month ="";
-        String day ="";
-        int count = Integer.parseInt (birth.substring(0,2));
-        if(count < 50){
+        String year = "";
+        String month = "";
+        String day = "";
+        int count = Integer.parseInt(birth.substring(0, 2));
+        if (count < 50) {
 
             year = "20" + birth.substring(0, 2); // "20" + "02"
 
-        }else {
+        } else {
             year = "19" + birth.substring(0, 2);
         }
         month = birth.substring(2, 4); // "08"
@@ -126,7 +126,7 @@ public class LoginController {
 
         String date = year + "-" + month + "-" + day;
         System.out.println(date);
-        System.out.println(id+email+birth);
+        System.out.println(id + email + birth);
 
         // LocalDate로 변환
         LocalDate formatBirth = LocalDate.parse(date);
@@ -139,7 +139,7 @@ public class LoginController {
 
         System.out.println(foundName);
         if (foundName != null) {
-            return ResponseEntity.ok(foundName+"님 의 \n비밀번호를 수정합니다.");
+            return ResponseEntity.ok(foundName + "님 의 \n비밀번호를 수정합니다.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("아이디를 찾지 못 했습니다.");
         }
@@ -171,10 +171,10 @@ public class LoginController {
     //일반 회원가입 기능
     @Transactional
     @PostMapping
-    public String generalJoin(UserDTO dto){
+    public String generalJoin(UserDTO dto) {
         System.out.println(dto);
-        UserVO vo = new UserVO(dto.getUser_name(),dto.getUser_email(),dto.getPassword(),dto.getUser_phone(),dto.getUser_birth(),dto.getUser_gender(),dto.getNickname(),dto.getUser_loginId());
-        boolean result =  userService.register(vo);
+        UserVO vo = new UserVO(dto.getUser_name(), dto.getUser_email(), dto.getPassword(), dto.getUser_phone(), dto.getUser_birth(), dto.getUser_gender(), dto.getNickname(), dto.getUser_loginId());
+        boolean result = userService.register(vo);
         System.out.println(result);
         return "redirect:/login";
     }
@@ -189,6 +189,5 @@ public class LoginController {
 //    }
 
 
-
 }
-*/
+
