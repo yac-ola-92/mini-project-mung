@@ -1,3 +1,4 @@
+
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
@@ -19,6 +20,7 @@ public class LoginServiceImplTest {
         System.out.println("loginSuccess 성공!!");
     }
 
+
     @Test
     public void idCheck(){
         System.out.println("ServiceImpl 실행");
@@ -32,7 +34,7 @@ public class LoginServiceImplTest {
         System.out.println(service.printName("dwi"));
         System.out.println("loginSuccess 성공!!");
     }
-
+//제발
 
 //    @Test
 //    public void findByUserLoginIdTest(){
@@ -46,3 +48,4 @@ public class LoginServiceImplTest {
 //        System.out.println(service.login(new LoginDTO("user","12345")));
 //    }
 }
+

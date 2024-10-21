@@ -1,0 +1,24 @@
+
+.text_mungYellow{
+    color: #bc915e;
+}
+
+.bg_munYellow{
+    background: #bc915e;
+}
+
+.bg-text_mungYellow{
+    background: #bc915e;
+    color: white;
+}
+
+.overlap-bg_mungYellow{
+
+    background:#9e713b;
+}
+
+.hover_mung:hover{
+
+    color: black;
+    background-color: #9e713b;
+}

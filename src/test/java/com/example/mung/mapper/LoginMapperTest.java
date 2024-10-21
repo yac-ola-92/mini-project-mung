@@ -1,3 +1,4 @@
+
 package com.example.mung.mapper;
 
 import com.example.mung.domain.LoginDTO;
@@ -17,6 +18,7 @@ public class LoginMapperTest {
         System.out.println("loginActive 완료!!");
     }
 
+
     @Test
     public void loginByIdCheck(){
         System.out.println(mapper.loginByIdCheck("dwi"));
@@ -28,6 +30,7 @@ public class LoginMapperTest {
         System.out.println(mapper.nameCheck("dwi"));
         System.out.println("nameCheck 완료!!");
     }
+    //제발좀 올라가주세요
 //
 //    @Test
 //    public void loginIdCheckById() {
@@ -49,3 +52,4 @@ public class LoginMapperTest {
 
 
 }
+

@@ -12,16 +12,16 @@ public class RoomServiceImplTest {
 
     @Test //모든 숙소의 객실리스트 출력
     public void testGetList(){
-        service.getList().stream().forEach(System.out::println);
+        service.findAll().stream().forEach(System.out::println);
     }
 
    @Test //숙소 아이디로 객실 리스트 출력
    public void testGetListByAccom_id(){
-       service.getListByAccom_id(1).stream().forEach(System.out::println);
+       service.readByAccom_id(1).stream().forEach(System.out::println);
    }
    @Test // 견종으로 객실 출력
     public void testGetListByPet_kind(){
-       service.getListByPet_kind("소형견").stream().forEach(System.out::println);
+       service.readByPet_kind("소형견").stream().forEach(System.out::println);
    }
 
    @Test // 한 숙소에 객실 등록
@@ -35,8 +35,8 @@ public class RoomServiceImplTest {
        vo.setRoom_images_url("http://images.dadami.png");
        vo.setPet_kind("대형견");
        vo.setRoom_price(120000);
-       service.insert(vo);
-       service.getListByAccom_id(8).stream().forEach(System.out::println);
+       service.register(vo);
+       service.readByAccom_id(8).stream().forEach(System.out::println);
    }
     @Test // 한 숙소에 객실 등록
     public void TestUpdate(){
@@ -49,14 +49,14 @@ public class RoomServiceImplTest {
         vo.setRoom_images_url("http://images.couple.png");
         vo.setPet_kind("소형견");
         vo.setRoom_price(85000);
-        service.update(vo);
-        service.getListByAccom_id(8).stream().forEach(System.out::println);
+        service.modify(vo);
+        service.readByAccom_id(8).stream().forEach(System.out::println);
     }
 
     @Test //객실 삭제
     public void TestDelete(){
-        service.delete(10);
-        service.getListByAccom_id(8).stream().forEach(System.out::println);
+        service.remove(10);
+        service.readByAccom_id(8).stream().forEach(System.out::println);
     }
 
 }

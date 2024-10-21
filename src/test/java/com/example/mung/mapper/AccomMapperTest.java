@@ -19,16 +19,20 @@ public class AccomMapperTest {
     }
 
     @Test
-    public void testGetListByLocation(){
-        accomDAO.getListByLocation("강원").stream().forEach(System.out::println);
+    public void testGetOnetByLocation(){
+        accomDAO.getListByLocation("강원",2).stream().forEach(System.out::println);
     }
 
     @Test
-    public void testGetListByUserAndAccom_name(){
+    public void testGetOneByUserAndAccom_name(){
         AccomVO vo = new AccomVO();
         vo.setUser_id(1);
         vo.setAccom_name("언덕위");
-        accomDAO.getListByUserAndAccom_name(vo).stream().forEach(System.out::println);
+        accomDAO.getoneByUserAndAccom_name(vo).stream().forEach(System.out::println);
+    }
+
+    public void testGetListByRating(){
+        accomDAO.getListByRating().stream().forEach(System.out::println);
     }
 
     @Test
