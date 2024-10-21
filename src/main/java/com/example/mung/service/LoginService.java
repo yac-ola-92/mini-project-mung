@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.LoginDTO;
@@ -33,3 +34,4 @@ public interface LoginService {
 //    UserVO loginService(LoginDTO dto);
 
 }
+*/
