@@ -1,0 +1,354 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Travel HTML-5 Template </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- <link rel="manifest" href="site.webmanifest"> -->
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+	
+ <!-- CSS here -->
+   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="assets/css/slicknav.css">
+   <link rel="stylesheet" href="assets/css/animate.min.css">
+   <link rel="stylesheet" href="assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+   <link rel="stylesheet" href="assets/css/themify-icons.css">
+   <link rel="stylesheet" href="assets/css/slick.css">
+   <link rel="stylesheet" href="assets/css/nice-select.css">
+   <link rel="stylesheet" href="assets/css/style.css">
+   <link rel="stylesheet" href="assets/css/responsive.css">
+   <style>
+	
+	main {
+		text-align: center;
+            margin: 50px;
+            padding: 50px;
+            background-color: #f8f8f8;
+        
+	}
+
+	ul {
+        list-style-type: none;
+    	margin: 0;
+        padding: 0;
+        overflow: hidden;
+        }
+ 	li {
+        float: left;
+        }
+
+	#preview {
+            margin-top: 20px;
+            max-width: 300px; /* 최대 너비 설정 */
+            max-height: 300px; /* 최대 높이 설정 */
+            display: none; /* 기본적으로 숨김 */
+        }		
+		.input-form {
+			width: auto;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+		.submit , .cancel {
+			background-color :#bc915e;
+			border: none;
+			width: 100px;
+			height: 50px;
+
+		}	
+		#add-form-btn {
+			background-color: #bc915e;
+			border: none;
+			width: 100px;
+			height: 50px;
+
+		}
+		#delete-form-btn {
+			background-color: #bc915e;
+			border: none;
+			width: 100px;
+			height: 50px;
+		}
+		#row {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		#col-lg-8 col-md-8 {
+			text-align: center;
+		}
+		textarea {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#cbx {
+            display: block; /* 각 체크박스를 블록 요소로 설정 */
+            margin-bottom: 10px; /* 아래쪽 여백 추가 */
+        }
+		
+	
+
+   </style>
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+		<div class="header-bottom  header-sticky" style="background-color:#fff9f0;"> 
+			<div class="row align-items-center" >
+				<!-- Logo -->
+				<div class="col-xl-2 col-lg-2 col-md-1"></div>
+					<div class="logo" style="margin-left: 400px;" >
+					  <a href="mainPage.html"><img style="margin :auto; width : 100px;" src="assets/img/logo/멍로고.png" alt=""></a>
+					</div>
+					<nav>  
+						<ul>   
+						<li><a href="packages.html" style="color:#bc915e; margin : 0 100 0 100 ;">숙소예약</a></li>   
+						<li><a href="board.html" style="color:#bc915e; margin : 0 100 0 100 ;">게시판</a></li>   
+						<li><a href="mypage.html" style="color:#bc915e; margin : 0 100 0 100 ;">마이페이지</a></li>
+						<li><a href="login.html" style="color:#bc915e; margin : 0 100 0 100 ;">로그인</a></li>
+					</ul>   
+					</nav>
+
+				<div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
+					<!-- Main-menu -->
+					<div class="main-menu f-right d-none d-lg-block" >
+					  
+					</div>
+				</div>
+				<!-- Mobile Menu -->
+				<div class="col-12">
+					<div class="mobile_menu d-block d-lg-none"></div>
+				</div>
+			</div>
+		</div>
+   </div>
+</div>
+</div>
+<!-- Header End -->
+        <!-- Header End -->
+    </header>
+	<main>
+    <!-- slider Area Start-->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2 d-flex align-items-center" style="background-color: #bc915e;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h3>숙소 등록</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- slider Area End-->
+	
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<h3 class="mb-30">숙소</h3>
+						<hr>
+						<form id= "registerForm" action="/accom_update" >
+							<input type="hidden" name="user_id" value="{{user_id}}">
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>숙소명 : </label><input type="text" name="accom_name" placeholder="숙소명"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '숙소명'" required
+									class="single-input-secondary">
+							</div>
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>숙소 위치 : </label><input type="text" name="accom_location" placeholder="위치"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '위치'" required
+									class="single-input-secondary">
+							</div>
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>숙소 전화번호 : </label><input type="email" name="accom_phone" placeholder="숙소 전화번호"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = '숙소 전화번호'" required
+									class="single-input-secondary">
+							</div>
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>숙소 소개 : </label><textarea class="single-textarea" placeholder="숙소소개" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '숙소 소개'" required></textarea>
+							</div> 
+							<div>
+							<form action="/upload" method="post" enctype="multipart/form-data"> <!-- enctype는 html에서 데이터가 서버로 전송될 때 인코딩 방식을 지정함-->
+								<input type="file" id="image" name="image" accept="image/*" required>
+							</form>
+							<img id="preview" alt="이미지 미리보기">
+						</div>
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>예약 시 주의사항 : </label><textarea class="single-textarea" placeholder="예약 시 주의사항" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '예약 시 주의사항'" name="accom_caution" required></textarea>
+							</div> 
+							<div class="mt-10" style="display: flex; align-items: center;">
+								<label>편의시설 : </label>
+								<label id="cbx1"><input type="checkbox" name="accom_amenities" value="주차장">주차장</label><br><br>
+								<label id="cbx2"><input type="checkbox" name="accom_amenities" value="WI-FI">WI-FI</label><br><br>
+								<label id="cbx3"><input type="checkbox" name="accom_amenities" value="멍수영장">멍수영장</label><br><br>
+								<label id="cbx4"><input type="checkbox" name="accom_amenities" value="마당">드넓은 마당</label><br><br>
+								<label id="cbx5"><input type="checkbox" name="accom_amenities" value="놀이터">놀이터</label><br><br>
+								<label id="cbx6"><input type="checkbox" name="accom_amenities" value="스파">스파</label><br><br>
+								
+							</div>
+
+							<div>
+							<h3 class="mb-30">객실</h3>
+							<button id="add-form-btn">입력폼 추가</button>
+
+							<div id="form-container">
+								<!-- 입력폼이 여기에 추가됩니다. -->
+							</div>
+							<hr>
+						
+								<button type="submit" class="submit">제출</button>
+								<button type="reset" class="cancel" onclick="window.location.href='/숙소리스트'" style="margin-left: 10px;" >취소</button>
+							
+						</div>
+						</form>
+					</div>
+
+			</div>
+		</div>
+</main>
+	<!-- End Align Area -->
+    
+	<footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
+            <div class="container">
+                
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="index.html"><img src="assets/img/logo/멍로고.png" style="width: 150px;" alt=""></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <ul>
+                                        <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;" >고객문의</a></li>
+                                        <li><a href="#"  style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
+                                    </ul>
+                                </div>
+                       </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row pt-padding" style="padding: 0px;">
+                 <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                 </div>
+             </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+
+
+<!-- JS here -->
+<script>
+    const addFormBtn = document.getElementById('add-form-btn');
+    const formContainer = document.getElementById('form-container');
+
+    addFormBtn.addEventListener('click', () => {
+        // 새로운 입력폼 생성
+        const newForm = document.createElement('div');
+        newForm.className = 'input-form';
+
+        newForm.innerHTML = `
+		<form id="inputRoom" method="post" action="/room_register" >
+			<input type="hidden" name="accom_id" value="{{accom_id}}">
+            <label for="room_name">객실 명:</label>
+            <input type="text" name="room_name" id= "room_name"required><br><br>
+			<form>
+				<label>객실 타입 :</label>
+				<label for="room_type">캠핑</label>
+				<input type="radio" name="room_type" id="room_type" value="캠핑">
+				<label for="room_type">독채</label>
+				<input type="radio" name="room_type" id="room_type" value="독채"><br><br>
+			</form>	
+			<label>객실 금액: </label><input type="number" name="room_price" id= "room_price" placeholder="1박의 금액을 입력해주세요" required>원 <br><br>
+			<label>객실 이미지: </label><form action="/upload" method="post" enctype="multipart/form-data">
+				<input type="file" id="image" name="image" accept="image/*" required>
+			</form><br>
+			<label>객실 소개 : </label><textarea name="room_info" rows="3" cols="30" placeholder="객실에 대한 주의사항을 적어주세요"></textarea><br><br>
+			<label>객실 수: </label><input type="number" name="room_amount" id= "room_amount" placeholder="등록할 동일한 타입의 객실 수를 입력해 주세요." required>원 <br><br>
+			</form>
+            <button type="button" class="delete-form-btn" style="background-color: #bc915e; border: none;
+			width: 80px; height: 30px;">삭제</button>
+        `;
+
+        // 삭제 버튼 클릭 이벤트 리스너 추가
+        const deleteBtn = newForm.querySelector('.delete-form-btn');
+        deleteBtn.addEventListener('click', () => {
+            formContainer.removeChild(newForm); // 해당 입력폼 삭제
+        });
+
+        // 생성된 입력폼을 컨테이너에 추가
+        formContainer.appendChild(newForm);
+    });
+</script>
+
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="./assets/js/owl.carousel.min.js"></script>
+		<script src="./assets/js/slick.min.js"></script>
+		
+		<!-- One Page, Animated-HeadLin -->
+        <script src="./assets/js/wow.min.js"></script>
+		<script src="./assets/js/animated.headline.js"></script>
+		<script src="./assets/js/jquery.magnific-popup.js"></script>
+		
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="./assets/js/jquery.nice-select.min.js"></script>
+		<script src="./assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="./assets/js/contact.js"></script>
+        <script src="./assets/js/jquery.form.js"></script>
+        <script src="./assets/js/jquery.validate.min.js"></script>
+        <script src="./assets/js/mail-script.js"></script>
+        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="./assets/js/plugins.js"></script>
+        <script src="./assets/js/main.js"></script>
+        
+</body>
+</html>

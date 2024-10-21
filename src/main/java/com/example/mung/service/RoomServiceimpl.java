@@ -15,37 +15,37 @@ public class RoomServiceimpl implements RoomService {
    private RoomMapper roomDAO;
 
     @Override
-    public List<RoomDTO>getList(){
+    public List<RoomDTO>findAll(){
         System.out.println("모든 숙소의 객실 출력!!!!");
         return roomDAO.getList();
     }
 
     @Override // 한 숙소에서 가지고 있는 객실 모두 출력
-    public List<RoomDTO>getListByAccom_id(int accom_id){
+    public List<RoomDTO>readByAccom_id(int accom_id){
         System.out.println(accom_id+"번 숙소의 객실 모두 출력!!");
         return roomDAO.getListByAccom_id(accom_id);
     }
 
     @Override //반려동물의 종으로 숙소 출력
-    public List<RoomDTO>getListByPet_kind(String pet_kind){
+    public List<RoomDTO>readByPet_kind(String pet_kind){
         System.out.println(pet_kind+"까지 예약가능한 숙소입니다");
         return roomDAO.getListByPet_kind(pet_kind);
     }
 
     @Override  //숙소의 객실 등록
-    public boolean insert(RoomVO vo){
+    public boolean register(RoomVO vo){
         System.out.println(vo.getRoom_name()+"의 객실 등록 성공!!");
         return roomDAO.insert(vo);
     }
 
     @Override //등록된 객실 수정
-    public boolean update(RoomVO vo){
+    public boolean modify(RoomVO vo){
         System.out.println(vo.getRoom_name()+"의 객실이 수정되었습니다.");
         return roomDAO.update(vo);
     }
 
     @Override  // 객실 삭제
-    public boolean delete(int room_id) {
+    public boolean remove(int room_id) {
         System.out.println(room_id+"의 객실이 삭제되었습니다.");
         return roomDAO.delete(room_id);
     }

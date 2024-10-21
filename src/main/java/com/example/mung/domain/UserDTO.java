@@ -2,6 +2,7 @@ package com.example.mung.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
     private int user_id;
     private String user_name;
