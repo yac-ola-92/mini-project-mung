@@ -172,7 +172,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="../static/assets/img/logo/munglogo.png" alt="">
+                    <img src="/assets/img/logo/munglogo.png" alt="">
                 </div>
             </div>
         </div>
@@ -199,162 +199,124 @@
                                     <li><a href="mainPage.html" id="logout" style="display: none;" onclick="logout()">로그아웃</a></li>
                                 </ul>
                             </nav>
-                            <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <!-- form -->
-                                        <form action="/accomByLocation" method="get" class="search-box" style="margin-left: 50px;">
-                                            <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;" >
-                                                <input name="accom_location" type="text" style="border:4px solid #bc915e;" value="${accom_location}">
-                                            </div>
-                                            <div class="input-form mb-30" style="margin-right:10px;">
-                                                <div class="select-itms" >
-                                                    <input name="rv_start_date" type="date" style="border:4px solid #bc915e;" id="st_date" value="${st_date}">
-                                                </div>
-                                            </div>
-                                            <div class="input-form mb-30" style="margin-right:10px;">
-                                                <div class="select-itms" >
-                                                    <input name="rv_end_date" type="date" style="border:4px solid #bc915e;" id="lt_date" value="${lt_date}">
-                                                </div>
-                                            </div>
-                                            <div class="input-form mb-30"style="margin-right:10px; width: 150px;">
-                                                <input name="capacity" type="number" style="border: 4px solid #bc915e; " value="${capacity}">
-                                            </div> <!---->
-                                            <div class="search-form mb-30">
-                                                <button type="submit" id="search">Search</button>
-                                            </div>
-                                        </form>
-                                </div>
-                            </div>      
-                    </div>
-                </div>
-            </div>
+                        </div>
+               </div>
         </div>
                          <!-- slider Area End-->
                         <!-- Header End -->
     </header>
     <main>
-        <!-- Favourite Places Start -->
-        <div class="favourite-place place-padding" >
-            <div class="container">
-                <!-- Section Tittle -->
+        <!-- slider Area End-->
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area section-padding">
+            <div class="container" th:if="${accInfo}">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle text-center">
-                            <h2>멍숙소</h2>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 mt-sm-30" style="margin-right : 70px;">
-                        <div class="single-element-widget mt-30">
-                            <h3 class="mb-30">편의시설</h3>
-                            <div class="switch-wrap d-flex justify-content-between">
-                                <p>애견수영장</p>
-                                <div class="primary-checkbox">
-                                    <input type="checkbox" id="p-checkbox" checked>
-                                    <label for="p-checkbox"></label>
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post">
+                            <div class="feature-img">
+                                <img class="img-fluid" th:src="${accInfo.accom_images_url}" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <div>
+                                    <h2 th:text="${accInfo.accom_name}">숙소이름</h2>
+                                    <ul class="blog-info-link mt-3 mb-4">
+                                        <li><i class="fa fa-user"></i>펫 종</li>
+                                        <li th:text="${accInfo.rating}"><i class="fa fa-comments"></i>별점</li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="switch-wrap d-flex justify-content-between">
-                                <p>WI-FI</p>
-                                <div class="primary-checkbox">
-                                    <input type="checkbox" id="pr-checkbox" checked>
-                                    <label for="pr-checkbox"></label>
+                                <div>
+                                    <h3>숙소 소개</h3>
+                                        <p th:text="${accInfo.accom_description}" class="excert"></p>
+                                    <hr>
                                 </div>
-                            </div>
-                            <div id="control">
-                            <form>
-                                <h3 class="mb-30">금액</h3>
-                                    <div>
-                                        <input type="range" value="0" min="0" max="100" oninput="rangeValue.innerText=this.value"> 
-                                        <p id="rangeValue">0</p>      
-                                    </div>
-                                </form>
-                            </div>
-                           
-                        </div>
-                        <div class="single-element-widget mt-30">
-                            <h3 class="mb-30">나의 반려견</h3>
-                            <div class="switch-wrap d-flex justify-content-between">
-                                <p>소형견</p>
-                                <div class="primary-radio">
-                                    <input type="checkbox" id="default-radio1">
-                                    <label for="default-radio"></label>
-                                </div>
-                            </div>
-                            <div class="switch-wrap d-flex justify-content-between">
-                                <p>중형견</p>
-                                <div class="primary-radio">
-                                    <input type="checkbox" id="default-radio2">
-                                    <label for="default-radio"></label>
-                                </div>
-                            </div>
-                            <div class="switch-wrap d-flex justify-content-between">
-                                <p>대형견</p>
-                                <div class="primary-radio">
-                                    <input type="checkbox" id="default-radio">
-                                    <label for="default-radio"></label>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    <div th:if="${accomList != null}">
-                        <div class="row">
-                            <div  th:each=" vo, status : ${accomList}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
-                                <div class="single-place mb-30">
-                                    <a th:href="@{accom_list/details/${vo.accom_id}}">
-                                        <div class="single-place mb-30" >
-                                            <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img">
-                                        </div>
-                                        <div class="place-cap">
-                                            <div class="place-cap-top">
-                                                <span><i class="fas fa-star"></i><span th:text="${vo.rating}"></span> </span>
-                                                <a th:href="@{accom_list/details/${vo.accom_id}}"><h3 th:text="${vo.accom_name}"></h3></a>
-                                                <p class="dolor" th:text="${vo.room_price}"><span>/ 1박</span></p>
-                                            </div>
-                                            <div class="place-cap-bottom">
-                                                <ul>
-                                                    <li th:text="${vo.pet_kind}"><i class="far fa-clock"></i></li>
-                                                    <li th:text="${vo.accom_location}"><i class="fas fa-map-marker-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </a>
+                                <div>
+                                    <h3>예약 시 주의사항</h3>
+                                    <p th:text="${accInfo.accom_caution}"></p>
+                                    <hr>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Favourite Places End -->
-   
-        </div>
-    </div>
 
-        <!-- Pagination-area Start -->
-        <div class="pagination-area pb-100 text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single-wrap d-flex justify-content-center">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                  <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted left-arrow"></span></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                  <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
-                                </ul>
-                              </nav>
+                        <div class="blog-author">
+                            <div class="media align-items-center">
+                                <img src="assets/img/blog/author.png" alt="">
+                                <div class="media-body">
+                                    <h4>숙소 기본정보</h4>
+                                    <p th:text="${accInfo.accom_phone}">전화번호, 지도, sns 주소</p>
+                                    <p th:text="${accInfo.accom_location}"></p>
+                                    <p th:text="${accInfo.business_sns_url}"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comments-area">
+                            <h4>Review</h4>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="assets/img/comment/comment_1.png" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <p class="comment">
+                                                주절주절
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <h5 th:text="${accInfo.nickname}"></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="blog_right_sidebar">
+                                <aside class="single_sidebar_widget tag_cloud_widget">
+                                    <h4 class="widget_title">편의시설</h4>
+                                    <ul class="list">
+                                        <li>
+                                            편의시설
+                                        </li>
+                                    </ul>
+                                </aside>
+                                <aside class="single_sidebar_widget search_widget">
+                                    <form action="#">
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">예약하기 버튼이 될지어다</button>
+                                    </form>
+                                </aside>
+                                <aside class="single_sidebar_widget popular_post_widget">
+                                    <h3 class="widget_title">객실</h3>
+                                    <div class="media post_item">
+                                        <img src="assets/img/post/post_1.png" alt="post">
+                                        <div class="media-body">
+                                            <a href="single-blog.html">
+                                                <h3>객실 이름</h3>
+                                            </a>
+                                            <p>금액</p>
+                                        </div>
+                                    </div>
+                                </aside>
+                                <aside class="single_sidebar_widget newsletter_widget">
+                                    <h4 class="widget_title">Newsletter</h4>
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">이걸 예약/으로 할까</button>
+                                    </form>
+                                </aside>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Pagination-area End -->
+        </section>
     </main>
     <footer>
         <!-- Footer Start-->

@@ -30,16 +30,18 @@ public class RoomController {
         vo.setRoom_images_url(req.getParameter("room_images_url"));
         vo.setRoom_price(Integer.parseInt(req.getParameter("room_price")));
         vo.setPet_kind(req.getParameter("pet_kind"));
+        vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_standard")));
+        vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_max")));
         service.register(vo);
         return "register success";
     }
 
-   /* @GetMapping("/myAccom/room/{accom_id}/edit") // 숙소 수정에 사용될 정보
-    public Model room_edit(@PathVariable int accom_id, Model model){
+    @GetMapping("/myAccom/{accom_id}/edit") // 숙소 수정에 사용될 정보
+    public String room_edit(@PathVariable("accom_id") int accom_id, Model model){
         List<RoomDTO> rm = service.readByAccom_id(accom_id);
         model.addAttribute("rmInfo",rm);
-        return rm;
-    }*/
+        return "update_accom";
+    }
 
 
     @PostMapping("/room_update")
@@ -53,7 +55,9 @@ public class RoomController {
         vo.setRoom_images_url(req.getParameter("room_images_url"));
         vo.setRoom_price(Integer.parseInt(req.getParameter("room_price")));
         vo.setPet_kind(req.getParameter("pet_kind"));
-        return "update success";
+        vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_standard")));
+        vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_max")));
+        return "redirect:/myAccom";
     }
 
 
