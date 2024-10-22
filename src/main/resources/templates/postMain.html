@@ -8,65 +8,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/assets/css/slicknav.css">
-    <link rel="stylesheet" href="/assets/css/animate.min.css">
-    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="/assets/css/slick.css">
-    <link rel="stylesheet" href="/assets/css/nice-select.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <script src="https://kit.fontawesome.com/748b44d03f.js" crossorigin="anonymous"></script>
     <style>
-        .blog_area .container {
+        .container {
+            margin: 0 auto; /* 수평 중앙 정렬 */
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
         }
 
-        .blog_left_sidebar {
-            flex: 0 0 70%;
-            margin-right: 30px;
-        }
-
-        .category_sidebar {
-            flex: 0 0 25%;
-        }
-
-        .blog-pagination {
+        .search-container {
             display: flex;
+            align-items: center;
             justify-content: center;
             margin-top: 20px;
-            width: 100%;
         }
 
-        .pagination {
-            list-style: none;
-            padding-left: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .pagination li {
-            margin: 0 5px;
-        }
-
-        .page-link {
+        .search-select {
             padding: 10px 15px;
-            background-color: #f2e2cc;
-            border: 1px solid #ddd;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            background-color: #f2f2f2;
+            font-size: 16px;
             color: #333;
+            height: 50px;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 0;
+            background-color: #f2f2f2;
+            font-size: 16px;
+            color: #333;
+            width: 300px;
+            height: 50px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #f2e2cc;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            color: black;
+            cursor: pointer;
+            font-size: 16px;
+            height: 50px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+        }
+
+        .search-container input,
+        .search-container select,
+        .search-container button {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 글 작성 버튼 */
+        .btn-write {
+            margin: 20px 0; /* 상단과의 간격 */
+            padding: 10px 20px;
+            background-color: #f2e2cc;
+            color: #333;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-write:hover {
+            background-color: #e6d3b8;
+            color: #000;
+        }
+
+        /* 게시글 목록 스타일 */
+        .post-list {
+            width: 65%; /* 게시글 리스트의 너비 */
+            margin-right: 20px;
+        }
+
+        /* 카테고리 스타일 */
+        .category-section {
+            flex: 1;
+            background-color: #fff9f0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            max-height: 200px;
+            text-align: center;
+
+            /* 스크롤을 따라오도록 설정 */
+            position: sticky;
+            top: 10px; /* 화면 상단에서 떨어진 거리 */
+        }
+
+        .category-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .category-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-section li {
+            margin-bottom: 10px;
+        }
+
+        .category-section li a {
             text-decoration: none;
-            border-radius: 5px;
+            color: #007bff;
+            font-size: 16px;
+        }
+
+        .category-section li a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
 <header>
     <div class="header-area" style="background-color: #fff9f0;">
-        <div class="main-header ">
+        <div class="main-header">
             <div class="header-top top-bg d-none d-lg-block" style="background-color: #f2e2cc;">
                 <div class="container">
                     <div class="row justify-content-between align-items-center">
@@ -97,18 +171,23 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
+                                <a href="main.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">숙소 예약</a></li>
-                                        <li><a href="postMain.html">게시판</a></li>
-                                        <li><a href="postReview.html">후기 게시판</a></li>
+                                        <li><a th:href="@{/index}">숙소 예약</a></li>
+                                        <li><a th:href="@{/postMain}">게시판</a>
+                                            <ul class="submenu">
+                                                <li><a th:href="@{/postMain}">게시판</a></li>
+                                                <li><a th:href="@{/reviews}">후기 게시판</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="about.html">마이페이지</a></li>
-                                        <li><a href="login.html">로그인</a></li>
+                                        <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -123,75 +202,70 @@
     </div>
 </header>
 
-<!-- 게시판 영역 -->
 <section class="blog_area section-padding">
     <div class="container">
-        <div class="row">
-            <!-- 게시글 리스트 출력 -->
-            <div class="col-lg-8 mb-5 mb-lg-0">
-                <div class="blog_left_sidebar">
-                    <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
-                        <li>
-                            <article class="blog_item">
-                                <div class="blog_details" style="background-color: #fff9f0; border: solid 1px #f2e2cc;">
-                                    <a th:href="@{'/post/' + ${post.post_id}}">
-                                        <h2 class="blog-head" th:text="${post.title}" style="color: #2d2d2d;">게시글 제목</h2>
-                                    </a>
-                                    <ul class="blog-info-link">
-                                        <li><span th:text="${post.user_id}">작성자</span></li>
-                                        <li><span th:text="${#dates.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
-                                        <li><span th:text="${post.view_count}">조회수</span></li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
+        <div class="post-list">
             <!-- 글 작성 버튼 -->
             <div>
-                <button type="button" class="btn btn-primary" onclick="location.href='/login';"
-                        style="background-color: #f2e2cc; color: black;">글 작성</button>
+                <button type="button" class="btn-write" onclick="checkLogin();">글 작성</button>
             </div>
-        </div>
-    </div>
 
-    <!-- 검색 및 카테고리 필터 -->
-    <div class="col-lg-4">
-        <aside class="single_sidebar_widget search_widget">
-            <form action="/search" method="get">
-                <div class="form-group">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요">
-                    </div>
-                </div>
-                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                        style="background-color: #f2e2cc; border-color: #f2e2cc;" type="submit">검색</button>
-            </form>
-        </aside>
-
-        <aside class="single_sidebar_widget post_category_widget"
-               style="margin-top: 15%; padding: 20px; background-color: #fff9f0; border: 1px solid #ddd; border-radius: 5px;">
-            <h4 class="widget_title">카테고리</h4>
-            <ul class="list cat-list" style="margin-top: 5%;">
+            <!-- 게시글 목록 -->
+            <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
                 <li>
-                    <a href="#" class="d-flex">
+                    <article class="blog_item">
+                        <div class="blog_details" style="background-color: #fff9f0; border: solid 1px #f2e2cc;">
+                            <a th:href="@{'/post/' + ${post.post_id}}">
+                                <h2 class="blog-head" th:text="${post.title}" style="color: #2d2d2d;">게시글 제목</h2>
+                            </a>
+                            <ul class="blog-info-link">
+                                <li><span th:text="${post.nickname}">작성자</span></li>
+                                <li><span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
+                                <li><span th:text="${post.view_count}">조회수</span></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+            <p th:if="${posts == null || posts.isEmpty()}">검색 결과가 없습니다.</p>
+        </div>
+
+        <!-- 카테고리 -->
+        <div class="category-section">
+            <h4 class="widget_title">카테고리</h4>
+            <ul class="list cat-list">
+                <li>
+                    <a th:href="@{'/posts/category/rec'}">
                         <p>숙소 추천</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex">
+                    <a th:href="@{'/posts/category/general'}">
                         <p>자유 게시판</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex">
+                    <a th:href="@{'/posts/category/travel'}">
                         <p>여행 TIP</p>
                     </a>
                 </li>
             </ul>
-        </aside>
+        </div>
+    </div>
+
+    <!-- 검색 필터 -->
+    <div class="search-container">
+        <form th:action="@{/posts/search}" method="get" class="search-box">
+            <select name="type" class="search-select">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="nickname">작성자</option>
+            </select>
+            <input type="text" class="search-input" name="keyword" placeholder="검색어를 입력하세요">
+            <button type="submit" class="search-button">검색
+                <i class="fa-duotone fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
     </div>
 
     <!-- 페이징 -->
@@ -239,38 +313,28 @@
                     </div>
                 </div>
             </div>
-            <div class="row pt-padding">
-                <div class="col-xl-7 col-lg-7 col-md-7">
-                    <div class="footer-copy-right">
-                        <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-5 col-md-5">
-                    <div class="footer-social f-right">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
-                        <a href="#"><i class="fas fa-globe"></i></a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </footer>
+<script>
+    function checkLogin() {
+        console.log('checkLogin 함수가 실행되었습니다.');
 
+        // 로그인 여부 확인 로직
+        const isLoggedIn = true; // 테스트용으로 항상 로그인 상태로 가정
+
+        if (isLoggedIn) {
+            console.log('로그인 상태입니다. 글 작성 페이지로 이동합니다.');
+            window.location.href = '/new';
+        } else {
+            console.log('로그인되지 않았습니다. 로그인 페이지로 이동합니다.');
+            alert('로그인 후 글을 작성할 수 있습니다.');
+            window.location.href = '/login';
+        }
+    }
+</script>
 <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.slicknav.min.js"></script>
-<script src="/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/js/slick.min.js"></script>
-<script src="/assets/js/wow.min.js"></script>
-<script src="/assets/js/jquery.scrollUp.min.js"></script>
-<script src="/assets/js/jquery.nice-select.min.js"></script>
-<script src="/assets/js/jquery.sticky.js"></script>
-<script src="/assets/js/jquery.magnific-popup.js"></script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/main.js"></script>
-
 </body>
 </html>

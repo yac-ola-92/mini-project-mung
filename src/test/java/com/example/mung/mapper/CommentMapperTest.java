@@ -13,25 +13,23 @@ public class CommentMapperTest {
     @Autowired
     private CommentMapper dao;
 
-    @Test */
-/*전체 댓글 조회*//*
 
-    void testAll() {dao.getList().stream().forEach(System.out::println);}
+    @Test /*전체 댓글 조회*/
+    void testAll() {dao.getAllComment().stream().forEach(System.out::println);}
 
-    @Test */
-/* 특정 유저가 작성한 댓글 목록 조회*//*
+    @Test /* 특정 유저가 작성한 댓글 목록 조회*/
+    void testFindByUser_id() {System.out.println(dao.getCommentByUserId(1));}
 
-    void testFindByUser_id() {System.out.println(dao.getListByUserId(1));}
 
     @Test
     void testInsert() {
         CommentDTO comment = new CommentDTO();
         comment.setPost_id(1);
         comment.setContent("저도 여기 가봤어요!");
-        comment.setCreated_at(LocalDateTime.now());
+/*        comment.setCreated_at(LocalDateTime.now());*/
         comment.setUser_id(1);
-        dao.insert(comment);
-        dao.getList().stream().forEach(System.out::println);
+        dao.insertComment(comment);
+        dao.getAllComment().stream().forEach(System.out::println);
     }
 
     @Test
@@ -39,17 +37,17 @@ public class CommentMapperTest {
         CommentDTO comment = new CommentDTO();
         comment.setComment_id(4);
         comment.setContent("저도 다음에 가보려구요");
-        comment.setCreated_at(LocalDateTime.now());
+/*        comment.setCreated_at(LocalDateTime.now());*/
         comment.setPost_id(1);
         comment.setUser_id(1);
-        dao.update(comment);
-        dao.getList().stream().forEach(System.out::println);
+        dao.updateComment(comment);
+        dao.getAllComment().stream().forEach(System.out::println);
     }
 
     @Test
     void testDelete() {
-        System.out.println(dao.delete(14));
-        dao.getList().stream().forEach(System.out::println);
+        System.out.println(dao.deleteComment(14));
+        dao.getAllComment().stream().forEach(System.out::println);
     }
 
     @Test
@@ -57,11 +55,11 @@ public class CommentMapperTest {
         CommentDTO comment = new CommentDTO();
         comment.setPost_id(1);
         comment.setContent("너무 좋죠?");
-        comment.setCreated_at(LocalDateTime.now());
+/*        comment.setCreated_at(LocalDateTime.now());*/
         comment.setUser_id(1);
         comment.setParent_comment_id(4); // 부모 댓글 아이디 설정
-        dao.insertReply(comment);
-        dao.getList().stream().forEach(System.out::println);
+        dao.insertComment(comment);
+        dao.getAllComment().stream().forEach(System.out::println);
     }
 
 }

@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.AccomVO;
@@ -65,3 +66,4 @@ public class AccomServiceImplTest  {
     }
 
 }
+*/

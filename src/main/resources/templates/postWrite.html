@@ -62,15 +62,16 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">숙소 예약</a></li>
-                                            <li><a href="../static/postMain.html">게시판</a>
+                                            <li><a th:href="@{/index}">숙소 예약</a></li>
+                                            <li><a th:href="@{/postMain}">게시판</a>
                                                 <ul class="submenu">
-                                                    <li><a href="../static/postMain.html">게시판</a></li>
-                                                    <li><a href="../static/postReview.html">후기 게시판</a></li>
+                                                    <li><a th:href="@{/postMain}">게시판</a></li>
+                                                    <li><a th:href="@{/reviews}">후기 게시판</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="about.html">마이페이지</a></li>
-                                            <li><a href="packages.html">로그인</a></li>
+                                            <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
+                                            <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -152,10 +153,30 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();  // 기본 폼 제출을 막음
+
+            // 폼 데이터를 가져옴
+            var formData = new FormData(this);
+
+            // AJAX로 폼 데이터를 서버로 전송
+            fetch('/new', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())  // 서버 응답 처리
+                .then(data => {
+                    alert('게시글이 성공적으로 등록되었습니다.');
+                })
+                .catch(error => {
+                    alert('게시글 등록에 실패했습니다.');
+                });
+        });
+    </script>
     <!-- JS Files -->
     <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/main.js"></script>
-
 </body>
 </html>
