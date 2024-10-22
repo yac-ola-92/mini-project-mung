@@ -1,21 +1,24 @@
 package com.example.mung.service;
 
+import com.example.mung.domain.CommentDTO;
 import com.example.mung.domain.PostDTO;
 import com.example.mung.exception.PostNotFoundException;
+import com.example.mung.mapper.CommentMapper;
 import com.example.mung.mapper.PostMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
+
 import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
+    private final CommentMapper commentMapper;
 
-    public PostServiceImpl(PostMapper postMapper) {
+    public PostServiceImpl(PostMapper postMapper, CommentMapper commentMapper) {
         this.postMapper = postMapper;
+        this.commentMapper = commentMapper;
     }
 
     // 모든 게시글 조회
@@ -31,19 +34,8 @@ public class PostServiceImpl implements PostService {
         return postMapper.getPagedPost(size, offset);
     }
 
-    // 제목을 통해 게시글 조회
     @Override
-    public PostDTO readByTitle(String title) {
-        PostDTO post = postMapper.getOneByTitle(title);
-        if (post == null) {
-            throw new PostNotFoundException("게시글을 찾을 수 없습니다: " + title);
-        }
-        return post;
-    }
-
-    // 카테고리별 게시글 조회
-    @Override
-    public List<PostDTO> findByCategory(PostDTO.Category category) {
+    public List<PostDTO> getPostsByCategory(String category) {
         return postMapper.getPostByCategory(category);
     }
 
@@ -75,10 +67,22 @@ public class PostServiceImpl implements PostService {
         return postMapper.increaseViewCount(post_id) > 0;
     }
 
-    // 게시글 검색
+    // 제목으로 검색
     @Override
-    public List<PostDTO> searchPosts(String keyword, String type) {
-        return postMapper.searchPost(keyword, type);
+    public List<PostDTO> searchByTitle(String keyword) {
+        return postMapper.findByTitle(keyword);
+    }
+
+    // 내용으로 검색
+    @Override
+    public List<PostDTO> searchByContent(String keyword) {
+        return postMapper.findByContent(keyword);
+    }
+
+    // 작성자(nickname)으로 검색
+    @Override
+    public List<PostDTO> searchByNickname(String nickname) {
+        return postMapper.findByNickname(nickname);
     }
 
     // 비밀번호 확인
@@ -94,6 +98,11 @@ public class PostServiceImpl implements PostService {
         if (post == null) {
             throw new PostNotFoundException("게시글을 찾을 수 없습니다: " + post_id);
         }
+
+        // 댓글 목록 가져오기
+        List<CommentDTO> comments = commentMapper.getCommentsByPostId(post_id);
+        post.setComments(comments); // PostDTO에 댓글 목록 추가
         return post;
     }
+
 }

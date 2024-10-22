@@ -11,4 +11,5 @@ public interface CommentService {
     boolean register(CommentDTO comment);
     boolean modify(CommentDTO comment);
     boolean remove(int comment_id);
+    CommentDTO findById(int comment_id);
 }

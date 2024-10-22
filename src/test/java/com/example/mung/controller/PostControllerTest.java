@@ -1,6 +1,7 @@
 package com.example.mung.controller;
 
 import com.example.mung.domain.PostDTO;
+import com.example.mung.domain.UserDTO;
 import com.example.mung.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,98 +20,139 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class PostControllerTest {
 
-    //Spring MVC의 가상 MVC 환경 설정
     private MockMvc mockMvc;
 
-    // PostService 클래스의 인스턴스를 모킹하여, 실제 구현 없이 테스트
     @Mock
     private PostService postService;
 
-    // PostController에 postService를 주입. 모킹된 PostService 사용.
     @InjectMocks
     private PostController postController;
 
-    //테스트 준비
     @BeforeEach
     public void setUp() {
-        //Mockito 주석을 사용한 모킹 객체들을 초기화. 이를 통해 @Mock와 @InjectMocks 작동.
+        // ViewResolver 설정
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".html");
+
         MockitoAnnotations.openMocks(this);
-        //postController를 사용하는 MockMvc 인스턴스를 생성. standaloneSetup은 단일 컨트롤러에 대한 설정 가능케 해줌.
-        mockMvc = MockMvcBuilders.standaloneSetup(postController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(postController)
+                .setViewResolvers(viewResolver)
+                .build();
     }
 
-    // 전체 게시글 조회
+    // 게시글 목록 조회 테스트
     @Test
-    public void testGetAllpost() throws Exception {
-        // PostDTO 객체를 담을 빈 리스트 생성.
-        // 이후 Mock 객체가 반환할 데이터 추가.
-        List<PostDTO> post = new ArrayList<>();
-
-        //postService.findAll() 호출 시, 위에서 만든 빈 리스트 post 반환하도록 설정.
-        // 이렇게 함으로써 실제 서비스 구현없이 테스트 진행.
-        when(postService.findAll()).thenReturn(post);
-
-        //post 경로에 GET 요청을 보내고 응답 상태 확인.
-        // perform() 메소드는 요청을 실행하며, andExpect()는 예상되는 결과를 검증.
-        mockMvc.perform(get("/post"))
-                .andExpect(status().isOk());
-    }
-
-    // 게시글 생성
-    @Test
-    public void testInsertPost() throws Exception {
-        // PostDTO 객체를 생성, 생성할 게시글의 데이터 담기.
+    public void testGetPostsByCategory() throws Exception {
+        List<PostDTO> postList = new ArrayList<>();
         PostDTO post = new PostDTO();
+        post.setPost_id(1);
+        post.setTitle("Test Post");
+        postList.add(post);
+
+        when(postService.getPostsByCategory("rec")).thenReturn(postList);
+
+        mockMvc.perform(get("/category/rec"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("posts"))
+                .andExpect(view().name("postMain"));
+    }
+
+    // 게시글 검색 테스트
+    @Test
+    public void testSearchPosts() throws Exception {
+        List<PostDTO> searchResults = new ArrayList<>();
+        PostDTO post = new PostDTO();
+        post.setTitle("Test Post");
+        searchResults.add(post);
+
+        when(postService.searchPostsByTitle("Test")).thenReturn(searchResults);
+
+        mockMvc.perform(get("/search").param("keyword", "Test"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("posts"))
+                .andExpect(view().name("postMain"));
+    }
+
+    // 게시글 작성 폼 이동 테스트
+    @Test
+    public void testCreatePostForm() throws Exception {
+        mockMvc.perform(get("/new").sessionAttr("userInfo", new UserDTO()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("postWrite"));
+    }
+
+    // 게시글 등록 테스트
+    @Test
+    public void testCreatePost() throws Exception {
+        when(postService.register(any(PostDTO.class))).thenReturn(true);
+
+        mockMvc.perform(post("/new")
+                        .param("title", "Test Title")
+                        .param("content", "Test Content")
+                        .param("files", "")
+                        .sessionAttr("userInfo", new UserDTO()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("postWrite"))
+                .andExpect(model().attribute("msg", "게시글과 파일이 성공적으로 저장되었습니다."));
+    }
+
+    // 게시글 상세 조회 테스트
+    @Test
+    public void testGetPostById() throws Exception {
+        PostDTO post = new PostDTO();
+        post.setPost_id(1);
         post.setTitle("Test Title");
         post.setContent("Test Content");
 
-        //postService.register() 메소드가 호출될 때, 항상 true를 반환하도록 설정
-        when(postService.register(any(PostDTO.class))).thenReturn(true);
+        when(postService.readById(1)).thenReturn(post);
 
-        //JSON 형식의 게시글 데이터를 포함한 POST 요청을 /post 경로로 보내기
-        //요청 헤더에는 Contetn-Type을 application/json으로 설정하여 JSON데이터임을 명시
-        mockMvc.perform(post("/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"title\":\"Test Title\", \"content\":\"Test Content\"}"))
-                .andExpect(status().isOk());
+        mockMvc.perform(get("/1"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("post"))
+                .andExpect(view().name("postDetail"));
     }
 
+    // 게시글 수정 페이지 이동 테스트
     @Test
-    public void testUpdatePost() throws Exception {
+    public void testUpdatePostPage() throws Exception {
         PostDTO post = new PostDTO();
         post.setPost_id(1);
-        post.setTitle("Updated Title");
-        post.setContent("Updated Content");
+        post.setUser_id(1);
+        post.setTitle("Test Title");
 
-        when(postService.modify(any(PostDTO.class))).thenReturn(true);
+        UserDTO userInfo = new UserDTO();
+        userInfo.getUser_id();
 
-        mockMvc.perform(put("/post/{id}", 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"title\":\"Updated Title\", \"content\":\"Updated Content\"}"))
-                .andExpect(status().isOk());
+        when(postService.readById(1)).thenReturn(post);
+
+        mockMvc.perform(get("/update/1")
+                        .sessionAttr("userInfo", userInfo))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("post"))
+                .andExpect(view().name("postUpdate"));
     }
 
+    // 게시글 삭제 테스트
     @Test
     public void testDeletePost() throws Exception {
-        when(postService.remove(anyInt())).thenReturn(true);
+        PostDTO post = new PostDTO();
+        post.setPost_id(1);
+        post.setUser_id(1);
 
-        mockMvc.perform(delete("/post/{id}", 1))
-                .andExpect(status().isOk());
-    }
+        UserDTO userInfo = new UserDTO();
+        userInfo.getUser_id();
 
-    @Test
-    public void testGetPostByTitle() throws Exception {
-        List<PostDTO> post = new ArrayList<>();
-        post.add(new PostDTO());
-        when(postService.findByCategory(any())).thenReturn(post);
+        when(postService.readById(1)).thenReturn(post);
+        when(postService.remove(1)).thenReturn(true);
 
-        mockMvc.perform(get("/post/search")
-                        .param("keyword", "Test Title")
-                        .param("type", "title"))
-                .andExpect(status().isOk());
+        mockMvc.perform(post("/delete/1")
+                        .sessionAttr("userInfo", userInfo))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/postMain"));
     }
 }
