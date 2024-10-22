@@ -1,3 +1,4 @@
+/*
 package com.example.mung.mapper;
 
 import com.example.mung.domain.CommentDTO;
@@ -12,10 +13,14 @@ public class CommentMapperTest {
     @Autowired
     private CommentMapper dao;
 
-    @Test /*전체 댓글 조회*/
+    @Test */
+/*전체 댓글 조회*//*
+
     void testAll() {dao.getList().stream().forEach(System.out::println);}
 
-    @Test /* 특정 유저가 작성한 댓글 목록 조회*/
+    @Test */
+/* 특정 유저가 작성한 댓글 목록 조회*//*
+
     void testFindByUser_id() {System.out.println(dao.getListByUserId(1));}
 
     @Test
@@ -60,3 +65,4 @@ public class CommentMapperTest {
     }
 
 }
+*/
