@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Travel HTML-5 Template </title>
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <th:block th:fragment="link">
+        <link href="/assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+        <!-- CSS here -->
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/css/owl.carousel.min.css" rel="stylesheet">
+        <link href="/assets/css/flaticon.css" rel="stylesheet">
+        <link href="/assets/css/slicknav.css" rel="stylesheet">
+        <link href="/assets/css/animate.min.css" rel="stylesheet">
+        <link href="/assets/css/magnific-popup.css" rel="stylesheet">
+        <link href="/assets/css/fontawesome-all.min.css" rel="stylesheet">
+        <link href="/assets/css/themify-icons.css" rel="stylesheet">
+        <link href="/assets/css/slick.css" rel="stylesheet">
+        <link href="/assets/css/nice-select.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+    </th:block>
+    <th:block th:fragment="style">
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 7px 5px 0 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            li {
+                float: left;
+            }
+            #login , #logout {
+                background-color: #bc915e;
+                border: none;
+                height: 35px;
+                margin-left: 2px;
+            }
+            #login :hover{
+                background-color: #fff9f0;
+                border: solid 3px  #bc915e;
+            }
+            #logout :hover{
+                background-color: #fff9f0;
+                border: solid 3px  #bc915e;
+            }
+            nav ul li {
+                height: 40px;
+                margin: 10px;
+            }
+
+            nav ul li :hover {
+                background-color: #fff9f0;
+                border: solid 3px  #bc915e;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+
+<!-- Preloader Fragment -->
+<th:block th:fragment="preloader">
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img alt="" src="/assets/img/logo/멍로고.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<!-- Header Fragment -->
+<th:block th:fragment="header">
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-bottom  header-sticky sticky-bar sticky" style="background-color:#fff9f0;">
+            <div class="row align-items-center" >
+                <!-- Logo -->
+
+                <div class="logo" style="margin-left: 400px; width: auto;" >
+                    <a href="mainPage.html"><img style="margin : 40px; width : 150px;" src="/assets/img/logo/멍로고.png" alt=""></a>
+                </div>
+                <nav style="width: auto; padding:0 0 0 0;">
+                    <ul>
+                        <li><a href="myAccomList.html" style="color: #bc915e; display: block;">나의 숙소</a></li>
+                        <li><a href="accomList.html" style="color:#bc915e;">숙소예약</a></li>
+                        <li><a href="board.html" style="color:#bc915e;">게시판</a></li>
+                        <li><a href="myPage.html" style="color:#bc915e;">마이페이지</a></li>
+                        <li><a href="login.html" id="login" onclick="login()">로그인</a></li>
+                        <li><a href="mainPage.html" id="logout" style="display: none;" onclick="logout()">로그아웃</a></li>
+                    </ul>
+                </nav>
+
+                <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0; width: auto;">
+                    <!-- Main-menu -->
+                    <div class="main-menu f-right d-none d-lg-block" >
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+</th:block>
+<th:block th:fragment="footer">
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
+            <div class="container">
+
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="mainPage.html"><img alt="" src="../static/assets/img/logo/멍로고.png"
+                                                             style="width: 150px;"></a>
+                            </div>
+                            <div class="footer-tittle">
+                                <ul>
+                                    <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;">고객문의</a></li>
+                                    <li><a href="#" style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row pt-padding" style="padding: 0px;">
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                        <div class="footer-copy-right">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | This template is made with <i aria-hidden="true" class="ti-heart"></i>
+                                by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+</th:block>
+
+<th:block th:fragment="script">
+    <!-- JS here -->
+    <script>
+        function login() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('logout').style.display = 'block';
+        }
+        function logout() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('logout').style.display = 'none';
+        }
+    </script>
+
+
+    <!--     All JS Custom Plugins Link Here here-->
+    <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="/assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/animated.headline.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="/assets/js/contact.js"></script>
+    <script src="/assets/js/jquery.form.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <script src="/assets/js/mail-script.js"></script>
+    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/main.js"></script>
+</th:block>
+
+</body>
+</html>

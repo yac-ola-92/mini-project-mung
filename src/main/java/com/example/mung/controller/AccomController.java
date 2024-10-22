@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -22,7 +25,11 @@ public class AccomController {
     private AccomService service;
 
     @GetMapping("/mainPage")
-    public String go(){
+    public String go(Model model){
+        List<AccomDTO>list = service.readByRationg();
+
+        model.addAttribute("accomRating",list);
+
         return "mainPage";
     }
     @PostMapping("/accom_register") //숙소 등록

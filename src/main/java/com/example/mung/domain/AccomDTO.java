@@ -1,5 +1,6 @@
 package com.example.mung.domain;
 
+import com.example.mung.domain.transfer.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,12 @@ public class AccomDTO {
     private String accom_description;
     private String accom_images_url;
     private String accom_amenities;
+    private int room_price;
+    private String pet_kind;
+    private int rating;
+
+
+
 
 
 }

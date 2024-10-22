@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html
+        class="light-style layout-menu-fixed"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+            name="viewport"
+    />
+    <title>회원 정보</title>
+    <th:block th:replace="fragment/settings.html :: link"></th:block>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+    <link class="template-customizer-core-css" href="/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <th:block th:replace="fragment/settings.html :: style"></th:block>
+</head>
+
+<body>
+<th:block th:replace="fragment/settings.html :: preloader"></th:block>
+<th:block th:replace="fragment/settings.html :: header"></th:block>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Profile Details</h5>
+                    <!-- Account -->
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <!-- 기본 이미지 심어야함 -->
+                            <img
+                                    alt="user-avatar"
+                                    class="d-block rounded"
+                                    height="100"
+                                    id="uploadedAvatar"
+                                    src="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                    width="100"
+                            />
+                            <div class="button-wrapper">
+                                <label class="btn btn-primary me-2 mb-4" for="upload" tabindex="0">
+                                    <span class="d-none d-sm-block">프로필 사진 등록</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input
+                                            accept="image/png, image/jpeg"
+                                            class="account-file-input"
+                                            hidden
+                                            id="upload"
+                                            type="file"
+                                    />
+                                </label>
+                                <button class="btn btn-outline-secondary account-image-reset mb-4" type="button">
+                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">초기화</span>
+                                </button>
+
+                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-0"/>
+                    <div class="card-body">
+                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="firstName">First Name</label>
+                                    <input
+                                            autofocus
+                                            class="form-control"
+                                            id="firstName"
+                                            name="firstName"
+                                            type="text"
+                                            value="타임리프사용"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="lastName">Last Name</label>
+                                    <input class="form-control" id="lastName" name="lastName" type="text"
+                                           value="타임리프사용"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="email">E-mail</label>
+                                    <input
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder="이메일 등록하세요"
+                                            type="text"
+                                            value="타임리프사용"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="organization">Organization</label>
+                                    <input
+                                            class="form-control"
+                                            id="organization"
+                                            name="organization"
+                                            type="text"
+                                            value="ThemeSelection"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text">US (+1)</span>
+                                        <input
+                                                class="form-control"
+                                                id="phoneNumber"
+                                                name="phoneNumber"
+                                                placeholder="202 555 0111"
+                                                type="text"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="address">Address</label>
+                                    <input class="form-control" id="address" name="address" placeholder="Address"
+                                           type="text"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="state">State</label>
+                                    <input class="form-control" id="state" name="state" placeholder="California"
+                                           type="text"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="zipCode">Zip Code</label>
+                                    <input
+                                            class="form-control"
+                                            id="zipCode"
+                                            maxlength="6"
+                                            name="zipCode"
+                                            placeholder="231465"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="country">Country</label>
+                                    <select class="select2 form-select" id="country">
+                                        <option value="">Select</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Belarus">Belarus</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="China">China</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="India">India</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="Israel">Israel</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Korea">Korea, Republic of</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Russia">Russian Federation</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="United States">United States</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="language">Language</label>
+                                    <select class="select2 form-select" id="language">
+                                        <option value="">Select Language</option>
+                                        <option value="en">English</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                        <option value="pt">Portuguese</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="timeZones">Timezone</label>
+                                    <select class="select2 form-select" id="timeZones">
+                                        <option value="">Select Timezone</option>
+                                        <option value="-12">(GMT-12:00) International Date Line West</option>
+                                        <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
+                                        <option value="-10">(GMT-10:00) Hawaii</option>
+                                        <option value="-9">(GMT-09:00) Alaska</option>
+                                        <option value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
+                                        <option value="-8">(GMT-08:00) Tijuana, Baja California</option>
+                                        <option value="-7">(GMT-07:00) Arizona</option>
+                                        <option value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                                        <option value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
+                                        <option value="-6">(GMT-06:00) Central America</option>
+                                        <option value="-6">(GMT-06:00) Central Time (US & Canada)</option>
+                                        <option value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+                                        <option value="-6">(GMT-06:00) Saskatchewan</option>
+                                        <option value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                                        <option value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
+                                        <option value="-5">(GMT-05:00) Indiana (East)</option>
+                                        <option value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
+                                        <option value="-4">(GMT-04:00) Caracas, La Paz</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="currency">Currency</label>
+                                    <select class="select2 form-select" id="currency">
+                                        <option value="">Select Currency</option>
+                                        <option value="usd">USD</option>
+                                        <option value="euro">Euro</option>
+                                        <option value="pound">Pound</option>
+                                        <option value="bitcoin">Bitcoin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button class="btn btn-primary me-2" type="submit">수정</button>
+                                <button class="btn btn-outline-secondary" type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Account -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+
+
+</div>
+<!-- Content wrapper -->
+<th:block th:replace="fragment/settings.html :: footer"></th:block>
+<th:block th:replace="fragment/settings.html :: script"></th:block>
+<script src="/assets/vendor/js/menu.js"></script>
+<script src="/assets/js/main1.js"></script>
+<script src="/assets/js/pages-account-settings-account.js"></script>
+
+</body>
+</html>

@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public boolean register_b(UserVO vo) {
+        return mapper.insert_b(vo);
+    }
+
+    @Override
     public boolean modify(UserVO vo) {
         System.out.println("Service단 : modify 실행");
         return mapper.update(vo);

@@ -20,10 +20,13 @@ public interface UserMapper {
 
 
     // User 등록
-    @Insert("INSERT INTO user (user_name,user_loginId, user_email, password, user_phone, user_birth, user_gender, nickname, role, profile_image_url, pet_info, business_number, business_sns_url) " +
-            "VALUES (#{user_name},#{user_loginId}, #{user_email}, #{password}, #{user_phone}, #{user_birth}, #{user_gender}, #{nickname}, #{role}, #{profile_image_url}, #{pet_info}, #{business_number}, #{business_sns_url})")
+    @Insert("INSERT INTO user (user_name,user_email,password,user_phone,user_birth,user_gender,nickname,role,user_loginId) " +
+            "VALUES (#{user_name},#{user_email}, #{password}, #{user_phone}, #{user_birth}, #{user_gender}, #{nickname}, #{role}, #{user_loginId})")
     boolean insert(UserVO vo);
 
+    @Insert("INSERT INTO user (user_name,user_email,password,user_phone,user_birth,user_gender,nickname,role,user_loginId,business_number) " +
+            "VALUES (#{user_name},#{user_email}, #{password}, #{user_phone}, #{user_birth}, #{user_gender}, #{nickname}, #{role}, #{user_loginId},#{business_number})")
+    boolean insert_b(UserVO vo);
 
     // User 수정
     @Update("UPDATE user SET user_loginId=#{user_loginId},user_name = #{user_name}, user_email = #{user_email}, password = #{password}, " +

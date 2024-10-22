@@ -11,10 +11,12 @@ public interface AccomMapper {
 
     // filtering : accom_location, capacity_standard , capacity_max, pet_kind
 
-    @Select("SELECT accom_name, accom_location, accom_images_url, room_price,pet_kind, rating " +
-            "FROM ACCOMMODATION a JOIN ROOM ON a.accompli_id = room.accom_id " +
-            "LEFT JOIN REVIEW ON a.user_id = review.user_id " +
-            "ORDER BY rating DESC")
+
+
+    @Select("SELECT a.accom_name, a.accom_location, a.accom_images_url, r.room_price,r.pet_kind, re.rating " +
+            "FROM ACCOMMODATION a JOIN ROOM r ON a.accom_id = r.accom_id " +
+            "LEFT JOIN REVIEW re ON a.user_id = re.user_id " +
+            "ORDER BY re.rating DESC")
     public List<AccomDTO> getListByRating();
     // 메인페이지에 별점 높은 숙소들을 표시하기 위함
 
@@ -55,4 +57,7 @@ public interface AccomMapper {
     이렇게 하면 vo객체에도 accom_id가 있고 파라미터로도 accom_id가 있어서 값을 찾지 못하게 됨
     그래서 객체만 부르고 아예 set으로 값을 모두 설정한다음  출력하니까 성공
 */
+
+    @Select("select * from accommodation")
+    public List<AccomDTO> getList();
 }
