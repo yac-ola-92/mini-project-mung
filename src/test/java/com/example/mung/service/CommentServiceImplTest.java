@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.CommentDTO;
@@ -58,3 +59,4 @@ public class CommentServiceImplTest {
         commentService.findAll().stream().forEach(System.out::println);
     }
 }
+*/

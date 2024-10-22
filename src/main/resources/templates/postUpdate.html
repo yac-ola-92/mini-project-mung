@@ -31,15 +31,16 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">숙소 예약</a></li>
-                                        <li><a href="postMain.html">게시판</a>
+                                        <li><a th:href="@{/index}">숙소 예약</a></li>
+                                        <li><a th:href="@{/postMain}">게시판</a>
                                             <ul class="submenu">
-                                                <li><a href="postMain.html">게시판</a></li>
-                                                <li><a href="postReview.html">후기 게시판</a></li>
+                                                <li><a th:href="@{/postMain}">게시판</a></li>
+                                                <li><a th:href="@{/reviews}">후기 게시판</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="about.html">마이페이지</a></li>
-                                        <li><a href="packages.html">로그인</a></li>
+                                        <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -137,10 +138,30 @@
         </div>
     </div>
 </footer>
+<script>
+    document.querySelector('form[name="update-form"]').addEventListener('submit', function(event) {
+        event.preventDefault();  // 기본 폼 제출 막기
 
+        var formData = new FormData(this);  // 폼 데이터 가져오기
+
+        // AJAX 요청으로 서버에 폼 데이터 전송
+        fetch(this.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                // 서버 응답이 성공적일 때 알림창 띄우기
+                alert('게시글이 성공적으로 수정되었습니다.');
+                window.location.href = '/postMain';  // 수정 후 다른 페이지로 이동
+            })
+            .catch(error => {
+                alert('게시글 수정에 실패했습니다.');
+            });
+    });
+</script>
 <!-- JS Files -->
 <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
-
 </body>
 </html>

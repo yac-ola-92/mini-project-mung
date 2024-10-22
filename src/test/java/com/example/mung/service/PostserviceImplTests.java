@@ -17,7 +17,7 @@ public class PostserviceImplTests {
     void testFindAll() {postService.findAll().stream().forEach(System.out::println);}
 
     @Test // 특정 게시글 조회
-    void testReadByTitle() {System.out.println(postService.readByTitle("여기 좋아요!"));}
+    void testReadByTitle() {System.out.println(postService.searchPostsByTitle("여기 좋아요!"));}
 
     @Test // 게시글 수정
     void testModify() {

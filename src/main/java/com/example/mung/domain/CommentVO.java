@@ -14,13 +14,15 @@ public class CommentVO {
     private final String content;
     private final LocalDateTime created_at;
     private int parent_comment_id;
+    private String nickname;  // 사용자 닉네임 추가
 
-    public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, int parentCommentId) {
-        comment_id = commentId;
-        post_id = postId;
-        user_id = userId;
+    public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, int parentCommentId, String nickname) {
+        this.comment_id = commentId;
+        this.post_id = postId;
+        this.user_id = userId;
         this.content = content;
-        created_at = createdAt;
-        parent_comment_id = parentCommentId;
+        this.created_at = createdAt;
+        this.parent_comment_id = parentCommentId;
+        this.nickname = nickname;
     }
 }

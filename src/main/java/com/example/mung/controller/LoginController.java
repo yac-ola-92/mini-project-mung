@@ -51,7 +51,7 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("userInfo", user);  // 세션에 사용자 정보 저장
             System.out.println("로그인 성공");
-            return "redirect:/main";  // 메인 페이지로 리다이렉트
+            return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
         } else {
             System.out.println("로그인 실패");
             return "redirect:/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
