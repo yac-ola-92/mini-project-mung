@@ -6,16 +6,19 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
 public class PostDTO {
+
     private int post_id;
     private int user_id;
+    // 작성자 닉네임 필드 추가
+    private String nickname;
 
     @NotNull(message = "제목은 비워 놓을 수 없습니다.")
     private String title;
@@ -36,7 +39,9 @@ public class PostDTO {
     @Pattern(regexp = "\\d{4}", message = "비밀번호는 숫자 4자리여야 합니다.") // 숫자만 허용
     private String password;
 
-    private String files;
+    private byte[] files;
+
+    private List<CommentDTO> comments; // 게시글에 대한 댓글 리스트
 
     public enum Category {
         rec, general, travel

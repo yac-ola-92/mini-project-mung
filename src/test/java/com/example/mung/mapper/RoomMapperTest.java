@@ -51,7 +51,7 @@ public class RoomMapperTest {
     public void testUpdate(){
 
         RoomVO vo = new RoomVO();
-        vo.setRoom_id(5);
+        vo.setRoom_id(6);
         vo.setRoom_name("우리가족룸");
         vo.setRoom_type("패밀리");
         vo.setRoom_price(170000);
@@ -59,6 +59,8 @@ public class RoomMapperTest {
         vo.setRoom_info("오직 가족만");
         vo.setRoom_amount(7);
         vo.setPet_kind("소형견");
+        vo.setCapacity_standard(2);
+        vo.setCapacity_max(4);
         System.out.println(vo);
         mapper.update(vo);
         mapper.getListByAccom_id(1).stream().forEach(System.out::println);

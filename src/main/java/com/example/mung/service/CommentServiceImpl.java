@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
     // 특정 게시글에 달린 댓글 조회
     @Override
     public List<CommentDTO> readByPostId(int post_id) {
-        return commentMapper.getCommentByPostId(post_id);
+        return commentMapper.getCommentsByPostId(post_id);
     }
 
     // 댓글 등록
@@ -46,13 +46,21 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public boolean modify(CommentDTO comment) {
-        return commentMapper.insertComment(comment) > 0;  // 성공 여부를 확인
+        return commentMapper.updateComment(comment) > 0;  // 댓글 수정
     }
 
     // 댓글 삭제
     @Transactional
     @Override
     public boolean remove(int comment_id) {
-        return commentMapper.deleteComment(comment_id) > 0;  // 성공 여부를 확인
+        // 대댓글이 있는지 확인 후, 부모 댓글 삭제 시 대댓글도 함께 삭제
+        commentMapper.deleteReplyByParent(comment_id);  // 대댓글 삭제
+        return commentMapper.deleteComment(comment_id) > 0;  // 부모 댓글 삭제
+    }
+
+    // 댓글 ID로 댓글 조회
+    @Override
+    public CommentDTO findById(int comment_id) {
+        return commentMapper.findById(comment_id);
     }
 }

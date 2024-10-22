@@ -8,23 +8,21 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- <link rel="manifest" href="site.webmanifest"> -->
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-	<!-- Place favicon.ico in the root directory -->
 
-	
- <!-- CSS here -->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-   <link rel="stylesheet" href="assets/css/slicknav.css">
-   <link rel="stylesheet" href="assets/css/animate.min.css">
-   <link rel="stylesheet" href="assets/css/magnific-popup.css">
-   <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-   <link rel="stylesheet" href="assets/css/themify-icons.css">
-   <link rel="stylesheet" href="assets/css/slick.css">
-   <link rel="stylesheet" href="assets/css/nice-select.css">
-   <link rel="stylesheet" href="assets/css/style.css">
-   <link rel="stylesheet" href="assets/css/responsive.css">
+	<!-- Place favicon.ico in the root directory -->
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/assets/css/flaticon.css">
+	<link rel="stylesheet" href="/assets/css/slicknav.css">
+	<link rel="stylesheet" href="/assets/css/animate.min.css">
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="/assets/css/slick.css">
+	<link rel="stylesheet" href="/assets/css/nice-select.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="https://example.com/static/assets/img/favicon.ico">
+
    <style>
 	
 	main {
@@ -115,7 +113,7 @@
 				<!-- Logo -->
 				<div class="col-xl-2 col-lg-2 col-md-1"></div>
 					<div class="logo" style="margin-left: 400px;" >
-					  <a href="index.html"><img style="margin :auto; width : 100px;" src="assets/img/logo/멍로고.png" alt=""></a>
+					  <a href="index.html"><img style="margin :auto; width : 100px;" src="/assets/img/logo/멍로고.png" alt=""></a>
 					</div>
 					<nav>  
 						<ul>   
@@ -162,37 +160,33 @@
     </div>
 	<!-- slider Area End-->
 	
-		<div class="section-top-border" th:if="${accomInfo}">
-			<div class="row" th:each="vo : ${accomInfo}">
+		<div class="section-top-border" th:if="${accInfo}">
+			<div class="row">
 				<div class="col-lg-8 col-md-8">
 					<h3 class="mb-30">숙소</h3>
 					<hr>
 					<form id= "updateForm" action="/accom_update" method="post" > <!--수정할 때 불러올 값을 value에 지정-->
-						<input type="hidden" name="accom_id" value="accom_id">
+						<input type="hidden" name="accom_id" value="${accInfo.accom_id}" >
 						<div class="mt-10" style="display: flex; align-items: center;">
-							<label>숙소명 : </label><input type="text" name="accom_name" th:value="[[${vo.accom_name}]]" required
+							<label>숙소명 : </label><input type="text" name="accom_name" th:value="${accInfo.accom_name}" required
 									class="single-input-secondary">
 						</div>
 						<div class="mt-10" style="display: flex; align-items: center;">
-							<label>숙소 위치 : </label><input type="text" name="accom_location" th:value="[[${vo.accom_location}]]" required
+							<label>숙소 위치 : </label><input type="text" name="accom_location" th:value="${accInfo.accom_location}" required
 									class="single-input-secondary">
 						</div>
 						<div class="mt-10" style="display: flex; align-items: center;">
-							<label>숙소 전화번호 : </label><input type="email" name="accom_phone" th:value="[[${vo.accom_phone}]]" required
+							<label>숙소 전화번호 : </label><input type="email" name="accom_phone" th:value="${accInfo.accom_phone}" required
 									class="single-input-secondary">
 						</div>
 						<div class="mt-10" style="display: flex; align-items: center;">
-							<label>숙소 소개 : </label><textarea class="single-textarea" name="accom_descripstion" required th:text="${vo.accom_descripstion}"></textarea>
+							<label>숙소 소개 : </label><textarea class="single-textarea" name="accom_description" required th:text="${accInfo.accom_descripstion}"></textarea>
 						</div> <!--textarea는 값을 불러올때 th:text에 불러오면 됨-->
 						<div>
-							<form action="/upload" method="post" enctype="multipart/form-data"> 
-								<input type="file" id="acc_image" name="image" accept="image/*" required>
-							</form>
-							<img id="preview" alt="이미지 미리보기">
+								<input type="file" id="acc_image" name="accom_images_url" required>
 						</div>
-
 					<div class="mt-10" style="display: flex; align-items: center;">
-						<label>예약 시 주의사항 : </label><textarea class="single-textarea" required th:text="${vo.accom_description}"></textarea>
+						<label>예약 시 주의사항 : </label><textarea class="single-textarea" required th:text="${accInfo.accom_description}"></textarea>
 					</div> 
 					<div class="mt-10" style="display: flex; align-items: center;">
 						<label>편의시설 : </label>
@@ -210,33 +204,55 @@
 						<div id="form-container" th:if="${rmInfo}">
 							<div th:each="rvo : ${rmInfo}">
 								<form id="roomEdit" action="/room_update" method="post">
-								<label for="room_name">객실 명:</label>
-							<input type="text" id="room_name" name="room_name" th:value="[[${rvo.room_name}]]" required><br><br>
-							<form>
-								<label>객실 타입 :</label>
-								<label for="room_camp">캠핑</label>
-								<input type="radio" name="room_type" id="room_camp" value="캠핑">
-								<label for="room_house">독채</label>
-								<input type="radio" name="room_type" id="room_house" value="독채"><br><br>
-							</form>	
-							<label>객실 금액: </label><input type="number" name="room_price" th:value="[[${rvo.room_price}]]">원 <br><br>
-							<label>객실 이미지: </label><form action="/upload" method="post" enctype="multipart/form-data">
-								<input type="file" id="r_image" name="image" accept="image/*" required>
-							</form><br>
-							<label>객실 소개 : </label><textarea name="room_info" rows="3" cols="30" th:text="${rvo.room_info}" ></textarea><br><br>
-							<label>객실 수: </label><input type="number" name="room_amount" id= "room_amount" th:value="[[${rvo.room_amount}]]" required>원 <br><br>
-							<button type="button" class="delete-form-btn" style="background-color: #bc915e; border: none;
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<label for="room_name">객실 명 : </label><input  type="text" id="room_name" name="room_name" th:value="${rvo.room_name}"required
+																	class="single-input-secondary">
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<<label>객실 타입 :</label>
+										<label for="room_camp">캠핑</label>
+										<input type="radio" name="room_type" id="room_camp" value="캠핑">
+										<label for="room_house">독채</label>
+										<input type="radio" name="room_type" id="room_house" value="독채"><br><br>
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<label>숙소 전화번호 : </label><input type="email" name="accom_phone" th:value="${accInfo.accom_phone}" required
+																		class="single-input-secondary">
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<label>객실 금액: </label><input type="number" name="room_price" th:value="${rvo.room_price}"><span>원</span>
+									</div>
+									<div>
+										<label>객실 이미지: </label><input type="url" id="r_image" name="room_images_url" required>
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<label>객실 소개 : </label><textarea name="room_info" rows="3" cols="30" th:text="${rvo.room_info}" ></textarea>
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+										<label>객실 수: </label><input type="number" name="room_amount" id= "room_amount" th:value="${rvo.room_amount}" required
+																		class="single-input-secondary">
+									</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+									<label>수용 인원: </label><input type="number" name="capacity_standard" id= "capa_st" placeholder="객실의 기준 인원을 입력해주새요." required
+																	class="single-input-secondary"><span>명</span>
+								</div>
+									<div class="mt-10" style="display: flex; align-items: center;">
+									<label>최대 인원: </label><input type="number" name="capacity_max" id= "capa_max" placeholder="객실의 최대 수용인원을 입력해주세요." required>명 <br><br>
+																	class="single-input-secondary"><span>명</span>
+								</div>
+									<button type="button" class="delete-form-btn" style="background-color: #bc915e; border: none;
 							width: 80px; height: 30px;">삭제</button>
-								</form>
-							</div>
-						</div>
-					</div>
 						<hr>
 						<button type="submit" class="submit">제출</button>
-						<button type="reset" class="cancel"onclick="window.location.href='/myAccom/{{accom_id}}'" style="margin-left: 10px;" >취소</button>
+						<button type="reset" class="cancel" onclick="window.location.href='/myAccom/{{accom_id}}'" style="margin-left: 10px;" >취소</button>
+
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 </main>
 	<!-- End Align Area -->
     
@@ -323,40 +339,39 @@
 </body>
 </html>
 
-		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-		
-		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
-		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-		<script src="./assets/js/slick.min.js"></script>
-		
-		<!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-		<script src="./assets/js/animated.headline.js"></script>
-		<script src="./assets/js/jquery.magnific-popup.js"></script>
-		
-		<!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-		<script src="./assets/js/jquery.sticky.js"></script>
-        
-        <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-        
-		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
-        
+&lt;!&ndash; Jquery, Popper, Bootstrap &ndash;&gt;
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+&lt;!&ndash; Jquery Mobile Menu &ndash;&gt;
+<script src="/assets/js/jquery.slicknav.min.js"></script>
+
+&lt;!&ndash; Jquery Slick , Owl-Carousel Plugins &ndash;&gt;
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+&lt;!&ndash; One Page, Animated-HeadLin &ndash;&gt;
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/animated.headline.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+&lt;!&ndash; Scrollup, nice-select, sticky &ndash;&gt;
+<script src="/assets/js/jquery.scrollUp.min.js"></script>
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery.sticky.js"></script>
+
+&lt;!&ndash; contact js &ndash;&gt;
+<script src="/assets/js/contact.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script src="/assets/js/mail-script.js"></script>
+<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+&lt;!&ndash; Jquery Plugins, main Jquery &ndash;&gt;
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
 </body>
 </html>

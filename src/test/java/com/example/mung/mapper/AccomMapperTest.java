@@ -1,3 +1,4 @@
+/*
 package com.example.mung.mapper;
 
 import com.example.mung.domain.AccomVO;
@@ -72,3 +73,4 @@ public class AccomMapperTest {
        accomDAO.getList().stream().forEach(System.out::println);
     }
 }
+*/

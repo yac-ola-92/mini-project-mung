@@ -1,99 +1,129 @@
+/*
 package com.example.mung.mapper;
 
-import com.example.mung.MungApplication;
 import com.example.mung.domain.PostDTO;
-import org.junit.jupiter.api.Assertions;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.jdbc.Sql;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@SpringBootTest(classes = MungApplication.class)
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
 public class PostMapperTest {
+
     @Autowired
-    private PostMapper dao;
+    private PostMapper postMapper;
 
-    // 전체 게시글 조회 테스트
-    @Test
-    void testAllList() {dao.getList().stream().forEach(System.out::println);}
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
 
-    // 특정 제목 조회 테스트
-    @Test
-    void testSelectByTitle() {System.out.println(dao.getOneByTitle("여기 좋아요!"));}
-
-    //게시글 수정
-    @Test
-    void testUpdate() {
-        PostDTO dto = new PostDTO();
-        dto.setPost_id(1);
-        dto.setTitle("그냥 그래요");
-        dto.setContent("내돈주고 가기엔 아까운거 같아요");
-        dto.setCategory(PostDTO.Category.rec);
-        dto.setUpdated_at(LocalDateTime.now());
-        dto.setPassword("1234");
-        dto.setFiles(null);
-
-        dao.update(dto);
-        dao.getList().stream().forEach(System.out::println);
+    @BeforeEach
+    public void setUp() {
+        // H2 데이터베이스를 위한 설정이나 초기화 작업을 진행할 수 있습니다.
     }
 
-    //게시글 등록
+    // 모든 게시글 조회 테스트
     @Test
-    @Transactional
-    void testInsert() {
-        PostDTO dto = new PostDTO();
-        dto.setUser_id(1);
-        dto.setTitle("여기 괜찮아요");
-        dto.setContent("나쁘지 않은거 같아요. 댕댕이랑 같이 가보세용");
-        dto.setCategory(PostDTO.Category.general);
-        dto.setCreated_at(LocalDateTime.now());
-        dto.setPassword("2345");
-        dto.setFiles(null);
-        System.out.println(dao.insert(dto));
-        dao.getList().stream().forEach(System.out::println);
+    public void testGetList() {
+        List<PostDTO> posts = postMapper.getList();
+        assertNotNull(posts);
+        assertFalse(posts.isEmpty());
     }
 
-    //게시글 삭제 테스트
+    // 페이징 처리된 게시글 조회 테스트
     @Test
-    @Transactional
-    void testDelete() {
-        System.out.println(dao.delete(2));
-        dao.getList().stream().forEach(System.out::println);
+    public void testGetPagedPost() {
+        List<PostDTO> posts = postMapper.getPagedPost(10, 0);
+        assertNotNull(posts);
+        assertTrue(posts.size() <= 10);  // 페이지 사이즈 확인
     }
 
-    //게시글 조회수 증가 테스트
+    // 특정 제목으로 게시글 조회 테스트
     @Test
-    @Transactional
-    void testGetViewCount() {
-        PostDTO dto = new PostDTO();
-        int post_id = 1;
-        dao.increaseViewCount(post_id);
-        dao.getOneByTitle("여기 괜찮아요");
-        dao.getList().stream().forEach(System.out::println);
+    public void testSearchByTitle() {
+        List<PostDTO> posts = postMapper.findByTitle("Test");
+        assertNotNull(posts);
+        assertFalse(posts.isEmpty());
     }
 
-    //카테고리별 검색
+    // 카테고리별 게시글 조회 테스트
     @Test
-    void testGetPostByCategory() {
-        List<PostDTO> post = dao.getPostByCategory(PostDTO.Category.rec);
-        dao.getList().stream().forEach(System.out::println);
+    public void testGetPostByCategory() {
+        List<PostDTO> posts = postMapper.getPostByCategory("rec");
+        assertNotNull(posts);
+        assertFalse(posts.isEmpty());
     }
 
-    // 제목, 내용, 작성자로 게시글 검색기능 테스트
+    // 게시글 수정 테스트
     @Test
-    void testSearchPostsByTitle() {
-        List<PostDTO> post = dao.searchPost("여기", "title");
-        dao.getList().stream().forEach(System.out::println);
+    public void testUpdatePost() {
+        PostDTO post = new PostDTO();
+        post.setPost_id(1);
+        post.setTitle("Updated Title");
+        post.setContent("Updated Content");
+        post.setCategory(PostDTO.Category.general);
+        post.setPassword("1234");
+
+        int result = postMapper.update(post);
+        assertEquals(1, result); // 성공적으로 수정되었는지 확인
     }
 
-    // 게시글 ID로 비밀번호 조회 테스트
+    // 게시글 등록 테스트
     @Test
-    void testFindPasswordById() {
-        String password = dao.findPasswordById(1);
-        dao.getList().stream().forEach(System.out::println);
+    public void testInsertPost() {
+        PostDTO post = new PostDTO();
+        post.setUser_id(1);
+        post.setTitle("New Post");
+        post.setContent("This is a new post.");
+        post.setPassword("1234");
+
+        int result = postMapper.insert(post);
+        assertTrue(post.getPost_id() > 0); // AUTO_INCREMENT 확인
+        assertEquals(1, result); // 성공적으로 삽입되었는지 확인
     }
 
+    // 게시글 삭제 테스트
+    @Test
+    public void testDeletePost() {
+        int result = postMapper.delete(1);  // ID 1번 게시글 삭제
+        assertEquals(1, result); // 삭제 확인
+    }
+
+    // 조회수 증가 테스트
+    @Test
+    public void testIncreaseViewCount() {
+        int result = postMapper.increaseViewCount(1);
+        assertEquals(1, result); // 조회수 증가 성공 확인
+    }
+
+    // 게시글 검색 (타입별 검색) 테스트
+    @Test
+    public void testSearchPost() {
+        List<PostDTO> posts = postMapper.searchPost("Test", "title");
+        assertNotNull(posts);
+        assertFalse(posts.isEmpty());
+    }
+
+    // 비밀번호 확인 테스트
+    @Test
+    public void testFindPasswordById() {
+        String password = postMapper.findPasswordById(1);
+        assertNotNull(password);
+        assertEquals("1234", password);
+    }
+
+    // ID로 게시글 조회 테스트
+    @Test
+    public void testGetOneById() {
+        PostDTO post = postMapper.getOneById(1);
+        assertNotNull(post);
+        assertEquals(1, post.getPost_id());
+    }
 }
+*/

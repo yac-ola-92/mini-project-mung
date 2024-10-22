@@ -17,18 +17,23 @@ public class AccomServiceImpl implements AccomService {
     private AccomMapper accomDAO;  //AccomMapper 받아서 accomDAO 객체 생성
 
     @Override
+    public List<AccomDTO>findAll(){
+        return accomDAO.getList();
+    }
+
+    @Override
     public List<AccomDTO>readByLocation(String location ,int guestCount){  // 위치에 따른 숙소 출력
         System.out.println(location+" 지역에 있는 숙소를 출력합니다");
         return accomDAO.getListByLocation(location, guestCount);
     }
 
     @Override
-    public List<AccomDTO>readByAccom_id(int accom_id){
+    public AccomDTO readByAccom_id(int accom_id){
         System.out.println(accom_id + "해당하는 숙소 정보를 불러옵니다.");
         return accomDAO.getOneByAccom_id(accom_id);
     }
-
-    public List<AccomDTO>readByRationg(){
+    @Override
+    public List<AccomDTO>readByRating(){
         System.out.println("별점 높은 숙소들이라구~");
         return accomDAO.getListByRating();
     }

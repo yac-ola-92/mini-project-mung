@@ -12,19 +12,19 @@
 	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 	<!-- Place favicon.ico in the root directory -->
 
-	
- <!-- CSS here -->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-   <link rel="stylesheet" href="assets/css/slicknav.css">
-   <link rel="stylesheet" href="assets/css/animate.min.css">
-   <link rel="stylesheet" href="assets/css/magnific-popup.css">
-   <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-   <link rel="stylesheet" href="assets/css/themify-icons.css">
-   <link rel="stylesheet" href="assets/css/slick.css">
-   <link rel="stylesheet" href="assets/css/nice-select.css">
-   <link rel="stylesheet" href="assets/css/style.css">
-   <link rel="stylesheet" href="assets/css/responsive.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/assets/css/flaticon.css">
+	<link rel="stylesheet" href="/assets/css/slicknav.css">
+	<link rel="stylesheet" href="/assets/css/animate.min.css">
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="/assets/css/slick.css">
+	<link rel="stylesheet" href="/assets/css/nice-select.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+
    <style>
 	
 	main {
@@ -106,7 +106,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="../static/assets/img/logo/munglogo.png" alt="">
                 </div>
             </div>
         </div>
@@ -119,14 +119,16 @@
 				<!-- Logo -->
 				<div class="col-xl-2 col-lg-2 col-md-1"></div>
 					<div class="logo" style="margin-left: 400px;" >
-					  <a href="mainPage.html"><img style="margin :auto; width : 100px;" src="assets/img/logo/멍로고.png" alt=""></a>
+					  <a href="/mainPage"><img style="margin :auto; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
 					</div>
 					<nav>  
-						<ul>   
-						<li><a href="packages.html" style="color:#bc915e; margin : 0 100 0 100 ;">숙소예약</a></li>   
-						<li><a href="board.html" style="color:#bc915e; margin : 0 100 0 100 ;">게시판</a></li>   
-						<li><a href="mypage.html" style="color:#bc915e; margin : 0 100 0 100 ;">마이페이지</a></li>
-						<li><a href="login.html" style="color:#bc915e; margin : 0 100 0 100 ;">로그인</a></li>
+						<ul>
+							<li><a href="/accom_register" style="color: #bc915e; display: block;">나의 숙소</a></li>
+							<li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
+							<li><a href="postMain" style="color:#bc915e;">게시판</a></li>
+							<li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
+							<li><a href="/login" id="login" onclick="check()">로그인</a></li>
+							<li><a href="/logout" id="logout" style="display: none;" onclick="check()">로그아웃</a></li>
 					</ul>   
 					</nav>
 
@@ -171,7 +173,7 @@
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">숙소</h3>
 						<hr>
-						<form id= "registerForm" action="/accom_update" >
+						<form id= "registerForm" action="/accom_register" method="post">
 							<input type="hidden" name="user_id" value="{{user_id}}">
 							<div class="mt-10" style="display: flex; align-items: center;">
 								<label>숙소명 : </label><input type="text" name="accom_name" placeholder="숙소명"
@@ -189,30 +191,27 @@
 									class="single-input-secondary">
 							</div>
 							<div class="mt-10" style="display: flex; align-items: center;">
-								<label>숙소 소개 : </label><textarea class="single-textarea" placeholder="숙소소개" onfocus="this.placeholder = ''"
+								<label>숙소 소개 : </label><textarea class="single-textarea" placeholder="숙소소개" name="accom_description" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '숙소 소개'" required></textarea>
 							</div> 
 							<div>
-							<form action="/upload" method="post" enctype="multipart/form-data"> <!-- enctype는 html에서 데이터가 서버로 전송될 때 인코딩 방식을 지정함-->
-								<input type="file" id="image" name="image" accept="image/*" required>
-							</form>
-							<img id="preview" alt="이미지 미리보기">
-						</div>
+								<label for="image">숙소 이미지 : </label><input type="url" id="image" name="accom_images_url" placeholder="이미지주소를 입력해주세요" required>
+							</div>
 							<div class="mt-10" style="display: flex; align-items: center;">
 								<label>예약 시 주의사항 : </label><textarea class="single-textarea" placeholder="예약 시 주의사항" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '예약 시 주의사항'" name="accom_caution" required></textarea>
 							</div> 
 							<div class="mt-10" style="display: flex; align-items: center;">
 								<label>편의시설 : </label>
-								<label id="cbx1"><input type="checkbox" name="accom_amenities" value="주차장">주차장</label><br><br>
-								<label id="cbx2"><input type="checkbox" name="accom_amenities" value="WI-FI">WI-FI</label><br><br>
-								<label id="cbx3"><input type="checkbox" name="accom_amenities" value="멍수영장">멍수영장</label><br><br>
-								<label id="cbx4"><input type="checkbox" name="accom_amenities" value="마당">드넓은 마당</label><br><br>
-								<label id="cbx5"><input type="checkbox" name="accom_amenities" value="놀이터">놀이터</label><br><br>
-								<label id="cbx6"><input type="checkbox" name="accom_amenities" value="스파">스파</label><br><br>
+								<label id="cbx1"><input type="checkbox" name="accom_amenities" value="주차장">주차장</label>
+								<label id="cbx2"><input type="checkbox" name="accom_amenities" value="WI-FI">WI-FI</label>
+								<label id="cbx3"><input type="checkbox" name="accom_amenities" value="멍수영장">멍수영장</label>
+								<label id="cbx4"><input type="checkbox" name="accom_amenities" value="마당">마당</label>
+								<label id="cbx5"><input type="checkbox" name="accom_amenities" value="놀이터">놀이터</label>
+								<label id="cbx6"><input type="checkbox" name="accom_amenities" value="스파">스파</label>
 								
 							</div>
-
+						</form>
 							<div>
 							<h3 class="mb-30">객실</h3>
 							<button id="add-form-btn">입력폼 추가</button>
@@ -223,10 +222,8 @@
 							<hr>
 						
 								<button type="submit" class="submit">제출</button>
-								<button type="reset" class="cancel" onclick="window.location.href='/숙소리스트'" style="margin-left: 10px;" >취소</button>
-							
+								<button type="reset" class="cancel" onclick="window.location.href='/mainPage'" style="margin-left: 10px;" >취소</button>
 						</div>
-						</form>
 					</div>
 
 			</div>
@@ -244,7 +241,7 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="index.html"><img src="assets/img/logo/멍로고.png" style="width: 150px;" alt=""></a>
+                                 <a href="index.html"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <ul>
@@ -273,82 +270,94 @@
 
 <!-- JS here -->
 <script>
-    const addFormBtn = document.getElementById('add-form-btn');
-    const formContainer = document.getElementById('form-container');
 
-    addFormBtn.addEventListener('click', () => {
-        // 새로운 입력폼 생성
-        const newForm = document.createElement('div');
-        newForm.className = 'input-form';
+	function check() {
+		var log = SessionScope.user_id;
+		if( log == null){
+			document.getElementById('login').style.display = 'block';
+        	document.getElementById('logout').style.display = 'none';
+		}else{
+			 document.getElementById('login').style.display = 'none';
+      		 document.getElementById('logout').style.display = 'block';
+    	}
+</script>
+	<script>
+const addFormBtn = document.getElementById('add-form-btn');
+const formContainer = document.getElementById('form-container');
 
-        newForm.innerHTML = `
-		<form id="inputRoom" method="post" action="/room_register" >
-			<input type="hidden" name="accom_id" value="{{accom_id}}">
-            <label for="room_name">객실 명:</label>
-            <input type="text" name="room_name" id= "room_name"required><br><br>
-			<form>
-				<label>객실 타입 :</label>
-				<label for="room_type">캠핑</label>
-				<input type="radio" name="room_type" id="room_type" value="캠핑">
-				<label for="room_type">독채</label>
-				<input type="radio" name="room_type" id="room_type" value="독채"><br><br>
-			</form>	
-			<label>객실 금액: </label><input type="number" name="room_price" id= "room_price" placeholder="1박의 금액을 입력해주세요" required>원 <br><br>
-			<label>객실 이미지: </label><form action="/upload" method="post" enctype="multipart/form-data">
-				<input type="file" id="image" name="image" accept="image/*" required>
-			</form><br>
-			<label>객실 소개 : </label><textarea name="room_info" rows="3" cols="30" placeholder="객실에 대한 주의사항을 적어주세요"></textarea><br><br>
-			<label>객실 수: </label><input type="number" name="room_amount" id= "room_amount" placeholder="등록할 동일한 타입의 객실 수를 입력해 주세요." required>원 <br><br>
-			</form>
-            <button type="button" class="delete-form-btn" style="background-color: #bc915e; border: none;
-			width: 80px; height: 30px;">삭제</button>
-        `;
+addFormBtn.addEventListener('click', () => {
+    // 새로운 입력폼 생성
+    const newForm = document.createElement('div');
+    newForm.className = 'input-form';
 
-        // 삭제 버튼 클릭 이벤트 리스너 추가
-        const deleteBtn = newForm.querySelector('.delete-form-btn');
-        deleteBtn.addEventListener('click', () => {
-            formContainer.removeChild(newForm); // 해당 입력폼 삭제
-        });
+    newForm.innerHTML = `
+    <form id="inputRoom" method="post" action="/room_register" >
+        <input type="hidden" name="accom_id" value="{{accom_id}}">
+        <label for="room_name">객실 명:</label>
+        <input type="text" name="room_name" id= "room_name"required><br><br>
+        <form>
+            <label>객실 타입 :</label>
+            <label for="room_type">캠핑</label>
+            <input type="radio" name="room_type" id="room_type" value="캠핑">
+            <label for="room_type">독채</label>
+            <input type="radio" name="room_type" id="room_type" value="독채"><br><br>
+        </form>
+        <label>객실 금액: </label><input type="number" name="room_price" id= "room_price" placeholder="1박의 금액을 입력해주세요" required>원 <br><br>
+        <label>객실 이미지: </label><input type="url" id="image" name="room_images_url" placeholder="이미지 주소를 입력해주세요" required><br>
+        <label>객실 소개 : </label><textarea name="room_info" rows="3" cols="30" placeholder="객실에 대한 주의사항을 적어주세요"></textarea><br><br>
+        <label>객실 수: </label><input type="number" name="room_amount" id= "room_amount" placeholder="등록할 동일한 타입의 객실 수를 입력해 주세요." required>원 <br><br>
+        <label>수용 인원: </label><input type="number" name="capacity_standard" id= "capa_st" placeholder="객실의 기준 인원을 입력해주새요." required>명 <br><br>
+        <label>최대 인원: </label><input type="number" name="capacity_max" id= "capa_max" placeholder="객실의 최대 수용인원을 입력해주세요." required>명 <br><br>
 
-        // 생성된 입력폼을 컨테이너에 추가
-        formContainer.appendChild(newForm);
+        </form>
+        <button type="button" class="delete-form-btn" style="background-color: #bc915e; border: none;
+        width: 80px; height: 30px;">삭제</button>
+    `;
+
+    // 삭제 버튼 클릭 이벤트 리스너 추가
+    const deleteBtn = newForm.querySelector('.delete-form-btn');
+    deleteBtn.addEventListener('click', () => {
+        formContainer.removeChild(newForm); // 해당 입력폼 삭제
     });
+
+    // 생성된 입력폼을 컨테이너에 추가
+    formContainer.appendChild(newForm);
+});
 </script>
 
-		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-		
-		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+	<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
-		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-		<script src="./assets/js/slick.min.js"></script>
-		
-		<!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-		<script src="./assets/js/animated.headline.js"></script>
-		<script src="./assets/js/jquery.magnific-popup.js"></script>
-		
-		<!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-		<script src="./assets/js/jquery.sticky.js"></script>
-        
-        <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-        
-		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
-        
+	&lt;!&ndash; Jquery, Popper, Bootstrap &ndash;&gt;
+	<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="/assets/js/popper.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	&lt;!&ndash; Jquery Mobile Menu &ndash;&gt;
+	<script src="/assets/js/jquery.slicknav.min.js"></script>
+
+	&lt;!&ndash; Jquery Slick , Owl-Carousel Plugins &ndash;&gt;
+	<script src="/assets/js/owl.carousel.min.js"></script>
+	<script src="/assets/js/slick.min.js"></script>
+	&lt;!&ndash; One Page, Animated-HeadLin &ndash;&gt;
+	<script src="/assets/js/wow.min.js"></script>
+	<script src="/assets/js/animated.headline.js"></script>
+	<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+	&lt;!&ndash; Scrollup, nice-select, sticky &ndash;&gt;
+	<script src="/assets/js/jquery.scrollUp.min.js"></script>
+	<script src="/assets/js/jquery.nice-select.min.js"></script>
+	<script src="/assets/js/jquery.sticky.js"></script>
+
+	&lt;!&ndash; contact js &ndash;&gt;
+	<script src="/assets/js/contact.js"></script>
+	<script src="/assets/js/jquery.form.js"></script>
+	<script src="/assets/js/jquery.validate.min.js"></script>
+	<script src="/assets/js/mail-script.js"></script>
+	<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+	&lt;!&ndash; Jquery Plugins, main Jquery &ndash;&gt;
+	<script src="/assets/js/plugins.js"></script>
+	<script src="/assets/js/main.js"></script>
+
+
 </body>
 </html>
