@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.awt.print.Pageable;
 import java.time.format.DateTimeFormatter;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class AccomController {
     @Autowired
     private AccomService service;
+
 
 
 
@@ -36,6 +39,7 @@ public class AccomController {
             model.addAttribute("role", check.getRole());
             model.addAttribute("accomRating", list);
         }
+
         return "mainPage";
     }
     @GetMapping("/accom_register") //숙소 등록 페이지 이동

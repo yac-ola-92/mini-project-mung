@@ -117,45 +117,56 @@
               <label for="floatingInput">아이디를 입력하세요.</label>
               <button type="button" id="btn_g_user_loginId"  style=" border: none; border-radius: 10px; background-color: #FFC107; margin-left: 10px; width: 170px;">중복 확인</button>
             </div>
-
-
-
-
             <div class="col-md-6 form-group form-floating mb-3">
-              <label for="name3"></label><input type="password" class="form-control" min="6" max="12" id="name3" name="user_" placeholder autocomplete="off">
+              <label for="name3"></label><input type="password" class="form-control" min="6" max="12" id="name3" name="password" placeholder autocomplete="off">
               <label for="floatingInput" id="73">비밀번호</label>
             </div>
             <div class="col-md-6 form-group form-floating mb-3">
-              <label for="name2"></label><input type="password" class="form-control" min="6" max="12" id="name2" name="user_" placeholder autocomplete="off">
+              <label for="name2"></label><input type="password" class="form-control" min="6" max="12" id="name2" name="1211" placeholder autocomplete="off">
               <label for="floatingInput" id="72">비밀번호 확인</label>
             </div>
             <div class="col-md-12 form-group form-floating mb-3" style="display: flex; align-items: center;">
-              <label for="name1"></label><input type="text" class="form-control" id="name1" name="user_" placeholder>
+              <label for="g_email"></label><input type="text" class="form-control" id="g_email" name="user_email" placeholder>
               <label for="floatingInput" id="71">이메일</label>
               <div class="btn-group">
-                <button type="button" id="g_dropdownButton_email" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" style=" margin-left: 10px;" aria-expanded="false" >
+                <button type="button" id="g_dropdownButton_email" class="btn btn-warning dropdown-toggle"  data-bs-toggle="dropdown" style=" margin-left: 10px;" aria-expanded="false" >
                   이메일 선택
                 </button>
                 <ul class="dropdown-menu g_email">
-                  <li><a class="dropdown-item g_email_item" name="67"  data-value="이메일 선택">이메일 선택</a></li>
-                  <li><a class="dropdown-item g_email_item" name="49"  data-value="@gmail.com">@gmail.com</a></li>
-                  <li><a class="dropdown-item g_email_item" name="48"  data-value="@naver.com">@naver.com</a></li>
-                  <li><a class="dropdown-item g_email_item" name="47"  data-value="@daum.net">@daum.net</a></li>
-                  <li><a class="dropdown-item g_email_item" name="46"  data-value="@yahoo.com">@yahoo.com</a></li>
+                  <li><a class="dropdown-item g_email_item"  data-value="이메일 선택">이메일 선택</a></li>
+                  <li><a class="dropdown-item g_email_item"  data-value="@gmail.com">@gmail.com</a></li>
+                  <li><a class="dropdown-item g_email_item"  data-value="@naver.com">@naver.com</a></li>
+                  <li><a class="dropdown-item g_email_item"  data-value="@daum.net">@daum.net</a></li>
+                  <li><a class="dropdown-item g_email_item"  data-value="@yahoo.com">@yahoo.com</a></li>
                 </ul>
               </div>
+              <input type="hidden" name="user_email" id="g_user_email_full">
             </div>
+
+            <script>
+              const emailInput = document.getElementById('g_email');
+              const emailDropdownItems = document.querySelectorAll('.g_email_item');
+              const userEmailFull = document.getElementById('g_user_email_full');
+
+              emailDropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                  const domain = item.getAttribute('data-value');
+                  userEmailFull.value = emailInput.value + domain; // 숨겨진 필드에 도메인 추가
+                });
+              });
+            </script>
+
             <div class="col-md-3 form-group form-floating mb-3">
-              <label for="name6"></label><input type="text" class="form-control" min="2" max="5" id="name6" name="user_" placeholder>
+              <label for="name6"></label><input type="text" class="form-control" min="2" max="5" id="name6" name="user_name" placeholder>
               <label for="floatingInput">이름</label>
             </div>
             <div class="col-md-6 form-group form-floating mb-3">
-              <label for="name7"></label><input type="text" class="form-control" min="6" max="6" id="name7" name="user_" placeholder>
+              <label for="name7"></label><input type="text" class="form-control" min="6" max="6" id="name7" name="user_birth" placeholder>
               <label for="floatingInput">생년월일</label>
             </div>
               <div class="col-md-3 form-group form-floating mb-3" style="display: flex; align-items: center;">
                 <div class="btn-group">
-                  <button type="button" id="g_dropdownButton_gender" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" id="g_dropdownButton_gender" name="user_gender" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     성별
                   </button>
                   <ul class="dropdown-menu g_gender">
@@ -164,13 +175,27 @@
                     <li><a class="dropdown-item g_gender_item" data-value="여자">여자</a></li>
                   </ul>
                 </div>
+                <input type="hidden" name="user_gender" id="g_user_gender"> <!-- 숨겨진 입력 필드 -->
               </div>
+
+            <script>
+              const genderDropdownItems = document.querySelectorAll('.g_gender_item');
+              const genderInput = document.getElementById('g_user_gender'); // 숨겨진 입력 필드 가져오기
+
+              genderDropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                  const gender = item.getAttribute('data-value');
+                  document.getElementById('g_dropdownButton_gender').textContent = gender; // 버튼 텍스트 업데이트
+                  genderInput.value = gender; // Hidden input에 성별 추가
+                });
+              });
+            </script>
             <div class="col-md-5 form-group form-floating mb-3">
-              <label for="42"></label><input type="text" class="form-control" id="42" name="user_" placeholder>
+              <label for="42"></label><input type="text" class="form-control" id="42" name="nickname" placeholder>
               <label for="floatingInput">닉네임</label>
             </div>
             <div class="col-md-7 form-group form-floating mb-3">
-              <label for="41"></label><input type="text" class="form-control" id="41" name="user_" placeholder>
+              <label for="41"></label><input type="text" class="form-control" id="41" name="user_phone" placeholder>
               <label for="floatingInput">전화번호</label>
             </div>
 
@@ -193,15 +218,15 @@
       <div class="col-lg-6" id="businessMember_form" style=" display: none;background-color: #fdd9a2;">
         <div class="login_form_inner"  >
 
-          <form class="row login_form" action="businessJoin" method="post" id="business_contactForm" novalidate="novalidate" style=" margin-top: -80px;">
+          <form class="row login_form" action="/businessJoin" method="post" id="business_contactForm" novalidate="novalidate" style=" margin-top: -80px;">
             <h1>&nbsp;</h1>
             <div class="col-md-11 form-group form-floating mb-3" style=" display: flex; align-items: center;">
-              <label for="b_user_loginId"></label><input type="text" class="form-control" min="6" max="15" id="b_user_loginId" name="host_loginId" placeholder style=" padding-right: 150px;" autocomplete="off">
+              <label for="b_user_loginId"></label><input type="text" class="form-control" min="6" max="15" id="b_user_loginId" name="user_loginId" placeholder style=" padding-right: 150px;" autocomplete="off">
               <label for="floatingInput">아이디를 입력하세요.</label>
               <button type="button" id="btn_b_user_loginId"  style=" border: none; border-radius: 10px; background-color: #FFC107; margin-left: 10px; width: 170px;">중복 확인</button>
             </div>
             <div class="col-md-6 form-group form-floating mb-3">
-              <label for="35"></label><input type="password" class="form-control" min="6" max="12" id="35" name="host_" placeholder autocomplete="off">
+              <label for="35"></label><input type="password" class="form-control" min="6" max="12" id="35" name="password" placeholder autocomplete="off">
               <label for="floatingInput" id="">비밀번호</label>
             </div>
             <div class="col-md-6 form-group form-floating mb-3">
@@ -209,7 +234,7 @@
               <label for="floatingInput" id="1234">비밀번호 확인</label>
             </div>
             <div class="col-md-12 form-group form-floating mb-3" style="display: flex; align-items: center;">
-              <label for="name112"></label><input type="text" class="form-control" id="name112" name="user_" placeholder>
+              <label for="b_email"></label><input type="text" class="form-control" id="b_email" name="user_email" placeholder>
               <label for="floatingInput" id="731">이메일</label>
               <div class="btn-group">
                 <button type="button"id="b_dropdownButton_email" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" style=" margin-left: 10px;" aria-expanded="false" >
@@ -223,18 +248,31 @@
                   <li><a class="dropdown-item b_email_item" name="46"  data-value="@yahoo.com">@yahoo.com</a></li>
                 </ul>
               </div>
+              <input type="hidden" name="user_email" id="b_user_email_full">
             </div>
+            <script>
+              const emailInput = document.getElementById('b_email');
+              const emailDropdownItems = document.querySelectorAll('.b_email_item');
+              const userEmailFull = document.getElementById('b_user_email_full');
+
+              emailDropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                  const domain = item.getAttribute('data-value');
+                  userEmailFull.value = emailInput.value + domain; // 숨겨진 필드에 도메인 추가
+                });
+              });
+            </script>
             <div class="col-md-3 form-group form-floating mb-3">
-              <label for="24"></label><input type="text" class="form-control" min="2" max="5" id="24" name="host_" placeholder>
+              <label for="24"></label><input type="text" class="form-control" min="2" max="5" id="24" name="user_name" placeholder>
               <label for="floatingInput">이름</label>
             </div>
             <div class="col-md-6 form-group form-floating mb-3">
-              <label for="23"></label><input type="text" class="form-control" min="6" max="6" id="23" name="host_" placeholder>
+              <label for="23"></label><input type="text" class="form-control" min="6" max="6" id="23" name="user_birth" placeholder>
               <label for="floatingInput">생년월일</label>
             </div>
             <div class="col-md-3 form-group form-floating mb-3" style="display: flex; align-items: center;">
               <div class="btn-group">
-                <button type="button"id="b_dropdownButton_gender" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
+                <button type="button" id="b_dropdownButton_gender" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
                   성별
                 </button>
                 <ul class="dropdown-menu b_gender">
@@ -243,17 +281,31 @@
                   <li><a class="dropdown-item b_gender_item" name="43" data-value="여자">여자</a></li>
                 </ul>
               </div>
+              <input type="hidden" name="user_gender" id="b_user_gender"> <!-- 숨겨진 입력 필드 -->
             </div>
+
+            <script>
+              const genderDropdownItems = document.querySelectorAll('.b_gender_item');
+              const genderInput = document.getElementById('b_user_gender'); // 숨겨진 입력 필드 가져오기
+
+              genderDropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                  const gender = item.getAttribute('data-value');
+                  document.getElementById('b_dropdownButton_gender').textContent = gender; // 버튼 텍스트 업데이트
+                  genderInput.value = gender; // Hidden input에 성별 추가
+                });
+              });
+            </script>
             <div class="col-md-5 form-group form-floating mb-3">
-              <label for="12"></label><input type="text" class="form-control" id="12" name="host_" placeholder />
+              <label for="12"></label><input type="text" class="form-control" id="12" name="nickname" placeholder />
               <label for="floatingInput">닉네임</label>
             </div>
             <div class="col-md-7 form-group form-floating mb-3">
-              <label for="13"></label><input type="text" class="form-control" id="13" name="host_" placeholder />
+              <label for="13"></label><input type="text" class="form-control" id="13" name="user_phone" placeholder />
               <label for="floatingInput">전화번호</label>
             </div>
             <div class="col-md-9 form-group form-floating mb-3" style=" display: flex; align-items: center;">
-              <label for="14"></label><input type="text" class="form-control" id="14" name="host_" placeholder />
+              <label for="14"></label><input type="text" class="form-control" id="14" name="business_number" placeholder />
               <label for="floatingInput">사업자 번호</label>
               <div class="col-md-3 form-group form-floating mb-3">
                 <p id="15"  style=" color: red;">*필수</p>

@@ -1,10 +1,13 @@
 package com.example.mung.controller;
 
 import com.example.mung.domain.LoginDTO;
-import com.example.mung.domain.UserDTO;
 import com.example.mung.domain.UserVO;
+import com.example.mung.domain.transfer.Role;
 import com.example.mung.service.LoginService;
 import com.example.mung.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,16 +40,22 @@ public class LoginController {
 
     //로그인 페이지로 이동하면서 idList 긁어오기
     @GetMapping("/login")
-    public String loginView(Model model) {
+    public String loginView(Model model, HttpSession session) {
+        if (session.getAttribute("userInfo") != null) {
+            return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
+        }
         model.addAttribute("idList", loginService.idList());
         System.out.println("로그인 화면 출력");
-        return "login";
+        return "redirect:/login";
     }
 
     //로그인 성공시 session에 로그인 정보 담기
     @PostMapping("/login")
     public String join(HttpSession session, LoginDTO dto) {
+
         UserVO user = loginService.loginSuccess(dto);
+        System.out.println(user);
+        System.out.println(dto);
 
         if (user != null) {
             session.setAttribute("userInfo", user);  // 세션에 사용자 정보 저장
@@ -56,6 +65,20 @@ public class LoginController {
             System.out.println("로그인 실패");
             return "redirect:/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+        session.invalidate();
+        System.out.println("로그아웃 성공");
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "redirect:" + request.getHeader("Referer");
     }
 
 
@@ -169,24 +192,89 @@ public class LoginController {
     }
 
     //일반 회원가입 기능
+    @PostMapping("/generalJoin")
     @Transactional
-    @PostMapping
-    public String generalJoin(UserDTO dto) {
-        System.out.println(dto);
-        UserVO vo = new UserVO(dto.getUser_name(), dto.getUser_email(), dto.getPassword(), dto.getUser_phone(), dto.getUser_birth(), dto.getUser_gender(), dto.getNickname(), dto.getUser_loginId());
+    public String generalJoin(HttpServletRequest httr) {
+
+        String year = "";
+        String month = "";
+        String day = "";
+        int count = Integer.parseInt(httr.getParameter("user_birth").substring(0, 2));
+        if (count < 50) {
+
+            year = "20" + httr.getParameter("user_birth").substring(0, 2); // "20" + "02"
+
+        } else {
+            year = "19" + httr.getParameter("user_birth").substring(0, 2);
+        }
+        month = httr.getParameter("user_birth").substring(2, 4); // "08"
+        day = httr.getParameter("user_birth").substring(4, 6); // "19"
+
+        String date = year + "-" + month + "-" + day;
+
+        UserVO vo = new UserVO();
+        Role roles = new Role(new String[]{"USER"});
+        vo.setUser_name(httr.getParameter("user_name"));
+        vo.setUser_email(httr.getParameter("user_email"));
+        vo.setPassword(httr.getParameter("password"));
+        vo.setUser_phone(httr.getParameter("user_phone"));
+        vo.setUser_birthToString(date);
+        vo.setUser_gender(httr.getParameter("user_gender"));
+        vo.setRole(roles);
+        vo.setNickname(httr.getParameter("nickname"));
+        vo.setUser_loginId(httr.getParameter("user_loginId"));
+
+        System.out.println(vo);
+
         boolean result = userService.register(vo);
+
         System.out.println(result);
+
         return "redirect:/login";
     }
 
-//    //사업자 회원가입 기능
-//    @Transactional
-//    @PostMapping
-//    public String businessJoin(UserDTO dto){
-//        System.out.println(dto);
-//        userService.register(vo);
-//        return "redirect:/login";
-//    }
+
+    //사업자 회원가입 기능
+    @PostMapping("/businessJoin")
+    @Transactional
+    public String businessJoin(HttpServletRequest httr) {
+        String year = "";
+        String month = "";
+        String day = "";
+        int count = Integer.parseInt(httr.getParameter("user_birth").substring(0, 2));
+        if (count < 50) {
+
+            year = "20" + httr.getParameter("user_birth").substring(0, 2); // "20" + "02"
+
+        } else {
+            year = "19" + httr.getParameter("user_birth").substring(0, 2);
+        }
+        month = httr.getParameter("user_birth").substring(2, 4); // "08"
+        day = httr.getParameter("user_birth").substring(4, 6); // "19"
+
+        String date = year + "-" + month + "-" + day;
+
+        UserVO vo = new UserVO();
+        Role roles = new Role(new String[]{"USER,HOST"});
+        vo.setUser_name(httr.getParameter("user_name"));
+        vo.setUser_email(httr.getParameter("user_email"));
+        vo.setPassword(httr.getParameter("password"));
+        vo.setUser_phone(httr.getParameter("user_phone"));
+        vo.setUser_birthToString(date);
+        vo.setUser_gender(httr.getParameter("user_gender"));
+        vo.setRole(roles);
+        vo.setNickname(httr.getParameter("nickname"));
+        vo.setUser_loginId(httr.getParameter("user_loginId"));
+        vo.setBusiness_number(httr.getParameter("business_number"));
+
+        System.out.println(vo);
+
+        boolean result = userService.register_b(vo);
+
+        System.out.println(result);
+
+        return "redirect:/login";
+    }
 
 
 }

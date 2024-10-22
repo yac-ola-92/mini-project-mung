@@ -15,4 +15,5 @@ public interface AccomService {
     public boolean  register(AccomVO vo);
     public boolean modify(AccomVO vo);
     public boolean remove(int accom_id);
+    public List<AccomDTO> findAll();
 }

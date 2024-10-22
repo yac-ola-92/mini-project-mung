@@ -66,4 +66,9 @@ public class AccomServiceImpl implements AccomService {
         System.out.println("숙소 삭제 성공 ");
         return accomDAO.delete(accom_id);
     }
+
+    @Override
+    public List<AccomDTO> findAll() {
+        return List.of();
+    }
 }

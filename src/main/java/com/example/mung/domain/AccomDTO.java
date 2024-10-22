@@ -1,5 +1,7 @@
 package com.example.mung.domain;
 
+
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,6 +19,7 @@ public class AccomDTO {
     private String accom_description;
     private String accom_images_url;
     private String accom_amenities;
+
     private int rating;
     private String pet_kind;
     private int room_price;
@@ -25,6 +28,7 @@ public class AccomDTO {
     private String business_number;
     private String business_sns_url;
     private String comment;
+
 
 
 }

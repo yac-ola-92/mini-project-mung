@@ -14,8 +14,11 @@ public interface UserService {
     //회원 번호로 조회
     UserDTO read(int id);
 
-    //회원 등록
+    //일반회원 등록
     boolean register(UserVO vo);
+
+    //사업자회원 등록
+    boolean register_b(UserVO vo);
 
     //회원 수정
     boolean modify(UserVO vo);

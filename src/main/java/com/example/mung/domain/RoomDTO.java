@@ -19,4 +19,6 @@ public class RoomDTO {
     private String pet_kind;
     private int capacity_standard;
     private int capacity_max;
+
+
 }

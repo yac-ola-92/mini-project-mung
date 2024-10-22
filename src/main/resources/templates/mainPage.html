@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org/">
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -24,34 +25,36 @@
 
 
 
-        <style>
-                ul {
-                    list-style-type: none;
-                    margin: 7px 5px 0 0;
-                    padding: 0;
-                    overflow: hidden;
-                }
-                li {
-                    float: left;
-                }
-                #login , #logout {
-                    background-color: #bc915e;
-                    border: none;
-                    height: 35px;
-                    margin-left: 2px;
-                }
-                #login :hover{
-                    background-color: #fff9f0;
-                    border: solid 3px  #bc915e;
-                }
-                #logout :hover{
-                    background-color: #fff9f0;
-                    border: solid 3px  #bc915e;
-                }
-                nav ul li {
-                    height: 40px;
-                    margin: 10px;
-                }
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 7px 5px 0 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        li {
+            float: left;
+        }
+        #login , #logout {
+            background-color: #bc915e;
+            border: none;
+            height: 35px;
+            margin-left: 2px;
+        }
+        #login :hover{
+            background-color: #fff9f0;
+            border: solid 3px  #bc915e;
+        }
+        #logout :hover{
+            background-color: #fff9f0;
+            border: solid 3px  #bc915e;
+        }
+        nav ul li {
+            height: 40px;
+            margin: 10px;
+        }
+
 
                nav ul li :hover {
                 background-color: #fff9f0;
@@ -120,65 +123,86 @@
         <!-- Header End -->
     </header>
 
-    <main>
 
-        <!-- slider Area Start-->
-        <div class="slider-area" >
+            <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
+                <!-- Main-menu -->
+                <div class="main-menu f-right d-none d-lg-block">
+
+                </div>
+            </div>
             <!-- Mobile Menu -->
-            <div class="slider-active">
-                <div class="single-slider hero-overly  slider-height d-flex align-items-center"  data-background="https://www.eldoradoresort.co.kr/pop/pet_villa.jpg">
-                        <div class="row">
-                            <div class="col-xl-9 col-lg-9 col-md-9">
-                                <div class="hero__caption">
-                                    <h1></h1>
-                                </div>
-                            </div>
-                        </div> 
-                        <!-- Search Box -->
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <!-- form -->
-                                    <form action="/accomByLocation" method="get" class="search-box" style="margin-left: 50px;">
-                                        <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;" >
-                                            <input name="accom_location" type="text" style="border:4px solid #bc915e;" placeholder="지역">
-                                        </div>
-                                        <div class="input-form mb-30" style="margin-right:10px;">
-                                            <div class="select-itms" >
-                                                <input name="rv_start_date" type="date" style="border:4px solid #bc915e;" id="st_date">
-                                            </div>
-                                        </div>
-                                        <div class="input-form mb-30" style="margin-right:10px;">
-                                            <div class="select-itms" >
-                                                <input name="rv_end_date" type="date" style="border:4px solid #bc915e;" id="lt_date">
-                                            </div>
-                                        </div>
-                                        <div class="input-form mb-30"style="margin-right:10px; width: 150px;">
-                                            <input name="capacity" type="number" style="border: 4px solid #bc915e; " placeholder="인원">
-                                        </div> <!---->
-                                        <div class="search-form mb-30">
-                                            <button type="submit" id="search">Search</button>
-                                        </div>	
-                                    </form>
-                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <!-- slider Area End-->
-        <!-- Favourite Places Start -->
-        <div class="favourite-place place-padding">
-            <div class="container">
-                <!-- Section Tittle -->
+            <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+
+<main>
+
+    <!-- slider Area Start-->
+    <div class="slider-area">
+        <!-- Mobile Menu -->
+        <div class="slider-active">
+            <div class="single-slider hero-overly  slider-height d-flex align-items-center"
+                 data-background="https://www.eldoradoresort.co.kr/pop/pet_villa.jpg">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle text-center">
-                            <span>핫한 숙소</span>
-                            <h2>Accommodation</h2>
+                    <div class="col-xl-9 col-lg-9 col-md-9">
+                        <div class="hero__caption">
+                            <h1></h1>
                         </div>
                     </div>
                 </div>
+                <!-- Search Box -->
+                <div class="col-xl-10 col-lg-10 col-md-10">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <!-- form -->
+                            <form action="/accomByLocation" class="search-box" method="get" style="margin-left: 50px;">
+                                <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;">
+                                    <input name="accom_location" placeholder="지역" style="border:4px solid #bc915e;"
+                                           type="text">
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px;">
+                                    <div class="select-itms">
+                                        <input id="st_date" name="rv_start_date" style="border:4px solid #bc915e;"
+                                               type="date">
+                                    </div>
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px;">
+                                    <div class="select-itms">
+                                        <input id="lt_date" name="rv_end_date" style="border:4px solid #bc915e;"
+                                               type="date">
+                                    </div>
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px; width: 150px;">
+                                    <input name="capacity" placeholder="인원" style="border: 4px solid #bc915e; "
+                                           type="number">
+                                </div> <!---->
+                                <div class="search-form mb-30">
+                                    <button id="search" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- Favourite Places Start -->
+    <div class="favourite-place place-padding">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center">
+                        <span>핫한 숙소</span>
+                        <h2>Accommodation</h2>
+                    </div>
+                </div>
+
                 <!--별점 순 숙소들을 출력하여 사용자에게 추천-->
              
             <div th:if="${accomRating != null}">
@@ -200,15 +224,14 @@
                                         <li th:text="${vo.pet_kind}"><i class="far fa-clock"></i></li>
                                         <li th:text="${vo.accom_location}"><i class="fas fa-map-marker-alt"></i></li>
                                     </ul>
+
                                 </div>
-                            </div>
                             </a>
                         </div>
-                      </div>
                     </div>
                 </div>
-             </div>
             </div>
+
         <!-- Favourite Places End -->
     </main>
     <footer>
@@ -230,22 +253,27 @@
                                     </ul>
                                 </div>
                        </div>
+
                     </div>
                 </div>
-                <!-- Footer bottom -->
-                <div class="row pt-padding" style="padding: 0px;">
-                 <div class="col-xl-7 col-lg-7 col-md-7">
+            </div>
+            <!-- Footer bottom -->
+            <div class="row pt-padding" style="padding: 0px;">
+                <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="footer-copy-right">
-                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i aria-hidden="true" class="ti-heart"></i>
+                            by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     </div>
-                 </div>
-             </div>
+                </div>
             </div>
         </div>
-        <!-- Footer End-->
-    </footer>
+    </div>
+    <!-- Footer End-->
+</footer>
+
 
 	<!-- JS here -->
 	<script>
@@ -295,4 +323,5 @@
         <script src="/assets/js/main.js"></script>
         
     </body>
+
 </html>
