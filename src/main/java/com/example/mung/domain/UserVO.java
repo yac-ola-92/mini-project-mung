@@ -24,7 +24,9 @@ public class UserVO {
     private LocalDateTime user_birth;
     private int user_gender; // 1,3: 남자 / 2,4: Female,
     private String nickname;
+
     private String role; //USER, HOST, ADMIN
+
     private String profile_image_url;
     private String pet_info; //JSON
     private LocalDateTime created_at;
@@ -45,14 +47,18 @@ public class UserVO {
         this.nickname = nickname;
         this.role = "USER"; // 기본 역할 설정
         this.user_loginId = user_loginId;
+
         this.roles = Arrays.asList(this.role); // 초기화
+
     }
 
     // 사업자 회원가입
     public UserVO(String user_name, String user_email, String password, String user_phone, LocalDateTime user_birth, int user_gender, String nickname, String user_loginId, String business_number) {
         this(user_name, user_email, password, user_phone, user_birth, user_gender, nickname, user_loginId);
         this.role = "USER,HOST"; // 사업자 역할 추가
+
         this.roles = Arrays.asList(this.role.split(",")); // 역할을 List로 변환
+
         this.business_number = business_number;
     }
 
@@ -64,7 +70,9 @@ public class UserVO {
     // 추가적인 역할 배열 설정
     public void setRole(String role) {
         this.role = role;
+
         this.roles = Arrays.asList(role.split(",")); // 역할을 List로 변환
+
     }
 
     public void setUser_birthToString(String birth) {
@@ -101,7 +109,9 @@ public class UserVO {
     public void setRole(Role role) {
         if (role == null || role.getRole_arr() == null) {
             this.role = "";
+
             this.roles = Arrays.asList(); // 빈 리스트로 초기화
+
             return;
         }
 
@@ -147,5 +157,6 @@ public class UserVO {
         list.put("무게", json.optString("무게"));
 
         return list;
+
     }
 }

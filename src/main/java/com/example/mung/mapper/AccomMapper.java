@@ -3,7 +3,6 @@ package com.example.mung.mapper;
 import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
 import org.apache.ibatis.annotations.*;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

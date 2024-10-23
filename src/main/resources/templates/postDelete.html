@@ -13,6 +13,29 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/postDelete.css">
+    <script th:inline="javascript">
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            var post_id = document.querySelector('form[name="delete-form"]').querySelector('input[name="post_id"]').value;
+
+            // 서버에 비밀번호 확인 요청 (AJAX를 통해 처리)
+            fetch('/post/checkPassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password: password, post_id: post_id })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        document.getElementById("submitBtn").disabled = false;  // 비밀번호가 맞으면 삭제 버튼 활성화
+                        alert('비밀번호가 확인되었습니다.');
+                    } else {
+                        alert('비밀번호가 틀렸습니다.');
+                    }
+                });
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -57,7 +80,7 @@
         <div class="row">
             <div layout:fragment="content">
                 <div>
-                    <form name="delete-form" th:action="@{'/post/delete/' + ${post_id}}" autocomplete="off" method="post" data-post-id="${post_id}">
+                    <form name="delete-form" th:action="@{'/post/delete/' + ${post_id}}" autocomplete="off" method="post">
                         <div>
                             <input type="hidden" name="post_id" th:value="${post_id}">
                             <p>글을 작성할 때 입력했던 비밀번호를 입력하세요.</p>
@@ -75,44 +98,7 @@
 </section>
 
 <!-- JS Files -->
-<script>
-    function checkPassword() {
-        var password = document.getElementById("password").value;
-        var post_id = document.querySelector('form[name="delete-form"]').getAttribute('data-post-id');
 
-        // 서버에 비밀번호 확인 요청 (AJAX를 통해 처리)
-        fetch('/post/checkPassword', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password: password, post_id: post_id })
-        }).then(response => response.json())
-            .then(data => {
-                if (data.valid) {
-                    document.getElementById("submitBtn").disabled = false;  // 비밀번호가 맞으면 삭제 버튼 활성화
-                    alert('비밀번호가 확인되었습니다.');
-
-                    // 삭제 버튼 클릭 시 게시글 삭제 요청 처리
-                    document.getElementById("submitBtn").addEventListener('click', function() {
-                        fetch(`/post/delete/${post_id}`, {
-                            method: 'DELETE'
-                        })
-                            .then(deleteResponse => {
-                                if (deleteResponse.ok) {
-                                    alert('게시글이 성공적으로 삭제되었습니다.');
-                                    window.location.href = '/postMain';  // 게시글 목록 페이지로 이동
-                                } else {
-                                    alert('게시글 삭제에 실패했습니다.');
-                                }
-                            });
-                    });
-                } else {
-                    alert('비밀번호가 틀렸습니다.');
-                }
-            });
-    }
-</script>
 <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
 </body>

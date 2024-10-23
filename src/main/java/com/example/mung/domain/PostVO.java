@@ -19,24 +19,23 @@ public class PostVO {
     private final LocalDateTime created_at;
     private final LocalDateTime updated_at;
     private final Category category;
-    private final MultipartFile[] file; // 파일을 MultipartFile 배열로 유지
+    private final String files; // 한 개의 파일로 수정
 
     public enum Category {
         rec, general, travel
     }
 
-    // 생성자 수정
     public PostVO(int post_id, int user_id, String nickname, String title, String content, int view_count,
-                  LocalDateTime created_at, LocalDateTime updated_at, Category category, MultipartFile[] file) {
+                  LocalDateTime created_at, LocalDateTime updated_at, Category category, String files) {
         this.post_id = post_id;
         this.user_id = user_id;
-        this.nickname = nickname; // 닉네임 필드 초기화
+        this.nickname = nickname;
         this.title = title;
         this.content = content;
         this.view_count = view_count;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.category = category;
-        this.file = file;
+        this.files = files; // 한 개의 파일 처리
     }
 }

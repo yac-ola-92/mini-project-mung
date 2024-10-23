@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +18,6 @@ public class PostDTO {
 
     private int post_id;
     private int user_id;
-    // 작성자 닉네임 필드 추가
     private String nickname;
 
     @NotNull(message = "제목은 비워 놓을 수 없습니다.")
@@ -31,17 +31,17 @@ public class PostDTO {
     @NotNull(message = "카테고리를 선택해 주세요.")
     private Category category;
 
-    private LocalDateTime created_at = LocalDateTime.now(); // 게시글 생성 시 현재 시간 자동 설정
+    private LocalDateTime created_at = LocalDateTime.now();
     private LocalDateTime updated_at;
 
     @NotNull(message = "비밀번호 4자리는 필수로 입력해 주세요.")
     @Size(min = 4, max = 4, message = "비밀번호는 4자리여야 합니다.")
-    @Pattern(regexp = "\\d{4}", message = "비밀번호는 숫자 4자리여야 합니다.") // 숫자만 허용
+    @Pattern(regexp = "\\d{4}", message = "비밀번호는 숫자 4자리여야 합니다.")
     private String password;
 
-    private byte[] files;
+    private String files; // 한 개의 파일만 처리
 
-    private List<CommentDTO> comments; // 게시글에 대한 댓글 리스트
+    private List<CommentDTO> comments;
 
     public enum Category {
         rec, general, travel

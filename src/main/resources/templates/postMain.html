@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/748b44d03f.js" crossorigin="anonymous"></script>
     <style>
         .container {
-            margin: 0 auto; /* 수평 중앙 정렬 */
+            margin: 0 auto;
             display: flex;
             justify-content: center;
         }
@@ -70,7 +70,7 @@
 
         /* 글 작성 버튼 */
         .btn-write {
-            margin: 20px 0; /* 상단과의 간격 */
+            margin: 20px 0;
             padding: 10px 20px;
             background-color: #f2e2cc;
             color: #333;
@@ -89,7 +89,7 @@
 
         /* 게시글 목록 스타일 */
         .post-list {
-            width: 65%; /* 게시글 리스트의 너비 */
+            width: 65%;
             margin-right: 20px;
         }
 
@@ -104,10 +104,8 @@
             max-width: 300px;
             max-height: 200px;
             text-align: center;
-
-            /* 스크롤을 따라오도록 설정 */
             position: sticky;
-            top: 10px; /* 화면 상단에서 떨어진 거리 */
+            top: 10px;
         }
 
         .category-section h4 {
@@ -136,6 +134,18 @@
             text-decoration: underline;
         }
     </style>
+    <script th:inline="javascript">
+        function checkLogin() {
+            var userLoginId = /*[[${userInfo != null ? userInfo.user_loginId : ''}]]*/ '';
+
+            if (userLoginId !== '') {
+                window.location.href = '/new';  // 글 작성 페이지로 이동
+            } else {
+                alert('로그인 후 글을 작성할 수 있습니다.');
+                window.location.href = '/login';  // 로그인 페이지로 이동
+            }
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -186,8 +196,8 @@
                                             </ul>
                                         </li>
                                         <li><a href="about.html">마이페이지</a></li>
-                                        <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
-                                        <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
+                                        <li><a th:if="${userInfo == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${userInfo != null}" href="/logout" class="btn-log">로그아웃</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -209,7 +219,6 @@
             <div>
                 <button type="button" class="btn-write" onclick=" checkLogin();">글 작성</button>
             </div>
-
             <!-- 게시글 목록 -->
             <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
                 <li>
@@ -227,7 +236,7 @@
                     </article>
                 </li>
             </ul>
-            <p th:if="${posts == null || posts.isEmpty()}">검색 결과가 없습니다.</p>
+            <p th:if="${posts == null || posts.isEmpty()}">게시글이 없습니다.</p>
         </div>
 
         <!-- 카테고리 -->
@@ -263,7 +272,7 @@
             </select>
             <input type="text" class="search-input" name="keyword" placeholder="검색어를 입력하세요">
             <button type="submit" class="search-button">검색
-                <i class="fa-duotone fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
     </div>
@@ -316,21 +325,6 @@
         </div>
     </div>
 </footer>
-<script>
-    function checkLogin() {
-        var userId = /*[[${session.userInfo.user_loginId}]]*/ '';  // 뒤에 '' 문자열을 추가
-        console.log(userId,1);
-        if (userId) {
-            console.log('로그인 상태입니다. 글 작성 페이지로 이동합니다.');
-            window.location.href = '/new';
-        } else {
-            console.log('로그인되지 않았습니다. 로그인 페이지로 이동합니다.');
-            alert('로그인 후 글을 작성할 수 있습니다.');
-            window.location.href = '/login';
-        }
-    }
-</script>
-
 
 <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/js/popper.min.js"></script>
