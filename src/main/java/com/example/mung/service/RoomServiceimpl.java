@@ -32,6 +32,11 @@ public class RoomServiceimpl implements RoomService {
         return roomDAO.getListByPet_kind(pet_kind);
     }
 
+    public RoomDTO readUrl(int accom_id){
+        System.out.println("url 가져올게요");
+        return roomDAO.getUrl(accom_id);
+    }
+
     @Override  //숙소의 객실 등록
     public boolean register(RoomVO vo){
         System.out.println(vo.getRoom_name()+"의 객실 등록 성공!!");

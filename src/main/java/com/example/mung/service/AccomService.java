@@ -10,8 +10,12 @@ public interface AccomService {
     // -> 인터페이스에서 정의된 메서드를실제로 구현
     public List<AccomDTO>findAll();
     public List<AccomDTO>readByLocation(String location, int capacity);
-    public List<AccomDTO> readByAccom_id(int accom_id);
+
+    public AccomDTO readByUser(int accom_id);
+    public List<AccomDTO> readByReview(int accom_id);
+
     public List<AccomDTO>readByRating();
+    public AccomDTO readByAccomId(int accom_id);
     public boolean  register(AccomVO vo);
     public boolean modify(AccomVO vo);
     public boolean remove(int accom_id);

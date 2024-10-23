@@ -29,6 +29,9 @@ public interface RoomMapper {
             " FROM ROOM WHERE accom_id = #{accom_id}")
     public List<RoomDTO>getListByAccom_id(int accom_id); // 숙소id로 해당 숙소의 객실 전부 출력
 
+  @Select("SELECT accom_id, room_id, room_images_url FROM ROOM WHERE accom_id =#{accom_id}")
+   public RoomDTO getUrl(int accom_id);
+
     @Select("SELECT room_name, room_type, room_price, room_images_url, room_info, room_amount, pet_kind, capacity_standard, capacity_max" +
             " FROM ROOM WHERE pet_kind = #{pet_kind}")
     public List<RoomDTO>getListByPet_kind(String pet_kind); //반려견의 크기(소,중,대)로 객실 추출

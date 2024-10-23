@@ -72,7 +72,6 @@ public class UserVO {
         this.role = role;
 
         this.roles = Arrays.asList(role.split(",")); // 역할을 List로 변환
-
     }
 
     public void setUser_birthToString(String birth) {
@@ -117,6 +116,7 @@ public class UserVO {
 
         System.out.println("권한 정보 입력 완료!!");
         this.role = String.join(",", role.getRole_arr());
+
         this.roles = Arrays.asList(role.getRole_arr()); // 역할을 List로 변환
         System.out.println("롤 세터 작동"+this.role);
         System.out.println("롤 세터 작동"+this.roles);

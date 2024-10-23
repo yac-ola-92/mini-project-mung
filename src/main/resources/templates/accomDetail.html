@@ -192,6 +192,7 @@
                                 </div>
                             <nav>
                                 <ul>
+
                                     <li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
                                     <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
                                     <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
@@ -206,23 +207,27 @@
                          <!-- slider Area End-->
                         <!-- Header End -->
     </header>
-    <main>
-        <!-- slider Area End-->
-        <!--================Blog Area =================-->
+    <!--<main>
+        &lt;!&ndash; slider Area End&ndash;&gt;
+        &lt;!&ndash;================Blog Area =================&ndash;&gt;
         <section class="blog_area single-post-area section-padding">
+
             <div class="container" th:if="${accInfo != null}">
+
                 <div class="row">
                     <div class="col-lg-8 posts-list">
                         <div class="single-post">
-                            <div class="feature-img">
-                                <img class="img-fluid" th:src="${accInfo.accom_images_url}" alt="">
+                            <div class="feature-img" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                <div th:each="image : ${imgUrl}">
+                                    <img class="img-fluid" th:src="${image}" alt="">
+                                </div>
                             </div>
                             <div class="blog_details">
                                 <div>
-                                    <h2 th:text="${accInfo.accom_name}">숙소이름</h2>
+                                    <h2 th:text="${accR.accom_name}">숙소이름</h2>
                                     <ul class="blog-info-link mt-3 mb-4">
                                         <li><i class="fa fa-user"></i>펫 종</li>
-                                        <li th:text="${accInfo.rating}"><i class="fa fa-comments"></i>별점</li>
+                                        <li th:text="${accR.rating}"><i class="fa fa-comments"></i>별점</li>
                                     </ul>
                                 </div>
                                 <div>
@@ -255,13 +260,15 @@
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">
                                     <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
+                                        <div class="thumb" >
                                             <img src="assets/img/comment/comment_1.png" alt="">
                                         </div>
                                         <div class="desc">
+                                            <div>
                                             <p class="comment">
                                                 주절주절
                                             </p>
+                                            </div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <h5 th:text="${accInfo.nickname}"></h5>
@@ -277,9 +284,8 @@
                             <div class="blog_right_sidebar">
                                 <aside class="single_sidebar_widget tag_cloud_widget">
                                     <h4 class="widget_title">편의시설</h4>
-                                    <ul class="list">
-                                        <li>
-                                            편의시설
+                                    <ul class="list" th:each="amen : ${amenity}">
+                                        <li th:text="${amen}">
                                         </li>
                                     </ul>
                                 </aside>
@@ -290,27 +296,16 @@
                                     </form>
                                 </aside>
                                 <aside class="single_sidebar_widget popular_post_widget">
-                                    <h3 class="widget_title">객실</h3>
-                                    <div class="media post_item">
-                                        <img src="assets/img/post/post_1.png" alt="post">
+                                    <h3 class="widget_title" th:if="${roomInfo}">객실</h3>
+                                    <div class="media post_item" th:each="rm : ${roomInfo}">
+                                        <img th:src="${rm.room_images_url.split(',')[0]}" alt="post">
                                         <div class="media-body">
                                             <a href="single-blog.html">
-                                                <h3>객실 이름</h3>
+                                                <h3 th:text="${rm.room_name}"></h3>
                                             </a>
-                                            <p>금액</p>
+                                            <p th:text="${rm.room_price}"></p>
                                         </div>
                                     </div>
-                                </aside>
-                                <aside class="single_sidebar_widget newsletter_widget">
-                                    <h4 class="widget_title">Newsletter</h4>
-                                    <form action="#">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                                   onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                        </div>
-                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                                type="submit">이걸 예약/으로 할까</button>
-                                    </form>
                                 </aside>
                             </div>
                         </div>
@@ -318,7 +313,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main>-->
     <footer>
         <!-- Footer Start-->
         <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
@@ -329,10 +324,12 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
+
                                  <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <ul>
+                                        <link rel="shortcut icon" type="image/x-icon" href="https://example.com/static/assets/img/favicon.ico">
                                         <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;" >고객문의</a></li>
                                         <li><a href="#"  style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
                                     </ul>
@@ -395,7 +392,6 @@
     <script src="/static/assets/js/jquery.ajaxchimp.min.js"></script>
     <script src="/static/assets/js/plugins.js"></script>
     <script src="/static/assets/js/main.js"></script>
-
 
 
    </body>

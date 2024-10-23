@@ -9,6 +9,7 @@ public interface RoomService {
     public List<RoomDTO>findAll();
     public List<RoomDTO>readByAccom_id(int accom_id);
     public List<RoomDTO>readByPet_kind(String pet_kind);
+    public RoomDTO readUrl(int accom_id);
     public boolean register(RoomVO vo);
     public boolean modify(RoomVO vo);
     public boolean remove(int room_id);

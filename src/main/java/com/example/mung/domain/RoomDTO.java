@@ -2,6 +2,9 @@ package com.example.mung.domain;
 
 import lombok.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,5 +23,7 @@ public class RoomDTO {
     private int capacity_standard;
     private int capacity_max;
 
-
+    public List<String> getRoomImagesUrl() {
+        return Arrays.asList(getRoom_images_url().split(","));
+    }
 }
