@@ -46,7 +46,7 @@ public class LoginController {
         }
         model.addAttribute("idList", loginService.idList());
         System.out.println("로그인 화면 출력");
-        return "redirect:/login";
+        return "login";
     }
 
     //로그인 성공시 session에 로그인 정보 담기
@@ -63,7 +63,7 @@ public class LoginController {
             return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
         } else {
             System.out.println("로그인 실패");
-            return "redirect:/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
+            return "login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
     }
 

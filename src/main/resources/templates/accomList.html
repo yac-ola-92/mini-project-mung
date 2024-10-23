@@ -191,12 +191,13 @@
                                 </div>
                             <nav>
                                 <ul>
-                                    <li><a href="myAccomList.html" style="color: #bc915e; display: block;">나의 숙소</a></li>
-                                    <li><a href="accomList.html" style="color:#bc915e;">숙소예약</a></li>
-                                    <li><a href="board.html" style="color:#bc915e;">게시판</a></li>
-                                    <li><a href="myPage.html" style="color:#bc915e;">마이페이지</a></li>
-                                    <li><a href="login.html" id="login" onclick="login()">로그인</a></li>
-                                    <li><a href="mainPage.html" id="logout" style="display: none;" onclick="logout()">로그아웃</a></li>
+                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${role =='HOST' and role !=null}">나의 숙소</a></li>
+                                    <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
+                                    <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
+                                    <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
+                                    <li><a href="/login" id="login" th:if="${userCheck==null}">로그인</a></li>
+                                    <li><a href="/logout" id="logout" th:if="${userCheck!=null}">로그아웃</a></li>
+
                                 </ul>
                             </nav>
                             <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
@@ -205,7 +206,7 @@
                                         <!-- form -->
                                         <form action="/accomByLocation" method="get" class="search-box" style="margin-left: 50px;">
                                             <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;" >
-                                                <input name="accom_location" type="text" style="border:4px solid #bc915e;" value="${accom_location}">
+                                                <input name="accom_location" type="text" style="border:4px solid #bc915e;" value="">
                                             </div>
                                             <div class="input-form mb-30" style="margin-right:10px;">
                                                 <div class="select-itms" >

@@ -16,6 +16,7 @@ import java.awt.print.Pageable;
 import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,7 +31,11 @@ public class AccomController {
     @GetMapping("/mainPage") // 메인페이지 이동
     public String go(Model model, HttpSession session){
         List<AccomDTO>list = service.readByRating();
-        UserVO check=(UserVO) session.getAttribute("userInfo");
+        UserVO check=null;
+        if(session.getAttribute("userInfo")!=null){
+            check = (UserVO) session.getAttribute("userInfo");
+        }
+        System.out.println(check!=null?check.getRole():null);
         System.out.println(list);
         if(check ==null){
            model.addAttribute("accomRating", list);
@@ -40,7 +45,7 @@ public class AccomController {
             model.addAttribute("accomRating", list);
         }
 
-        return "mainPage";
+        return "/mainPage";
     }
     @GetMapping("/accom_register") //숙소 등록 페이지 이동
     public String goReg (HttpSession session){
@@ -50,7 +55,7 @@ public class AccomController {
             System.out.println("로그인해야합니다");
             return "redirect:/login";
         }
-        return "redirect:/accom_register";
+        return "/register_accom";
 }
 
 //@ResponseBody
@@ -76,14 +81,14 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
     System.out.println(vo);
     service.register(vo);
 
-    return "/mainPage";
+    return "redirect:/myPage";
     //등록했으면 다시 숙소 리스트로 돌아감
 }
 
 @GetMapping("/myAccom/edit/{accom_id}") //수정할 숙소 불러오기
 //url 요청 접수
-public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 매개변수로 받음
-    AccomDTO acc = service.readByAccom_id(accom_id);
+public String accom_edit(@PathVariable("accom_id") int accom_id, Model model){ //id값을 매개변수로 받음
+    AccomDTO acc = service.readByAccomId(accom_id);
     //수정할 데이터들을 받아옴
     if(acc!=null){
         // 모델에 데이터 등록
@@ -91,7 +96,7 @@ public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 �
     }else {
         return "redirect:/error/404";
     }
-    return "update_accom";
+    return "/update_accom";
 }
 
 @PostMapping("/accom_update") //숙소 수정
@@ -106,7 +111,7 @@ public String accom_update( HttpServletRequest req){
     vo.setAccom_images_url(req.getParameter("accom_images_url"));
     vo.setAccom_amenities(req.getParameter("accom_amenities"));
     service.modify(vo);
-    return "숙소리스트로 "; // 마이페이지의 숙소리스트로 돌아갈거임
+    return "redirect:/myPage "; // 마이페이지의 숙소리스트로 돌아갈거임
 }
 
 @GetMapping("/accomByLocation") //검색 시 출력될 숙소리스트
@@ -164,19 +169,49 @@ public String accom_list(Model model, HttpServletRequest req) {
     System.out.println(capacity);
     return "accomList";
 }
-@GetMapping("/accom/{accom_id}/byAccomId") //숙소의 상세페이지
-public String accom_getOne(@PathVariable int accom_id, Model model, HttpServletRequest req ){
-    int acc_id = Integer.parseInt(req.getParameter("accom_id"));
-    AccomDTO dto = service.readByAccom_id(acc_id);
-    model.addAttribute("accInfo",dto);
-    //원하는 숙소 클릭 시 나오는 상세페이지에 사용하기 위함
-    return "/accomDetail";
-}
+    @GetMapping("/accom/{accom_id}/byAccomId")
+    public String accom_getOne(@PathVariable("accom_id") int accom_id, Model model) {
+
+            System.out.println(accom_id+"진입 성공~");
+            AccomDTO dtoU = service.readByUser(accom_id);
+            List<AccomDTO> dtoR = service.readByReview(accom_id);
+            System.out.println("User와 쪼인 C:"+ dtoU);
+            System.out.println("Review와 쪼인 C :"+ dtoR);
+
+        List<String>imagesUrl = dtoU.getAccomImagesUrl();
+        if (imagesUrl != null) {
+            System.out.println(imagesUrl);
+            // 처리 로직...
+        } else {
+            // 기본 이미지 URL 또는 에러 처리
+        }
+
+        List<String>amenities = dtoU.getAccomAmenities();
+        if (amenities != null) {
+            System.out.println(amenities);
+            // 처리 로직...
+        } else {
+            // 기본 어메니티 또는 에러 처리
+        }
+
+
+        if(dtoU !=null && dtoR !=null){
+                model.addAttribute("imgUrl", dtoU.getAccomImagesUrl());
+                model.addAttribute("amenity", dtoU.getAccomAmenities());
+                model.addAttribute("accR", dtoR);
+                model.addAttribute("accU", dtoU);
+            }else {
+                return "/error/404";
+            }
+        return "/accomDetail"; // 상세 페이지 반환
+    }
 
 @PostMapping("/accom_delete") //숙소 삭제
 public String  accom_delete(@RequestParam int accom_id){
     service.remove(accom_id);
     return "redirect:다시리스트페이지로";
 }
+
+
 
 }

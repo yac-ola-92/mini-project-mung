@@ -36,7 +36,7 @@ public class RoomController {
         return "register success";
     }
 
-    @GetMapping("/myAccom/{accom_id}/edit") // 숙소 수정에 사용될 정보
+    @GetMapping("/myAccom/{accom_id}/edi") // 숙소 수정에 사용될 정보
     public String room_edit(@PathVariable("accom_id") int accom_id, Model model){
         List<RoomDTO> rm = service.readByAccom_id(accom_id);
         model.addAttribute("rmInfo",rm);
@@ -61,15 +61,19 @@ public class RoomController {
     }
 
 
-    @GetMapping("roomByAccom")
-    public String room_list(Model model, HttpServletRequest req){
-        int accomId = Integer.parseInt(req.getParameter("accom_id"));
-        // 클라이언트로부터 숙소id를 받아와서 그 해당 숙소의 모든 객실을 출력하려고함
-        List<RoomDTO> list = service.readByAccom_id(accomId);
-        model.addAttribute("room_list",list);
-        // list에 숙소의 객실을 출력
-        // 이걸 model에 담아 뷰에서 사용할 수 있게 함
-        return "여기에 뷰의 이름을 반환할테야";
+    @GetMapping("/accom/{accom_id}/room")
+    public String room_list(@PathVariable("accom_id")int accom_id, Model model, HttpServletRequest req){
+        RoomDTO ru = service.readUrl(accom_id);
+        List<RoomDTO> room_dto = service.readByAccom_id(accom_id);
+        System.out.println("User와 쪼인 :"+ room_dto);
+
+        if(room_dto !=null){
+            model.addAttribute("imgUrl",ru.getRoomImagesUrl());
+            model.addAttribute("room", room_dto);
+        }else {
+            return "/error/404";
+        }
+        return "/accomDetail"; // 상세 페이지 반환
     }
 
 

@@ -88,12 +88,12 @@
 
     <header>
         <!-- Header Start -->
-               <div class="header-bottom  header-sticky" style="background-color:#fff9f0;"> 
+               <div class="header-bottom  header-sticky" style="background-color:#fff9f0;">
                         <div class="row align-items-center" >
                             <!-- Logo -->
-                        
+
                                 <div class="logo" style="margin-left: 400px;" >
-                                  <a href="mainPage.html"><img style="margin : 40px; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
+                                  <a href="/mainPage"><img style="margin : 40px; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
                                 </div>
                             <nav>
                                 <ul>
@@ -106,11 +106,11 @@
 
                                 </ul>
                             </nav>
-        
+
                             <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
                                 <!-- Main-menu -->
                                 <div class="main-menu f-right d-none d-lg-block" >
-                                  
+
                                 </div>
                             </div>
                             <!-- Mobile Menu -->
@@ -204,19 +204,19 @@
                 </div>
 
                 <!--별점 순 숙소들을 출력하여 사용자에게 추천-->
-             
+
             <div th:if="${accomRating != null}">
                 <div class="row">
                     <div  th:each=" vo, status : ${accomRating}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
                         <div class="single-place mb-30">
-                            <a th:href="@{accom_list/details/${vo.accom_id}}">
+                            <a th:href="@{/accom/{accom_id}/room(accom_id=${vo.accom_id})}"></a>
                            <div class="single-place mb-30" >
                                   <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img">
                             </div>
                             <div class="place-cap">
                                 <div class="place-cap-top">
                                     <span><i class="fas fa-star"></i><span th:text="${vo.rating}"></span> </span>
-                                    <a th:href="@{accom_list/details/${vo.accom_id}}"><h3 th:text="${vo.accom_name}"></h3></a>
+                                    <a th:href="@{/accom/{accom_id}/byAccomId(accom_id=${vo.accom_id})}"><h3 th:text="${vo.accom_name}"></h3></a>
                                     <p class="dolor" th:text="${vo.room_price}"><span>/ 1박</span></p>
                                 </div>
                                 <div class="place-cap-bottom">
@@ -224,21 +224,22 @@
                                         <li th:text="${vo.pet_kind}"><i class="far fa-clock"></i></li>
                                         <li th:text="${vo.accom_location}"><i class="fas fa-map-marker-alt"></i></li>
                                     </ul>
-
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+         </div>
+        </div>
+    </div>
         <!-- Favourite Places End -->
     </main>
     <footer>
         <!-- Footer Start-->
         <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
             <div class="container">
-                
+
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
                        <div class="single-footer-caption mb-50">
                          <div class="single-footer-caption mb-30">
@@ -270,13 +271,12 @@
                 </div>
             </div>
         </div>
-    </div>
     <!-- Footer End-->
 </footer>
 
 
 	<!-- JS here -->
-	<script>
+	<script th:inline="javascript">
         function check() {
 		var log ;
 		if( log == null){
@@ -286,11 +286,12 @@
 			 document.getElementById('login').style.display = 'none';
       		 document.getElementById('logout').style.display = 'block';
     	}
+        }
     </script>
 
     <!-- All JS Custom Plugins Link Here here -->
       <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-		
+
 		&lt;!&ndash; Jquery, Popper, Bootstrap &ndash;&gt;
 		<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="/assets/js/popper.min.js"></script>
@@ -310,18 +311,18 @@
         <script src="/assets/js/jquery.scrollUp.min.js"></script>
         <script src="/assets/js/jquery.nice-select.min.js"></script>
 		<script src="/assets/js/jquery.sticky.js"></script>
-        
+
         &lt;!&ndash; contact js &ndash;&gt;
         <script src="/assets/js/contact.js"></script>
         <script src="/assets/js/jquery.form.js"></script>
         <script src="/assets/js/jquery.validate.min.js"></script>
         <script src="/assets/js/mail-script.js"></script>
         <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
-        
+
 		&lt;!&ndash; Jquery Plugins, main Jquery &ndash;&gt;
         <script src="/assets/js/plugins.js"></script>
         <script src="/assets/js/main.js"></script>
-        
+
     </body>
 
 </html>

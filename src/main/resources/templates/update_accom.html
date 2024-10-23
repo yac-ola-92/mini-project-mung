@@ -136,9 +136,6 @@
 				</div>
 			</div>
 		</div>
-   </div>
-</div>
-</div>
 <!-- Header End -->
         <!-- Header End -->
     </header>
@@ -165,7 +162,7 @@
 				<div class="col-lg-8 col-md-8">
 					<h3 class="mb-30">숙소</h3>
 					<hr>
-					<form id= "updateForm" action="/accom_update" method="post" > <!--수정할 때 불러올 값을 value에 지정-->
+					<form id= "updateForm" th:action="/accom_update" method="post" > <!--수정할 때 불러올 값을 value에 지정-->
 						<input type="hidden" name="accom_id" value="${accInfo.accom_id}" >
 						<div class="mt-10" style="display: flex; align-items: center;">
 							<label>숙소명 : </label><input type="text" name="accom_name" th:value="${accInfo.accom_name}" required
@@ -197,7 +194,6 @@
 						<label class="cbx"><input type="checkbox" name="accom_amenities" value="놀이터">놀이터</label><br><br>
 						<label class="cbx"><input type="checkbox" name="accom_amenities" value="스파">스파</label><br><br>
 					</div>
-					</form>
 					<div>
 						<h3 class="mb-30">객실</h3>
 						<button id="add-form-btn">입력폼 추가</button>
@@ -244,12 +240,13 @@
 							width: 80px; height: 30px;">삭제</button>
 						<hr>
 						<button type="submit" class="submit">제출</button>
-						<button type="reset" class="cancel" onclick="window.location.href='/myAccom/{{accom_id}}'" style="margin-left: 10px;" >취소</button>
+						<button type="reset" class="cancel" onclick="window.location.href='/myAccom/{accom_id}'" style="margin-left: 10px;" >취소</button>
 
 							</form>
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -294,7 +291,7 @@
 
 
 <!-- JS here -->
-<script>
+<script th:inline="javascript">
     const addFormBtn = document.getElementById('add-form-btn');
     const formContainer = document.getElementById('form-container');
 
@@ -336,8 +333,6 @@
     });
 </script>
 
-</body>
-</html>
 
 <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
