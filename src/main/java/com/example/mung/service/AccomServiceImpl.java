@@ -29,6 +29,7 @@ public class AccomServiceImpl implements AccomService {
 
     @Transactional
     @Override
+
     public AccomDTO readByUser(int accom_id) {
         System.out.println("User 와 쪼인 성공!S");
         System.out.println(accom_id + "번에 해당하는 숙소 정보를 불러옵니다.");
@@ -93,4 +94,5 @@ public class AccomServiceImpl implements AccomService {
         System.out.println("숙소 삭제 성공 ");
         return accomDAO.delete(accom_id);
     }
+
 }

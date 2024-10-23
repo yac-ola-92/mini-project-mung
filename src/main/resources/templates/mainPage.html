@@ -8,7 +8,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="../static/assets/img/favicon.ico">
-        <!-- CSS here -->
 
             <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
@@ -97,13 +96,12 @@
                                 </div>
                             <nav>
                                 <ul>
-                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${role =='HOST' and role !=null}">나의 숙소</a></li>
+                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
                                     <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
                                     <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
                                     <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
-                                    <li><a href="/login" id="login" th:if="${userCheck==null}">로그인</a></li>
-                                    <li><a href="/logout" id="logout" th:if="${userCheck!=null}">로그아웃</a></li>
-
+                                    <li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+                                    <li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
                                 </ul>
                             </nav>
 
@@ -210,6 +208,7 @@
                     <div  th:each=" vo, status : ${accomRating}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
                         <div class="single-place mb-30">
                             <a th:href="@{/accom/{accom_id}/room(accom_id=${vo.accom_id})}"></a>
+
                            <div class="single-place mb-30" >
                                   <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img">
                             </div>
@@ -226,11 +225,16 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            </a>
+
                         </div>
                     </div>
                 </div>
             </div>
+
          </div>
+
         </div>
     </div>
         <!-- Favourite Places End -->
@@ -245,7 +249,7 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="mainPage.html"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
+                                 <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <ul>
@@ -275,6 +279,7 @@
 </footer>
 
 
+
 	<!-- JS here -->
 	<script th:inline="javascript">
         function check() {
@@ -289,37 +294,31 @@
         }
     </script>
 
-    <!-- All JS Custom Plugins Link Here here -->
+
+
       <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
-		&lt;!&ndash; Jquery, Popper, Bootstrap &ndash;&gt;
 		<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="/assets/js/popper.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
-	    &lt;!&ndash; Jquery Mobile Menu &ndash;&gt;
         <script src="/assets/js/jquery.slicknav.min.js"></script>
 
-		&lt;!&ndash; Jquery Slick , Owl-Carousel Plugins &ndash;&gt;
         <script src="/assets/js/owl.carousel.min.js"></script>
         <script src="/assets/js/slick.min.js"></script>
-		&lt;!&ndash; One Page, Animated-HeadLin &ndash;&gt;
         <script src="/assets/js/wow.min.js"></script>
 		<script src="/assets/js/animated.headline.js"></script>
         <script src="/assets/js/jquery.magnific-popup.js"></script>
 
-		&lt;!&ndash; Scrollup, nice-select, sticky &ndash;&gt;
         <script src="/assets/js/jquery.scrollUp.min.js"></script>
         <script src="/assets/js/jquery.nice-select.min.js"></script>
 		<script src="/assets/js/jquery.sticky.js"></script>
 
-        &lt;!&ndash; contact js &ndash;&gt;
         <script src="/assets/js/contact.js"></script>
         <script src="/assets/js/jquery.form.js"></script>
         <script src="/assets/js/jquery.validate.min.js"></script>
         <script src="/assets/js/mail-script.js"></script>
         <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
 
-		&lt;!&ndash; Jquery Plugins, main Jquery &ndash;&gt;
         <script src="/assets/js/plugins.js"></script>
         <script src="/assets/js/main.js"></script>
 

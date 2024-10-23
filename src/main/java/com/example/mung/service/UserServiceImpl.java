@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
     private UserMapper mapper;
 
     @Override
-    public List<UserDTO> findAll() {
+    public List<UserVO> findAll() {
         System.out.println("Service단 : findAll 실행");
         return mapper.getList();
     }
@@ -47,5 +47,11 @@ public class UserServiceImpl implements UserService{
     public boolean remove(int id) {
         System.out.println("Service단 : remove 실행");
         return mapper.delete(id);
+    }
+
+    @Override
+    public boolean modify_pet(UserVO vo) {
+        System.out.println("Service단 : modify_pet 실행");
+        return mapper.updatePet_info(vo);
     }
 }

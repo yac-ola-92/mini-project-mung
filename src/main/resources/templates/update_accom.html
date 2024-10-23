@@ -100,7 +100,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/멍로고.png" alt="">
+                    <img src="assets/img/logo/munglogo.png" alt="">
                 </div>
             </div>
         </div>
@@ -113,14 +113,16 @@
 				<!-- Logo -->
 				<div class="col-xl-2 col-lg-2 col-md-1"></div>
 					<div class="logo" style="margin-left: 400px;" >
-					  <a href="index.html"><img style="margin :auto; width : 100px;" src="/assets/img/logo/멍로고.png" alt=""></a>
+					  <a href="/mainPage"><img style="margin :auto; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
 					</div>
 					<nav>  
-						<ul>   
-						<li><a href="packages.html" style="color:#bc915e; margin : 0 100 0 100 ;">숙소예약</a></li>   
-						<li><a href="board.html" style="color:#bc915e; margin : 0 100 0 100 ;">게시판</a></li>   
-						<li><a href="mypage.html" style="color:#bc915e; margin : 0 100 0 100 ;">마이페이지</a></li>
-						<li><a href="login.html" style="color:#bc915e; margin : 0 100 0 100 ;">로그인</a></li>
+						<ul>
+							<li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
+							<li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
+							<li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
+							<li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
+							<li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+							<li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
 					</ul>   
 					</nav>
 
@@ -263,7 +265,7 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="index.html"><img src="assets/img/logo/멍로고.png" style="width: 150px;" alt=""></a>
+                                 <a href="index.html"><img src="assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <ul>
@@ -296,6 +298,7 @@
     const formContainer = document.getElementById('form-container');
 
     addFormBtn.addEventListener('click', () => {
+
         // 새로운 입력폼 생성
         const newForm = document.createElement('div');
         newForm.className = 'input-form';

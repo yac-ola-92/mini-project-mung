@@ -1,7 +1,4 @@
 /*
-
-*/
-/*
 package com.example.mung.mapper;
 
 import com.example.mung.domain.CommentDTO;

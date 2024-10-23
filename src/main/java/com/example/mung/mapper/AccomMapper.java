@@ -4,7 +4,6 @@ import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
 import org.apache.ibatis.annotations.*;
 
-
 import java.util.List;
 
 @Mapper
@@ -13,6 +12,7 @@ public interface AccomMapper {
     public List<AccomDTO> getList();
 
     // filtering : accom_location, capacity_standard , capacity_max, pet_kind
+
 
     @Select("SELECT a.accom_id, a.accom_name, a.accom_location, a.accom_images_url, r.room_price, r.pet_kind, re.rating " +
             "FROM ACCOMMODATION a JOIN ROOM r ON a.accom_id = r.accom_id " +
@@ -51,6 +51,7 @@ public interface AccomMapper {
             "WHERE a.accom_id = #{accom_id}")
     public AccomDTO getOneByUser(int accom_id);
     // 맵퍼 두개로 나눠서 만들고 서비스 ㄷ단까지 만들고 컨트롤러에서 두개  따로 모델에 적용해서 해
+
     //원하는 숙소를 클릭 했을 때 숙소의 상세 페이지에서 출력하기 위함
 
     @Select("SELECT accom_id, accom_name ,accom_location, accom_phone, accom_caution, accom_description, accom_images_url, accom_amenities " +

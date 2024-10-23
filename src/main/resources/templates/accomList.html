@@ -172,7 +172,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="../static/assets/img/logo/munglogo.png" alt="">
+                    <img src="/assets/img/logo/munglogo.png" alt="">
                 </div>
             </div>
         </div>
@@ -191,13 +191,13 @@
                                 </div>
                             <nav>
                                 <ul>
-                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${role =='HOST' and role !=null}">나의 숙소</a></li>
+
+                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
                                     <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
                                     <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
                                     <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
-                                    <li><a href="/login" id="login" th:if="${userCheck==null}">로그인</a></li>
-                                    <li><a href="/logout" id="logout" th:if="${userCheck!=null}">로그아웃</a></li>
-
+                                    <li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+                                    <li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
                                 </ul>
                             </nav>
                             <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
@@ -367,7 +367,7 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="index.html"><img src="../static/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
+                                 <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <ul>

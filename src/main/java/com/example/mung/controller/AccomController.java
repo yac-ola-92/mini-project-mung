@@ -26,16 +26,15 @@ public class AccomController {
     private AccomService service;
 
 
-
-
     @GetMapping("/mainPage") // 메인페이지 이동
     public String go(Model model, HttpSession session){
         List<AccomDTO>list = service.readByRating();
-        UserVO check=null;
-        if(session.getAttribute("userInfo")!=null){
-            check = (UserVO) session.getAttribute("userInfo");
+
+        UserVO check = null;
+        if (session.getAttribute("userInfo")!=null){
+            check=(UserVO) session.getAttribute("userInfo");
         }
-        System.out.println(check!=null?check.getRole():null);
+        System.out.println(check != null ? check.getRole() : null);
         System.out.println(list);
         if(check ==null){
            model.addAttribute("accomRating", list);
@@ -87,8 +86,10 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
 
 @GetMapping("/myAccom/edit/{accom_id}") //수정할 숙소 불러오기
 //url 요청 접수
-public String accom_edit(@PathVariable("accom_id") int accom_id, Model model){ //id값을 매개변수로 받음
-    AccomDTO acc = service.readByAccomId(accom_id);
+
+public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 매개변수로 받음
+    List<AccomDTO> acc = service.readByAccom_id(accom_id);
+
     //수정할 데이터들을 받아옴
     if(acc!=null){
         // 모델에 데이터 등록
@@ -169,6 +170,7 @@ public String accom_list(Model model, HttpServletRequest req) {
     System.out.println(capacity);
     return "accomList";
 }
+
     @GetMapping("/accom/{accom_id}/byAccomId")
     public String accom_getOne(@PathVariable("accom_id") int accom_id, Model model) {
 
@@ -205,6 +207,7 @@ public String accom_list(Model model, HttpServletRequest req) {
             }
         return "/accomDetail"; // 상세 페이지 반환
     }
+
 
 @PostMapping("/accom_delete") //숙소 삭제
 public String  accom_delete(@RequestParam int accom_id){
