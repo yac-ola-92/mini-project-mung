@@ -1,6 +1,5 @@
 package com.example.mung.service;
 
-import com.example.mung.domain.ReviewDTO;
 import com.example.mung.domain.ReviewVO;
 import com.example.mung.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;

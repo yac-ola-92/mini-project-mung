@@ -36,14 +36,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     // 댓글 등록
-    @Transactional
     @Override
     public boolean register(CommentDTO comment) {
         return commentMapper.insertComment(comment) > 0;  // 성공 여부를 확인
     }
 
-    // 대댓글 등록 및 댓글 수정
-    @Transactional
+    // 댓글 수정
     @Override
     public boolean modify(CommentDTO comment) {
         return commentMapper.updateComment(comment) > 0;  // 댓글 수정
@@ -53,9 +51,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public boolean remove(int comment_id) {
-        // 대댓글이 있는지 확인 후, 부모 댓글 삭제 시 대댓글도 함께 삭제
-        commentMapper.deleteReplyByParent(comment_id);  // 대댓글 삭제
-        return commentMapper.deleteComment(comment_id) > 0;  // 부모 댓글 삭제
+        return commentMapper.deleteComment(comment_id) > 0;  // 댓글 삭제
     }
 
     // 댓글 ID로 댓글 조회

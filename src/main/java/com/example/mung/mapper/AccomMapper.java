@@ -3,7 +3,6 @@ package com.example.mung.mapper;
 import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
 import org.apache.ibatis.annotations.*;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -65,7 +64,4 @@ public interface AccomMapper {
     이렇게 하면 vo객체에도 accom_id가 있고 파라미터로도 accom_id가 있어서 값을 찾지 못하게 됨
     그래서 객체만 부르고 아예 set으로 값을 모두 설정한다음  출력하니까 성공
 */
-
-    @Select("select * from accommodation")
-    public List<AccomDTO> getList();
 }

@@ -15,7 +15,5 @@ public class CommentDTO {
     private int user_id; // 작성자 ID
     private String content; // 댓글 내용
     private LocalDateTime created_at;
-    private int parent_comment_id = 0; // 부모 댓글 ID (없으면 0)
-
-    private String nickname;  // 추가된 필드: 작성자의 닉네임
+    private String nickname;
 }

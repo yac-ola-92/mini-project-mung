@@ -6,43 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class Comment_likeServiceImpl implements Comment_likeService {
 
-    private final Comment_likeMapper comment_likeMapper;
+    private final Comment_likeMapper commentLikeMapper;
 
     @Autowired
-    public Comment_likeServiceImpl(Comment_likeMapper comment_likeMapper) {
-        this.comment_likeMapper = comment_likeMapper;
+    public Comment_likeServiceImpl(Comment_likeMapper commentLikeMapper) {
+        this.commentLikeMapper = commentLikeMapper;
     }
 
     @Override
-    public List<Comment_likeDTO> findAll() {
-        return comment_likeMapper.getAllLike();
-    }
-
-    @Override
-    public List<Comment_likeDTO> readByUserId(int user_id) {
-        return comment_likeMapper.getLikeByUserId(user_id);
-    }
-
     @Transactional
-    @Override
-    public boolean register(Comment_likeDTO comment_likeDTO) {
-        return comment_likeMapper.insert(comment_likeDTO) > 0; // 성공 여부를 행의 수로 확인
+    public boolean likeOrDislike(Comment_likeDTO commentLikeDTO) {
+        // 이미 사용자가 좋아요 또는 싫어요를 눌렀는지 확인
+        Comment_likeDTO existing = commentLikeMapper.findByCommentIdAndUserId(commentLikeDTO.getComment_id(), commentLikeDTO.getUser_id());
+
+        if (existing != null) {
+            // 이미 존재하면 타입을 업데이트
+            return commentLikeMapper.updateLikeDislike(commentLikeDTO) > 0;
+        } else {
+            // 처음 누른 경우 삽입
+            return commentLikeMapper.insertLikeDislike(commentLikeDTO) > 0;
+        }
     }
 
-    @Transactional
     @Override
-    public boolean modify(Comment_likeDTO comment_likeDTO) {
-        return comment_likeMapper.update(comment_likeDTO) > 0;
+    public int getLikeCount(int comment_id) {
+        return commentLikeMapper.getLikeCount(comment_id);
     }
 
-    @Transactional
     @Override
-    public boolean remove(int comment_id, int user_id) {
-        return comment_likeMapper.delete(comment_id, user_id) > 0;
+    public int getDislikeCount(int comment_id) {
+        return commentLikeMapper.getDislikeCount(comment_id);
     }
 }
