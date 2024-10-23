@@ -1,7 +1,9 @@
 package com.example.mung.controller;
 
 import com.example.mung.domain.LoginDTO;
+import com.example.mung.domain.UserDTO;
 import com.example.mung.domain.UserVO;
+import com.example.mung.domain.transfer.PetInfo;
 import com.example.mung.domain.transfer.Role;
 import com.example.mung.service.LoginService;
 import com.example.mung.service.UserService;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -42,44 +46,60 @@ public class LoginController {
     @GetMapping("/login")
     public String loginView(Model model, HttpSession session) {
         if (session.getAttribute("userInfo") != null) {
+            System.out.println("세션에 담긴 값입니다."+session.getAttribute("userInfo"));
+            System.out.println("이미 로그인 되어있습니다.");
             return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
         }
         model.addAttribute("idList", loginService.idList());
         System.out.println("로그인 화면 출력");
-        return "redirect:/login";
+        return "/login";
     }
 
     //로그인 성공시 session에 로그인 정보 담기
     @PostMapping("/login")
     public String join(HttpSession session, LoginDTO dto) {
-
         UserVO user = loginService.loginSuccess(dto);
-        System.out.println(user);
-        System.out.println(dto);
+        System.out.println(user.getPet_info());
+        System.out.println(user.getPet_infoToString());
+        System.out.println("user값:" + user);
+
+        HashMap<String,String>list =user.getPet_infoList();
+        PetInfo petInfo = new PetInfo(list.get("이름"), list.get("종"), list.get("나이"), list.get("무게"));
+        user.setPet_inform(petInfo);
+
+        // roles를 List로 변환하여 UserVO에 설정
+        if (user.getRole() != null && !user.getRole().isEmpty()) {
+            user.setRoles(Arrays.asList(user.getRole().split(","))); // 역할을 List로 변환
+        }
+        System.out.println("user값:" + user);
+        System.out.println("dto값:" + dto);
 
         if (user != null) {
             session.setAttribute("userInfo", user);  // 세션에 사용자 정보 저장
-            System.out.println("로그인 성공");
+            System.out.println("세션에 담긴 값입니다." + user);
+            System.out.println("값" + user.getRole());
+            System.out.println(session.getAttribute("userInfo"));
             return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
         } else {
             System.out.println("로그인 실패");
-            return "redirect:/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
+            return "/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request) {
         session.invalidate();
         System.out.println("로그아웃 성공");
 
-        Cookie cookie = new Cookie("JSESSIONID", null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-
-        return "redirect:" + request.getHeader("Referer");
+        String referer = request.getHeader("Referer");
+        if (referer != null) {
+            return "redirect:" + referer; // 이전 페이지로 리다이렉트
+        } else {
+            return "redirect:/mainPage"; // 기본 페이지로 리다이렉트
+        }
     }
+
 
 
     //아이디 찾기 기능

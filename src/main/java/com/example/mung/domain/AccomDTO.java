@@ -2,13 +2,13 @@ package com.example.mung.domain;
 
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccomDTO {
     private int accom_id;
     private int user_id;

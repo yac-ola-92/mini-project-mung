@@ -27,9 +27,11 @@ public class PostController {
 
     // 게시판 메인
     @GetMapping("/postMain")
-    public String postMain(Model model) {
+    public String postMain(HttpSession session,Model model) {
         List<PostDTO> posts = postService.findAll();
         model.addAttribute("posts", posts);
+        model.addAttribute("userInfo",session.getAttribute("userInfo"));
+        System.out.println(model.getAttribute("userInfo"));
         return "postMain";
     }
 

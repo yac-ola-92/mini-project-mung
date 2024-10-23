@@ -207,7 +207,7 @@
         <div class="post-list">
             <!-- 글 작성 버튼 -->
             <div>
-                <button type="button" class="btn-write" onclick="checkLogin();">글 작성</button>
+                <button type="button" class="btn-write" onclick=" checkLogin();">글 작성</button>
             </div>
 
             <!-- 게시글 목록 -->
@@ -318,12 +318,9 @@
 </footer>
 <script>
     function checkLogin() {
-        console.log('checkLogin 함수가 실행되었습니다.');
-
-        // 로그인 여부 확인 로직
-        const isLoggedIn = true; // 테스트용으로 항상 로그인 상태로 가정
-
-        if (isLoggedIn) {
+        var userId = /*[[${session.userInfo.user_loginId}]]*/ '';  // 뒤에 '' 문자열을 추가
+        console.log(userId,1);
+        if (userId) {
             console.log('로그인 상태입니다. 글 작성 페이지로 이동합니다.');
             window.location.href = '/new';
         } else {
@@ -333,6 +330,8 @@
         }
     }
 </script>
+
+
 <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>

@@ -30,7 +30,11 @@ public class AccomController {
     @GetMapping("/mainPage") // 메인페이지 이동
     public String go(Model model, HttpSession session){
         List<AccomDTO>list = service.readByRating();
-        UserVO check=(UserVO) session.getAttribute("userInfo");
+        UserVO check = null;
+        if (session.getAttribute("userInfo")!=null){
+            check=(UserVO) session.getAttribute("userInfo");
+        }
+        System.out.println(check != null ? check.getRole() : null);
         System.out.println(list);
         if(check ==null){
            model.addAttribute("accomRating", list);
@@ -50,7 +54,7 @@ public class AccomController {
             System.out.println("로그인해야합니다");
             return "redirect:/login";
         }
-        return "redirect:/accom_register";
+        return "/register_accom";
 }
 
 //@ResponseBody
@@ -83,7 +87,7 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
 @GetMapping("/myAccom/edit/{accom_id}") //수정할 숙소 불러오기
 //url 요청 접수
 public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 매개변수로 받음
-    AccomDTO acc = service.readByAccom_id(accom_id);
+    List<AccomDTO> acc = service.readByAccom_id(accom_id);
     //수정할 데이터들을 받아옴
     if(acc!=null){
         // 모델에 데이터 등록
@@ -167,7 +171,7 @@ public String accom_list(Model model, HttpServletRequest req) {
 @GetMapping("/accom/{accom_id}/byAccomId") //숙소의 상세페이지
 public String accom_getOne(@PathVariable int accom_id, Model model, HttpServletRequest req ){
     int acc_id = Integer.parseInt(req.getParameter("accom_id"));
-    AccomDTO dto = service.readByAccom_id(acc_id);
+    List<AccomDTO> dto = service.readByAccom_id(acc_id);
     model.addAttribute("accInfo",dto);
     //원하는 숙소 클릭 시 나오는 상세페이지에 사용하기 위함
     return "/accomDetail";

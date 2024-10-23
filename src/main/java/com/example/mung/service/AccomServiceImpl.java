@@ -28,7 +28,7 @@ public class AccomServiceImpl implements AccomService {
     }
 
     @Override
-    public AccomDTO readByAccom_id(int accom_id){
+    public List<AccomDTO> readByAccom_id(int accom_id){
         System.out.println(accom_id + "해당하는 숙소 정보를 불러옵니다.");
         return accomDAO.getOneByAccom_id(accom_id);
     }
@@ -67,8 +67,5 @@ public class AccomServiceImpl implements AccomService {
         return accomDAO.delete(accom_id);
     }
 
-    @Override
-    public List<AccomDTO> findAll() {
-        return List.of();
-    }
+
 }

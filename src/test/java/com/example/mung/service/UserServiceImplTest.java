@@ -39,7 +39,7 @@ public class UserServiceImplTest {
         vo.setNickname("manager");
         vo.setRole(new Role(new String[]{"USER,HOST"}));
         vo.setUser_phone("010-0000-1234");
-        vo.setPet_info(new PetInfo("", "인간", "100", "80kg"));
+        vo.setPet_inform(new PetInfo("", "인간", "100", "80kg"));
         boolean result = service.register(vo);
         System.out.println("서비스단 등록 성공 : " + result);
     }
@@ -58,7 +58,7 @@ public class UserServiceImplTest {
         vo.setNickname("manager");
         vo.setRole(new Role(new String[]{"HOST,ADMIN"}));
         vo.setUser_phone("010-0000-1232");
-        vo.setPet_info(new PetInfo("안젤라", "인간", "101", "81kg"));
+        vo.setPet_inform(new PetInfo("안젤라", "인간", "101", "81kg"));
         boolean result = service.modify(vo);
         System.out.println("서비스단 수정 성공 : " + result);
 
