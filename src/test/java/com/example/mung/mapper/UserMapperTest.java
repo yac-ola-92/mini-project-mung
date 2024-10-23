@@ -18,9 +18,9 @@ public class UserMapperTest {
     @Test
     public void getListTest() {
         //mapper.getList().stream().forEach(System.out :: println);
-        List<UserDTO> list = mapper.getList();
-        list.stream().map(UserDTO::getPet_infoToString).forEach(System.out::println);
-        list.stream().map(UserDTO::getPet_infoList).forEach(System.out::println);
+        List<UserVO> list = mapper.getList();
+        list.stream().map(UserVO::getPet_infoToString).forEach(System.out::println);
+        list.stream().map(UserVO::getPet_infoList).forEach(System.out::println);
         list.stream().forEach(System.out::println);
         System.out.println("getList 완료!!!");
     }
@@ -50,7 +50,7 @@ public class UserMapperTest {
         vo.setRole(role);
         vo.setProfile_image_url("/bbangbbang.png");
         PetInfo petInfo = new PetInfo("뽀삐", "샤모에드", "2", "15kg");
-        vo.setPet_info(petInfo);
+        vo.setPet_inform(petInfo);
         boolean result = mapper.insert(vo);
         System.out.println("등록 완료 : " + result);
         System.out.println("insertTest 완료!!");
@@ -73,7 +73,7 @@ public class UserMapperTest {
         vo.setRole(role);
         vo.setProfile_image_url("/okji.png");
         PetInfo petInfo = new PetInfo("빵빵이", "요크셔테리어", "3", "4kg");
-        vo.setPet_info(petInfo);
+        vo.setPet_inform(petInfo);
         boolean result = mapper.update(vo);
         System.out.println("update 완료!!! result :" + result);
     }

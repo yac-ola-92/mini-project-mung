@@ -12,11 +12,13 @@ public interface UserMapper {
 
     // User 전체 조회
     @Select("select * from user where user_id > 0 ")
-    List<UserDTO> getList();
+    List<UserVO> getList();
 
     // User 상세 조회
     @Select("select * from user where user_id = #{id}")
     UserDTO getOne(int id);
+
+
 
 
     // User 등록
@@ -35,6 +37,9 @@ public interface UserMapper {
             "profile_image_url = #{profile_image_url}, pet_info = #{pet_info} ,business_number=#{business_number},business_sns_url=#{business_sns_url} " +
             "WHERE user_id = #{user_id}")
     boolean update(UserVO vo);
+
+    @Update("update user set pet_info = #{pet_info} where user_id = #{user_id}")
+    boolean updatePet_info(UserVO vo);
 
     //한 컬럼만 변경 가능한지 체크한 메서드
     @Update("UPDATE user SET user_loginId=#{user_loginId}WHERE user_id = #{user_id}")

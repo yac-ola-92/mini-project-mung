@@ -217,7 +217,7 @@
         <div class="post-list">
             <!-- 글 작성 버튼 -->
             <div>
-                <button type="button" class="btn-write" onclick="checkLogin();">글 작성</button>
+                <button type="button" class="btn-write" onclick=" checkLogin();">글 작성</button>
             </div>
             <!-- 게시글 목록 -->
             <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
@@ -325,6 +325,7 @@
         </div>
     </div>
 </footer>
+
 <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>

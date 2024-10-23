@@ -32,6 +32,7 @@ public class PostController {
 
     // 게시판 메인
     @GetMapping("/postMain")
+
     public String postMain(HttpSession session, Model model) {
         UserVO userInfo = getLoginUser(session);
         List<PostDTO> posts = postService.findAll();
@@ -40,6 +41,7 @@ public class PostController {
             model.addAttribute("userInfo", userInfo);  // 로그인된 사용자 정보 추가
         }
         return "postMain";  // 슬래시 제거
+
     }
 
     // 카테고리별 게시글 조회

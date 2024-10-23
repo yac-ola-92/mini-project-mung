@@ -14,7 +14,7 @@ public interface AccomMapper {
     // filtering : accom_location, capacity_standard , capacity_max, pet_kind
 
 
-    @Select("SELECT a.accom_name, a.accom_location, a.accom_images_url, r.room_price, r.pet_kind, re.rating " +
+    @Select("SELECT a.accom_id, a.accom_name, a.accom_location, a.accom_images_url, r.room_price, r.pet_kind, re.rating " +
             "FROM ACCOMMODATION a JOIN ROOM r ON a.accom_id = r.accom_id " +
             "LEFT JOIN REVIEW re ON a.user_id = re.user_id " +
             "ORDER BY re.rating DESC")
@@ -39,12 +39,12 @@ public interface AccomMapper {
     public List<AccomVO>getoneByUserAndAccom_name(AccomVO vo);
     //한 유저가 동일한 숙소를 등록하는지 확인하기위해
 
-    @Select("SELECT a.accom_id, a.accom_location, a.accom_phone, a.accom_caution, a.accom_description, a.accom_images_url, a.accom_amenities," +
+    @Select("SELECT a.user_id, a.accom_id, a.accom_location, a.accom_phone, a.accom_caution, a.accom_description, a.accom_images_url, a.accom_amenities," +
             "r.rating, r.comment, u.business_number, u.business_sns_url, u.nickname" +
             "FROM ACCOMMODATION a JOIN REVIEW r ON a.user_id = r.user_id " +
             "LEFT JOIN USER u ON a.user_id = u.user_id" +
-            "WHERE accom_id = #{accom_id}")
-    public AccomDTO getOneByAccom_id(int accom_id);
+            "WHERE accom_id = ${accom_id}")
+    public List<AccomDTO> getOneByAccom_id(int accom_id);
     //원하는 숙소를 클릭 했을 때 숙소의 상세 페이지에서 출력하기 위함
 
     @Insert("INSERT INTO ACCOMMODATION (user_id, accom_name, accom_location, accom_phone, accom_caution, accom_description, accom_images_url, accom_amenities)" +
@@ -64,4 +64,5 @@ public interface AccomMapper {
     이렇게 하면 vo객체에도 accom_id가 있고 파라미터로도 accom_id가 있어서 값을 찾지 못하게 됨
     그래서 객체만 부르고 아예 set으로 값을 모두 설정한다음  출력하니까 성공
 */
+
 }

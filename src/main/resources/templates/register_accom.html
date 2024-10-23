@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
 	<meta charset="utf-8">
@@ -123,12 +123,12 @@
 					</div>
 					<nav>  
 						<ul>
-							<li><a href="/accom_register" style="color: #bc915e; display: block;">나의 숙소</a></li>
+							<li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
 							<li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
-							<li><a href="postMain" style="color:#bc915e;">게시판</a></li>
+							<li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
 							<li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
-							<li><a href="/login" id="login" onclick="check()">로그인</a></li>
-							<li><a href="/logout" id="logout" style="display: none;" onclick="check()">로그아웃</a></li>
+							<li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+							<li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
 					</ul>   
 					</nav>
 
@@ -281,12 +281,14 @@
       		 document.getElementById('logout').style.display = 'block';
     	}
 </script>
-	<script>
+	<script th:inline="javascript">
 const addFormBtn = document.getElementById('add-form-btn');
 const formContainer = document.getElementById('form-container');
 
 addFormBtn.addEventListener('click', () => {
     // 새로운 입력폼 생성
+	var userId = /*[[${session.userInfo.user_loginId}]]*/ '';  // 뒤에 '' 문자열을 추가
+	console.log(userId,1);
     const newForm = document.createElement('div');
     newForm.className = 'input-form';
 

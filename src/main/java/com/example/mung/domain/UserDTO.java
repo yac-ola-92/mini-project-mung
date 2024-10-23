@@ -72,7 +72,7 @@ public class UserDTO {
     }
 
     //문자열인 권한을 배열로 하나씩 담아서 보내기 어디든..
-    public String[] splitRole(){
+    public String[] splitRole(String role){
 
         return role.split(",");
     }

@@ -25,7 +25,6 @@ public interface LoginMapper {
     @Select("select user_loginId from user")
     List<String> idList();
 
-
     //아이디 비밀번호로 정보 조회
     @Select("select * from user where user_loginId =#{user_loginId} and password = #{password}")
     UserVO loginActive(LoginDTO dto);
