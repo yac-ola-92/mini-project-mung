@@ -67,8 +67,4 @@ public class AccomServiceImpl implements AccomService {
         return accomDAO.delete(accom_id);
     }
 
-    @Override
-    public List<AccomDTO> findAll() {
-        return List.of();
-    }
 }

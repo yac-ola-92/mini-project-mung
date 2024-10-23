@@ -34,7 +34,8 @@ public interface PostMapper {
     int update(PostDTO post);
 
     // 게시글 등록
-    @Insert("INSERT INTO post (user_id, title, content, filePath) VALUES (#{user_id}, #{title}, #{content}, #{filePath})")
+    @Insert("INSERT INTO posts (user_id, nickname, title, content, files, created_at, password, category)\n" +
+            "    VALUES (#{user_id}, #{nickname}, #{title}, #{content}, #{files}, NOW(), #{password}, #{category})")
     @Options(useGeneratedKeys = true, keyProperty = "post_id")
     int insert(PostDTO post);
 

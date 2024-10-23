@@ -5,9 +5,12 @@ import com.example.mung.domain.Comment_likeDTO;
 import java.util.List;
 
 public interface Comment_likeService {
-    List<Comment_likeDTO> findAll();
-    List<Comment_likeDTO> readByUserId(int user_id);
-    boolean register(Comment_likeDTO comment_likeDTO);
-    boolean modify(Comment_likeDTO comment_likeDTO);
-    boolean remove(int comment_id, int user_id);
+    // 좋아요/싫어요 추가 또는 업데이트
+    boolean likeOrDislike(Comment_likeDTO commentLikeDTO);
+
+    // 댓글의 좋아요 카운트 조회
+    int getLikeCount(int comment_id);
+
+    // 댓글의 싫어요 카운트 조회
+    int getDislikeCount(int comment_id);
 }

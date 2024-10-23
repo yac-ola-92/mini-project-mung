@@ -1,14 +1,15 @@
 package com.example.mung.controller;
 
 import com.example.mung.domain.PostDTO;
-import com.example.mung.domain.UserDTO;
+import com.example.mung.domain.UserVO;
 import com.example.mung.service.PostService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,12 +26,20 @@ public class PostController {
         this.postService = postService;
     }
 
+    private UserVO getLoginUser(HttpSession session) {
+        return (UserVO) session.getAttribute("userInfo");
+    }
+
     // 게시판 메인
     @GetMapping("/postMain")
-    public String postMain(Model model) {
+    public String postMain(HttpSession session, Model model) {
+        UserVO userInfo = getLoginUser(session);
         List<PostDTO> posts = postService.findAll();
         model.addAttribute("posts", posts);
-        return "postMain";
+        if (userInfo != null) {
+            model.addAttribute("userInfo", userInfo);  // 로그인된 사용자 정보 추가
+        }
+        return "postMain";  // 슬래시 제거
     }
 
     // 카테고리별 게시글 조회
@@ -38,7 +47,7 @@ public class PostController {
     public String getPostsByCategory(@PathVariable("category") String category, Model model) {
         List<PostDTO> posts = postService.getPostsByCategory(category);
         model.addAttribute("posts", posts);
-        return "postMain";
+        return "postMain";  // 슬래시 제거
     }
 
     // 검색 기능
@@ -56,71 +65,98 @@ public class PostController {
             posts = new ArrayList<>();
         }
         model.addAttribute("posts", posts);
-        return "postMain"; // 검색 결과를 postMain 페이지에 렌더링
+        return "postMain";  // 검색 결과를 postMain 페이지에 렌더링
     }
 
-    // 게시글 작성 폼으로 이동
+    // 게시글 작성 페이지로 이동 (GET 요청 처리)
     @GetMapping("/new")
-    public String createPostForm(HttpSession session, Model model) {
-        if (session.getAttribute("userInfo") == null) {
-            return "redirect:/login";  // 로그인 페이지로 리다이렉트
+    public String postWritePage(HttpSession session, Model model) {
+        UserVO userInfo = getLoginUser(session);
+        if (userInfo == null) {
+            return "redirect:/login";
         }
-        model.addAttribute("postDTO", new PostDTO());  // 작성 폼에서 사용할 PostDTO를 넘김
-        return "postWrite";  // 게시글 작성 폼 페이지로 이동
+        model.addAttribute("userInfo", userInfo);  // 로그인된 사용자 정보 추가
+        return "postWrite";  // 게시글 작성 페이지로 이동
     }
 
-    // 게시글 등록 및 파일 업로드 처리
+
     @PostMapping("/new")
-    public ModelAndView createPost(@ModelAttribute PostDTO post, @RequestParam("files") MultipartFile file) {
-        ModelAndView mav = new ModelAndView();
-        if (!file.isEmpty()) {
+    public String createPost(@Valid @ModelAttribute PostDTO postDTO, BindingResult result,
+                             @RequestParam(value = "file", required = false) MultipartFile file,
+                             HttpSession session,
+                             Model model) {
+        UserVO userInfo = getLoginUser(session);
+        if (userInfo == null) {
+            return "redirect:/login";  // 로그인 안된 경우 로그인 페이지로 리다이렉트
+        }
+
+        // 로그 추가
+        System.out.println("게시글 작성 시작");
+
+        // 유효성 검사 실패 시 처리
+        if (result.hasErrors()) {
+            System.out.println("유효성 검사 실패");
+            model.addAttribute("msg", "입력값에 오류가 있습니다.");
+            return "postWrite";  // 입력값 오류 시 다시 작성 페이지로 이동
+        }
+
+        // 작성자 정보 추가
+        postDTO.setUser_id(userInfo.getUser_id());
+        postDTO.setNickname(userInfo.getNickname());
+
+        // 파일 업로드 처리
+        if (file != null && !file.isEmpty()) {
             try {
-                byte[] fileData = file.getBytes(); // 파일 바이트 배열로 변환
-                post.setFiles(fileData); // PostDTO에 파일 데이터 저장
+                String uploadDir = "C:/upload/";
+                String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                String filePath = uploadDir + fileName;
+                File dest = new File(filePath);
+                file.transferTo(dest);  // 파일 저장
+                postDTO.setFiles(filePath);
+
+                // 파일 처리 로그 추가
+                System.out.println("파일 저장 성공: " + filePath);
             } catch (IOException e) {
-                e.printStackTrace();
-                mav.addObject("msg", "파일 저장 중 오류가 발생했습니다.");
-                mav.setViewName("postWrite");
-                return mav;
+                System.out.println("파일 저장 실패");
+                model.addAttribute("msg", "파일 저장 중 오류가 발생했습니다.");
+                return "postWrite";  // 파일 저장 중 오류 발생 시 다시 작성 페이지로 이동
             }
-        } else {
-            post.setFiles(null); // 파일이 없을 경우 null 설정
         }
-        // 게시글 저장
-        if (postService.register(post)) {
-            mav.addObject("msg", "게시글과 파일이 성공적으로 저장되었습니다.");
-        } else {
-            mav.addObject("msg", "게시글 저장 중 오류가 발생했습니다.");
-        }
-        mav.setViewName("postWrite");
-        return mav;
+        // 게시글 등록
+        boolean success = postService.register(postDTO);
+        System.out.println("게시글 등록 상태: " + success);
+        return "postMain";  // 게시글 등록 후 메인 페이지로 리다이렉트
     }
+
 
     // 게시글 상세 조회
     @GetMapping("/post/{post_id}")
-    public String getPostById(@PathVariable int post_id, Model model) {
+    public String getPostDetail(@PathVariable int post_id, HttpSession session, Model model) {
+        UserVO userInfo = getLoginUser(session);
+        if (userInfo != null) {
+            model.addAttribute("userInfo", userInfo);
+        }
+
         PostDTO post = postService.readById(post_id);
-        postService.increaseViewCount(post_id);
+        if (post == null) {
+            return "error/404"; // 게시글이 없을 경우 404 페이지
+        }
         model.addAttribute("post", post);
         return "postDetail";
     }
 
-    // 게시글 수정 페이지로 이동
+    // 게시글 수정 페이지
     @GetMapping("/update/{post_id}")
     public String updatePostPage(@PathVariable int post_id, HttpSession session, Model model) {
-        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
-
+        UserVO userInfo = getLoginUser(session);
         if (userInfo == null) {
             return "redirect:/login";
         }
         PostDTO post = postService.readById(post_id);
-
-        // 작성자 확인을 nickname을 통해 처리
         if (!post.getNickname().equals(userInfo.getNickname())) {
             model.addAttribute("error", "작성자만 게시글을 수정할 수 있습니다.");
             return "postDetail";
         }
-
         model.addAttribute("post", post);
         return "postUpdate";
     }
@@ -128,23 +164,17 @@ public class PostController {
     // 게시글 삭제 처리
     @PostMapping("/delete/{post_id}")
     public String deletePost(@PathVariable int post_id, HttpSession session) {
-        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
-
+        UserVO userInfo = getLoginUser(session);
         if (userInfo == null) {
             return "redirect:/login";
         }
-
         PostDTO post = postService.readById(post_id);
-
-        // 작성자 여부 확인
         if (!post.getNickname().equals(userInfo.getNickname())) {
-            return "redirect:/postMain";  // 본인이 작성한 글이 아닌 경우 목록 페이지로 리다이렉트
+            return "redirect:/postMain";  // 슬래시 제거 및 redirect로 처리
         }
-
         if (postService.remove(post_id)) {
-            return "redirect:/postMain";  // 성공 시 목록 페이지로 리다이렉트
+            return "redirect:/postMain";  // 슬래시 제거 및 redirect로 처리
         }
-
-        return "postDelete";  // 실패 시 삭제 페이지로 돌아감
+        return "postDelete";
     }
 }

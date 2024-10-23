@@ -1,182 +1,166 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>게시글 작성</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시글 작성</title>
+    <meta name="description" content="게시판 페이지">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="/assets/img/logo/logo.png" alt="">
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="/assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader End -->
+<header>
+    <div class="header-area" style="background-color: #fff9f0;">
+        <div class="main-header">
+            <div class="header-top top-bg d-none d-lg-block" style="background-color: #f2e2cc;">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-8">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li>needhelp@gotrip.com</li>
+                                    <li>666 569 025077</li>
+                                    <li>Brooklyn Street, New York</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="header-info-right f-right">
+                                <ul class="header-social">
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a th:href="@{/index}">숙소 예약</a></li>
+                                        <li><a th:href="@{/postMain}">게시판</a>
+                                            <ul class="submenu">
+                                                <li><a th:href="@{/postMain}">게시판</a></li>
+                                                <li><a th:href="@{/reviews}">후기 게시판</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">마이페이지</a></li>
+                                        <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Preloader End-->
-    <header>
-        <div class="header-area" style="background-color: #fff9f0;">
-            <div class="main-header ">
-                <div class="header-top top-bg d-none d-lg-block" style="background-color: #f2e2cc;">
-                    <div class="container">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-lg-8">
-                                <div class="header-info-left">
-                                    <ul>
-                                        <li>needhelp@gotrip.com</li>
-                                        <li>666 569 025077</li>
-                                        <li>Brooklyn Street, New York</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="header-info-right f-right">
-                                    <ul class="header-social">
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                       </div>
-                    </div>
-                </div>
-                <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-xl-2 col-lg-2 col-md-1">
-                                <div class="logo">
-                                    <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
-                                </div>
-                            </div>
-                            <div class="col-xl-10 col-lg-10 col-md-10">
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a th:href="@{/index}">숙소 예약</a></li>
-                                            <li><a th:href="@{/postMain}">게시판</a>
-                                                <ul class="submenu">
-                                                    <li><a th:href="@{/postMain}">게시판</a></li>
-                                                    <li><a th:href="@{/reviews}">후기 게시판</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="about.html">마이페이지</a></li>
-                                            <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
-                                            <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
+</header>
+
+<!-- 게시글 작성 영역 -->
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <!-- 게시글 작성 폼 -->
+                    <h2>게시글 작성</h2>
+                    <form id="postForm" method="post" enctype="multipart/form-data" th:action="@{/new}">
+                        <div class="form-group">
+                            <label for="category">카테고리</label>
+                            <select name="category" id="category" class="form-control" required>
+                                <option value="rec">숙소 추천</option>
+                                <option value="general">자유 게시판</option>
+                                <option value="travel">여행 TIP</option>
+                            </select>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <label for="title">제목</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content">내용</label>
+                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">비밀번호 (수정/삭제시 확인용)</label>
+                            <input type="password" class="form-control" id="password" name="password" maxlength="4" placeholder="4자리 비밀번호" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="files">첨부 파일</label>
+                            <input type="file" class="form-control-file" id="files" name="files" multiple>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="background-color: #f2e2cc; color: black;">게시글 작성</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- 게시글 작성 영역 -->
-    <section class="blog_area section-padding">
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 mb-5 mb-lg-0">
-                    <div class="blog_left_sidebar">
-                        <!-- 게시글 작성 폼 -->
-                        <h2>게시글 작성</h2>
-                        <form th:action="@{/new}" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="category">카테고리</label>
-                                <select name="category" id="category" class="form-control" required>
-                                    <option value="rec">숙소 추천</option>
-                                    <option value="general">자유 게시판</option>
-                                    <option value="travel">여행 TIP</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">제목</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="content">내용</label>
-                                <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password">비밀번호 (수정/삭제시 확인용)</label>
-                                <input type="password" class="form-control" id="password" name="password" maxlength="4" placeholder="4자리 비밀번호" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="files">첨부 파일</label>
-                                <input type="file" class="form-control-file" id="files" name="files" multiple>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="background-color: #f2e2cc; color: black;">게시글 작성</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-logo">
-                                <a href="/static"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em;"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer bottom -->
-                <div class="row pt-padding">
-                    <div class="col-xl-7 col-lg-7 col-md-7">
-                        <div class="footer-copy-right">
-                            <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-logo">
+                            <a href="/static"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em;"></a>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Footer bottom -->
+            <div class="row pt-padding">
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                        <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-            event.preventDefault();  // 기본 폼 제출을 막음
-
-            // 폼 데이터를 가져옴
-            var formData = new FormData(this);
-
-            // AJAX로 폼 데이터를 서버로 전송
-            fetch('/new', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.text())  // 서버 응답 처리
-                .then(data => {
-                    alert('게시글이 성공적으로 등록되었습니다.');
-                })
-                .catch(error => {
-                    alert('게시글 등록에 실패했습니다.');
-                });
-        });
-    </script>
-    <!-- JS Files -->
-    <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/main.js"></script>
+    </div>
+</footer>
+<!-- JS Files -->
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

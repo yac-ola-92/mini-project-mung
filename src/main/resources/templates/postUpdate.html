@@ -13,9 +13,33 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<script th:inline="javascript">
+    document.querySelector('form[name="update-form"]').addEventListener('submit', function(event) {
+        event.preventDefault();  // 기본 폼 제출 막기
 
-<header>
+        var formData = new FormData(this);  // 폼 데이터 가져오기
+
+        // AJAX 요청으로 서버에 폼 데이터 전송
+        fetch(this.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('게시글 수정에 실패했습니다.');
+            })
+            .then(data => {
+                alert('게시글이 성공적으로 수정되었습니다.');
+                window.location.href = '/postMain';  // 수정 후 다른 페이지로 이동
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+</script>
+<body>
     <!-- Header Start -->
     <div class="header-area" style="background-color: #fff9f0;">
         <div class="main-header">
@@ -53,8 +77,6 @@
             </div>
         </div>
     </div>
-</header>
-
 <!-- 게시글 수정 폼 -->
 <section class="blog_area section-padding">
     <div class="container">
@@ -89,6 +111,7 @@
                             <input type="file" id="file" name="file" class="form-control">
                             <div th:if="${post.file}">
                                 <p>현재 첨부된 파일: <a th:href="@{'/file/download/' + ${post.file}}"><span th:text="${post.file}"></span></a></p>
+                                <label><input type="checkbox" name="deleteFile"> 첨부 파일 삭제</label>
                             </div>
                         </div>
                         <!-- 비밀번호 확인 -->
@@ -138,28 +161,7 @@
         </div>
     </div>
 </footer>
-<script>
-    document.querySelector('form[name="update-form"]').addEventListener('submit', function(event) {
-        event.preventDefault();  // 기본 폼 제출 막기
 
-        var formData = new FormData(this);  // 폼 데이터 가져오기
-
-        // AJAX 요청으로 서버에 폼 데이터 전송
-        fetch(this.action, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.text())
-            .then(data => {
-                // 서버 응답이 성공적일 때 알림창 띄우기
-                alert('게시글이 성공적으로 수정되었습니다.');
-                window.location.href = '/postMain';  // 수정 후 다른 페이지로 이동
-            })
-            .catch(error => {
-                alert('게시글 수정에 실패했습니다.');
-            });
-    });
-</script>
 <!-- JS Files -->
 <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>

@@ -25,8 +25,6 @@ public class AccomController {
     private AccomService service;
 
 
-
-
     @GetMapping("/mainPage") // 메인페이지 이동
     public String go(Model model, HttpSession session){
         List<AccomDTO>list = service.readByRating();
