@@ -3,14 +3,11 @@ package com.example.mung.mapper;
 import com.example.mung.domain.Comment_likeDTO;
 import org.apache.ibatis.annotations.*;
 
-import java.util.List;
-
 @Mapper
 public interface Comment_likeMapper {
 
     // 좋아요/싫어요 추가
-    @Insert("INSERT INTO comment_like (comment_id, user_id, type) " +
-            "VALUES (#{comment_id}, #{user_id}, #{type})")
+    @Insert("INSERT INTO comment_like (comment_id, user_id, type) VALUES (#{comment_id}, #{user_id}, #{type})")
     @Options(useGeneratedKeys = true, keyProperty = "like_id")
     int insertLikeDislike(Comment_likeDTO commentLike);
 
@@ -29,4 +26,3 @@ public interface Comment_likeMapper {
     @Select("SELECT COUNT(*) FROM comment_like WHERE comment_id = #{comment_id} AND type = 'DISLIKE'")
     int getDislikeCount(@Param("comment_id") int comment_id);
 }
-

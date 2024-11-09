@@ -1,7 +1,6 @@
 package com.example.mung.service;
 
 import com.example.mung.domain.CommentDTO;
-
 import java.util.List;
 
 public interface CommentService {
