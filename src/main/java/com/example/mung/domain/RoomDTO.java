@@ -23,7 +23,9 @@ public class RoomDTO {
     private int capacity_standard;
     private int capacity_max;
 
+
     public List<String> getRoomImagesUrl() {
         return Arrays.asList(getRoom_images_url().split(","));
     }
+
 }

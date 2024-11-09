@@ -20,4 +20,5 @@ public interface AccomService {
     boolean modify(AccomVO vo);
     boolean remove(int accom_id);
 
+
 }

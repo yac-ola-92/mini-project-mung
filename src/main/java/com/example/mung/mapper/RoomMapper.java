@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
 
+
    /* @Select("<script> select room_name  from ROOM " + //쿼리문자열 안주면 여기까지 수행
             "<where> " +
             "<if test='pet_kind != null'> pent_kind=#{pet_kind}</if>" + //ename 주면 여기까지 수행
@@ -15,10 +16,12 @@ public interface RoomMapper {
             "</where></script>")
     public List<RoomDTO> getList();*/
 
+
 //객실 리스트를 뽑을 건데
 //처음은 수용인원 capacity_standard and capacity_max 인원을 받는 명은{guestCount}?
 //두번째는 반려견의 종
 //세번째는 금액 ?
+
    @Select("SELECT room_id, accom_id, room_name, room_type, room_price, room_images_url, " +
                 " room_info, room_amount, pet_kind, capacity_standard, capacity_max" +
                 " FROM ROOM")
@@ -44,6 +47,7 @@ public interface RoomMapper {
     @Insert("INSERT INTO ROOM (accom_id, room_name, room_type, room_price, room_images_url, room_info, room_amount, pet_kind, capacity_standard, capacity_max)" +
             " VALUES (#{accom_id}, #{room_name}, #{room_type}, #{room_price},#{room_images_url}, #{room_info}, #{room_amount}, #{pet_kind}, #{capacity_standard}, #{capacity_max});")
     boolean insert(RoomVO vo); //객실 추가
+
 
     @Update("UPDATE ROOM SET room_name = #{room_name}, room_type =#{room_type}, room_price =#{room_price}, room_images_url =#{room_images_url}" +
                       " , room_info = #{room_info} , room_amount = #{room_amount}, pet_kind =#{pet_kind}, capacity_standard =#{capacity_standard}, capacity_max =#{capacity_max}" +

@@ -6,6 +6,7 @@ import com.example.mung.domain.RoomVO;
 import java.util.List;
 
 public interface RoomService {
+
     List<RoomDTO>findAll();
     List<RoomDTO>readByAccom_id(int accom_id);
     List<RoomDTO>readByPet_kind(String pet_kind);
@@ -14,5 +15,6 @@ public interface RoomService {
     boolean register(RoomVO vo);
     boolean modify(RoomVO vo);
     boolean remove(int room_id);
+
 }
 

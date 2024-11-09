@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,6 @@ import java.util.List;
 public class RoomController {
     @Autowired
     private RoomService service;
-
 
     @PostMapping("/room_register")
     public String room_registration(HttpServletRequest req){
@@ -31,11 +32,14 @@ public class RoomController {
         vo.setRoom_images_url(req.getParameter("room_images_url"));
         vo.setRoom_price(Integer.parseInt(req.getParameter("room_price")));
         vo.setPet_kind(req.getParameter("pet_kind"));
+
         vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_standard")));
         vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_max")));
+
         service.register(vo);
         return "register success";
     }
+
 
     @GetMapping("/myAccom/{accom_id}/edi") // 숙소 수정에 사용될 정보
     public String room_edit(@PathVariable("accom_id") int accom_id, Model model){
@@ -43,6 +47,7 @@ public class RoomController {
         model.addAttribute("rmInfo",rm);
         return "update_accom";
     }
+
 
 
     @PostMapping("/room_update")
@@ -56,6 +61,7 @@ public class RoomController {
         vo.setRoom_images_url(req.getParameter("room_images_url"));
         vo.setRoom_price(Integer.parseInt(req.getParameter("room_price")));
         vo.setPet_kind(req.getParameter("pet_kind"));
+
         vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_standard")));
         vo.setCapacity_standard(Integer.parseInt(req.getParameter("capacity_max")));
         return "redirect:/myAccom";
@@ -86,6 +92,7 @@ public class RoomController {
 
         return dto;
     }
+
 
 
     @PostMapping("/room_delete")

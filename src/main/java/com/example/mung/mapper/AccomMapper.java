@@ -14,6 +14,7 @@ public interface AccomMapper {
     // filtering : accom_location, capacity_standard , capacity_max, pet_kind
 
 
+
     @Select("SELECT a.accom_id, a.accom_name, a.accom_location, a.accom_images_url, r.room_price, r.pet_kind, re.rating " +
             "FROM ACCOMMODATION a JOIN ROOM r ON a.accom_id = r.accom_id " +
             "LEFT JOIN REVIEW re ON a.user_id = re.user_id " +
@@ -33,10 +34,13 @@ public interface AccomMapper {
 
     //지역 기반으로 숙소 불러오기 (강원 지역, 경기지역) room tb 와 join 해서 인원수도 비교하여 숙소출력
 
+
     @Select("SELECT  accom_name, accom_location " +
             " FROM accommodation " +
             "WHERE user_id = #{user_id} AND accom_name = #{accom_name}")
+
     List<AccomVO> getoneByUserAndAccom_name(AccomVO vo);
+
     //한 유저가 동일한 숙소를 등록하는지 확인하기위해
 
 

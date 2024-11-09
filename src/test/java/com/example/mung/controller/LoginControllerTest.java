@@ -1,4 +1,6 @@
+
 /*
+
 package com.example.mung.controller;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class LoginControllerTest {
 
-<<<<<<< HEAD
 
-=======
->>>>>>> feature-login
     //MockMvc 객체 생성
    // private MockMvc mockMvc;
 
@@ -26,4 +25,6 @@ public class LoginControllerTest {
 
 
 }
+
 */
+

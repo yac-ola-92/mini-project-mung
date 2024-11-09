@@ -17,14 +17,18 @@ public class AccomServiceImpl implements AccomService {
     private AccomMapper accomDAO;  //AccomMapper 받아서 accomDAO 객체 생성
 
     @Override
+
     public List<AccomDTO> findAll() {
+
         return accomDAO.getList();
     }
 
     @Override
+
     public List<AccomDTO> readByLocation(String location, int guestCount) {  // 위치에 따른 숙소 출력
         System.out.println(location + " 지역에 있는 숙소를 출력합니다");
         return accomDAO.getListByLocation(location, guestCount);
+
     }
 
     @Transactional
@@ -39,6 +43,7 @@ public class AccomServiceImpl implements AccomService {
     }
     @Transactional
     @Override
+
     public List<AccomDTO>readByReview(int accom_id){
         System.out.println("Review 와 쪼인 성공!S");
         System.out.println(accom_id + "번에 해당하는 숙소 정보를 불러옵니다");
@@ -69,6 +74,7 @@ public class AccomServiceImpl implements AccomService {
     @Override
     public boolean register(AccomVO vo) { //숙소 등록
         List<AccomVO> checkAccom = accomDAO.getoneByUserAndAccom_name(vo);
+
         System.out.println(checkAccom.isEmpty());
         if (!checkAccom.isEmpty()) {
             System.out.println("이미 존재해서 등록 안할거~!");
@@ -84,13 +90,17 @@ public class AccomServiceImpl implements AccomService {
 
     @Transactional
     @Override
+
     public boolean modify(AccomVO vo) { //숙소 수정
+
         System.out.println("숙소 업데이트 성공");
         return accomDAO.update(vo);
     }
 
     @Override
+
     public boolean remove(int accom_id) { //숙소 삭제
+
         System.out.println("숙소 삭제 성공 ");
         return accomDAO.delete(accom_id);
     }

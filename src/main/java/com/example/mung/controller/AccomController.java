@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
+
 
 
 import java.awt.print.Pageable;
@@ -26,6 +28,7 @@ import java.util.List;
 public class AccomController {
     @Autowired
     private AccomService service;
+
 
     @Autowired
     private RoomService rService;
@@ -64,6 +67,7 @@ public class AccomController {
 
 //@ResponseBody
 @PostMapping("/accom_register") //숙소 등록
+
     /* 우선 테스트 할 때 반환된 문자열이 자꾸 뷰 템플릿 이름으로 해석 되서
      @ResponseBody를 추가하니까 Spring이 반환된 문장열을 템플릿으로 해석하지 않고
     HTTP 응답 본문으로 직접 반환*/
@@ -72,6 +76,7 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
       /* 숙소를 등록할 때 하나의 숙소씩 등록이 되기때문에 굳이 리스트를 안쓰고
             그냥 AccomVO객체에 담아도 될 것 같다고 생각함
             유저아이디도 받아와야하나 ?? */
+
     UserVO check= (UserVO) session.getAttribute("userInfo");
     System.out.println(check.getUser_id()+"사용자의 숙소등록");
     vo.setUser_id(check.getUser_id());
@@ -101,9 +106,11 @@ public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 �
         model.addAttribute("accInfo",acc);
     }else {
         return "redirect:/error/404";
+
     }
     return "/update_accom";
 }
+
 
 @PostMapping("/accom_update") //숙소 수정
 public String accom_update( HttpServletRequest req){
@@ -176,6 +183,7 @@ public String accom_list(Model model, HttpServletRequest req) {
     return "accomList";
 }
 
+
     @GetMapping("/accom/{accom_id}/byAccomId")
     public String accom_getOne(@PathVariable("accom_id") int accom_id, Model model) {
         System.out.println(accom_id+"진입 성공~");
@@ -206,6 +214,7 @@ public String  accom_delete(@RequestParam int accom_id){
     service.remove(accom_id);
     return "redirect:다시리스트페이지로";
 }
+
 
 
 
