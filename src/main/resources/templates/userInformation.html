@@ -48,7 +48,7 @@
                                     class="d-block rounded"
                                     height="100"
                                     id="uploadedAvatar"
-                                    src="/images/heart.256x236.png"
+                                    src="/images/dang.jfif"
                                     width="100"
                             />
                             <div class="button-wrapper">
@@ -126,7 +126,9 @@
                                             id="user_birth"
                                             name="user_birth"
                                             readonly
-                                            th:value="${session.userInfo != null ? session.userInfo.user_birth+'-'+session.userInfo.user_gender : ''}"
+                                            th:value="${session.userInfo != null ? #temporals.format(session.userInfo.user_birth, 'yyMMdd') + ' - ' + session.userInfo.user_gender : ''}"
+
+
                                             type="text"
                                     />
                                 </div>

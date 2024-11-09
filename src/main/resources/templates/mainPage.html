@@ -186,10 +186,12 @@
 
             <div th:if="${accomRating != null}">
                 <div class="row">
+
                     <div  th:each=" vo, status : ${accomRating}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
                         <div class="single-place mb-30" style="height:500px; width:330px;">
                            <div class="single-place mb-30" >
                                   <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img" style="width: 100%; height: auto; object-fit: cover;">
+
                             </div>
                             <div class="place-cap">
                                 <div class="place-cap-top">

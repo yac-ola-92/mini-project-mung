@@ -46,10 +46,6 @@ public class UserController {
 
         UserVO info = (UserVO) session.getAttribute("userInfo");
         UserVO vo = new UserVO();
-        request.getParameter("name");
-        request.getParameter("type");
-        request.getParameter("weight");
-        request.getParameter("age");
         vo.setPet_inform(new PetInfo(request.getParameter("name"), request.getParameter("type"), request.getParameter("age"), request.getParameter("weight")));
         vo.setUser_id(info.getUser_id());
         System.out.println(vo);
