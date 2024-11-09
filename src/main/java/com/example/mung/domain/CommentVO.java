@@ -14,8 +14,10 @@ public class CommentVO {
     private final String content;
     private final LocalDateTime created_at;
     private final String nickname;
+
     private final int likeCount;     // 좋아요 수
     private final int dislikeCount;  // 싫어요 수
+
 
     public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, String nickname, int likeCount, int dislikeCount) {
         this.comment_id = commentId;

@@ -22,9 +22,6 @@
             <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="https://example.com/static/assets/img/favicon.ico">
 
-
-
-
     <style>
         ul {
             list-style-type: none;
@@ -121,22 +118,6 @@
         <!-- Header End -->
     </header>
 
-
-            <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
-                <!-- Main-menu -->
-                <div class="main-menu f-right d-none d-lg-block">
-
-                </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div class="col-12">
-                <div class="mobile_menu d-block d-lg-none"></div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
-</header>
-
 <main>
 
     <!-- slider Area Start-->
@@ -206,16 +187,15 @@
             <div th:if="${accomRating != null}">
                 <div class="row">
                     <div  th:each=" vo, status : ${accomRating}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
-                        <div class="single-place mb-30">
-                            <a th:href="@{/accom/{accom_id}/room(accom_id=${vo.accom_id})}"></a>
-
+                        <div class="single-place mb-30" style="height:500px; width:330px;">
                            <div class="single-place mb-30" >
-                                  <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img">
+                                  <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img" style="width: 100%; height: auto; object-fit: cover;">
                             </div>
                             <div class="place-cap">
                                 <div class="place-cap-top">
                                     <span><i class="fas fa-star"></i><span th:text="${vo.rating}"></span> </span>
-                                    <a th:href="@{/accom/{accom_id}/byAccomId(accom_id=${vo.accom_id})}"><h3 th:text="${vo.accom_name}"></h3></a>
+                                     <a th:href="@{/accom/{accom_id}/byAccomId(accom_id=${vo.accom_id})}"><h3 th:text="${vo.accom_name}"></h3></a>
+
                                     <p class="dolor" th:text="${vo.room_price}"><span>/ 1박</span></p>
                                 </div>
                                 <div class="place-cap-bottom">
@@ -225,8 +205,6 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            </a>
 
                         </div>
                     </div>
@@ -292,6 +270,7 @@
       		 document.getElementById('logout').style.display = 'block';
     	}
         }
+
     </script>
 
 

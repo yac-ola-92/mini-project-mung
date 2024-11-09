@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,19 +62,29 @@ public class RoomController {
     }
 
 
-    @GetMapping("/accom/{accom_id}/room")
-    public String room_list(@PathVariable("accom_id")int accom_id, Model model, HttpServletRequest req){
+   /* @GetMapping("/room/{accom_id}")
+    public String room_list(@PathVariable("accom_id")int accom_id, Model model){
+        System.out.println("roomController에서 받은 숙소 id : "+ accom_id);
         RoomDTO ru = service.readUrl(accom_id);
         List<RoomDTO> room_dto = service.readByAccom_id(accom_id);
         System.out.println("User와 쪼인 :"+ room_dto);
 
         if(room_dto !=null){
-            model.addAttribute("imgUrl",ru.getRoomImagesUrl());
+            model.addAttribute("roomUrl",ru.getRoomImagesUrl());
             model.addAttribute("room", room_dto);
         }else {
             return "/error/404";
         }
         return "/accomDetail"; // 상세 페이지 반환
+    }
+*/
+
+    @ResponseBody // json 방식으로 변환해서 보내기 위함
+    @GetMapping("/room/{room_id}") //객실 모달에 보낼 값들
+    public RoomDTO roomList(@PathVariable("room_id")int room_id){
+        RoomDTO dto = service.readOne(room_id);
+
+        return dto;
     }
 
 

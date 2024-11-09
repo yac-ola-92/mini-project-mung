@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Select;
 public interface CompanyMapper {
 
     @Select("select * from company")
-    public CompanyVO getOneCompany();
+    CompanyVO getOneCompany();
 }
