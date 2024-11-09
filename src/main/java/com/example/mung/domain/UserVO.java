@@ -48,7 +48,7 @@ public class UserVO {
         this.role = "USER"; // 기본 역할 설정
         this.user_loginId = user_loginId;
 
-        this.roles = Arrays.asList(this.role); // 초기화
+        this.roles = List.of(this.role); // 초기화
 
     }
 
@@ -109,7 +109,7 @@ public class UserVO {
         if (role == null || role.getRole_arr() == null) {
             this.role = "";
 
-            this.roles = Arrays.asList(); // 빈 리스트로 초기화
+            this.roles = List.of(); // 빈 리스트로 초기화
 
             return;
         }

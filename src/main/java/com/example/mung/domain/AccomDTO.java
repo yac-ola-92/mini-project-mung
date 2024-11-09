@@ -34,12 +34,14 @@ public class AccomDTO {
     private String Comment;
 
     public List<String> getAccomImagesUrl(){
-        List a = Arrays.asList(getAccom_images_url().split(","));
-        System.out.println("이미지 주소 출력"+a);
-        return a;
+        List ur = Arrays.asList(getAccom_images_url().split(","));
+        System.out.println("숙소 이미지 출력 : "+ ur);
+        return ur;
     }
     public List<String> getAccomAmenities(){
-        return Arrays.asList(getAccom_amenities().split(","));
+        List amen = Arrays.asList(getAccom_amenities().split(","));
+        System.out.println("숙소 편의시설 출력 : "+ amen);
+        return amen;
     }
 
 

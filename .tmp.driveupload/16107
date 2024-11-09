@@ -1,0 +1,50 @@
+0000000000000000000000000000000000000000 9fc378501a11de3ebb09b4552dfe95a8d325d519 Saem I Seo <sammy@Sammys-MacBook-Air.local> 1729063486 +0900	clone: from https://github.com/yac-ola-92/mini-project-mung.git
+9fc378501a11de3ebb09b4552dfe95a8d325d519 e828b625b8e6634491891c9cf9ca618868634e26 Saem I Seo <sammy@Sammys-MacBook-Air.local> 1729063510 +0900	checkout: moving from main to feature-acc
+e828b625b8e6634491891c9cf9ca618868634e26 32dcab40e8d077d941ce7167612692051ab8fb85 Sammy <seosi97@gmail.com> 1729228458 +0900	commit: upadate
+32dcab40e8d077d941ce7167612692051ab8fb85 97450556ecb22e8745dded332314426ce37fa384 Sammy <seosi97@gmail.com> 1729228585 +0900	checkout: moving from feature-acc to develop
+97450556ecb22e8745dded332314426ce37fa384 c6b5db392d7ff0aa1f955aef7a5475a178f2e75f Sammy <seosi97@gmail.com> 1729228676 +0900	commit (merge): Merge branch 'feature-acc' into develop
+c6b5db392d7ff0aa1f955aef7a5475a178f2e75f 32dcab40e8d077d941ce7167612692051ab8fb85 Sammy <seosi97@gmail.com> 1729229385 +0900	checkout: moving from develop to feature-acc
+32dcab40e8d077d941ce7167612692051ab8fb85 c6b5db392d7ff0aa1f955aef7a5475a178f2e75f Sammy <seosi97@gmail.com> 1729229400 +0900	checkout: moving from feature-acc to develop
+c6b5db392d7ff0aa1f955aef7a5475a178f2e75f 9fc378501a11de3ebb09b4552dfe95a8d325d519 Sammy <seosi97@gmail.com> 1729229909 +0900	checkout: moving from develop to main
+9fc378501a11de3ebb09b4552dfe95a8d325d519 035e095569f5f6ea66cec8a88511d7c6e4e89075 Sammy <seosi97@gmail.com> 1729229970 +0900	merge origin/main: Fast-forward
+035e095569f5f6ea66cec8a88511d7c6e4e89075 c6b5db392d7ff0aa1f955aef7a5475a178f2e75f Sammy <seosi97@gmail.com> 1729229985 +0900	checkout: moving from main to develop
+c6b5db392d7ff0aa1f955aef7a5475a178f2e75f 32dcab40e8d077d941ce7167612692051ab8fb85 Sammy <seosi97@gmail.com> 1729230001 +0900	checkout: moving from develop to feature-acc
+32dcab40e8d077d941ce7167612692051ab8fb85 fb0965721ed54c50ab27b89858efe26956345402 Sammy <seosi97@gmail.com> 1729230008 +0900	merge origin/feature-acc: Fast-forward
+fb0965721ed54c50ab27b89858efe26956345402 c6b5db392d7ff0aa1f955aef7a5475a178f2e75f Sammy <seosi97@gmail.com> 1729230082 +0900	checkout: moving from feature-acc to develop
+c6b5db392d7ff0aa1f955aef7a5475a178f2e75f ac4e0e685942dfe0bf10d51c76e72656b4f855e7 Sammy <seosi97@gmail.com> 1729230910 +0900	merge origin/develop: Merge made by the 'ort' strategy.
+ac4e0e685942dfe0bf10d51c76e72656b4f855e7 035e095569f5f6ea66cec8a88511d7c6e4e89075 Sammy <seosi97@gmail.com> 1729230920 +0900	checkout: moving from develop to main
+035e095569f5f6ea66cec8a88511d7c6e4e89075 ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 Sammy <seosi97@gmail.com> 1729230925 +0900	merge origin/main: Fast-forward
+ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 Sammy <seosi97@gmail.com> 1729230960 +0900	branch: Reset to origin/main
+ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 Sammy <seosi97@gmail.com> 1729230960 +0900	checkout: moving from main to main
+ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 ac4e0e685942dfe0bf10d51c76e72656b4f855e7 Sammy <seosi97@gmail.com> 1729230986 +0900	checkout: moving from main to develop
+ac4e0e685942dfe0bf10d51c76e72656b4f855e7 c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 Sammy <seosi97@gmail.com> 1729233318 +0900	merge origin/develop: Merge made by the 'ort' strategy.
+c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 Sammy <seosi97@gmail.com> 1729233347 +0900	checkout: moving from develop to main
+ac75f42efd7d5196960bc1bfeecfbf5f7d9c96f5 386b2e868411df70d937df04c44b668b74ff3443 Sammy <seosi97@gmail.com> 1729233354 +0900	merge origin/main: Fast-forward
+386b2e868411df70d937df04c44b668b74ff3443 c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 Sammy <seosi97@gmail.com> 1729233387 +0900	checkout: moving from main to develop
+c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 fb0965721ed54c50ab27b89858efe26956345402 Sammy <seosi97@gmail.com> 1729233403 +0900	checkout: moving from develop to feature-acc
+fb0965721ed54c50ab27b89858efe26956345402 6162f86a53927d331057ba868dd1fab8c1826a63 Sammy <seosi97@gmail.com> 1729498159 +0900	commit: change
+6162f86a53927d331057ba868dd1fab8c1826a63 c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 Sammy <seosi97@gmail.com> 1729504109 +0900	checkout: moving from feature-acc to develop
+c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 6162f86a53927d331057ba868dd1fab8c1826a63 Sammy <seosi97@gmail.com> 1729504139 +0900	checkout: moving from develop to feature-acc
+6162f86a53927d331057ba868dd1fab8c1826a63 dad13783331364c0d61bd45b63206189823c9bee Sammy <seosi97@gmail.com> 1729504169 +0900	merge origin/feature-acc: Fast-forward
+dad13783331364c0d61bd45b63206189823c9bee c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 Sammy <seosi97@gmail.com> 1729504193 +0900	checkout: moving from feature-acc to develop
+c9ee14225b9ecbdcf6c05d6e15679bf0dcb5a608 c6d656101a6b67a4d7575ea79aeb0eea08835731 Sammy <seosi97@gmail.com> 1729504247 +0900	commit (merge): Merge remote-tracking branch 'origin/develop' into develop
+c6d656101a6b67a4d7575ea79aeb0eea08835731 dad13783331364c0d61bd45b63206189823c9bee Sammy <seosi97@gmail.com> 1729504351 +0900	checkout: moving from develop to feature-acc
+dad13783331364c0d61bd45b63206189823c9bee c6d656101a6b67a4d7575ea79aeb0eea08835731 Sammy <seosi97@gmail.com> 1729504376 +0900	checkout: moving from feature-acc to develop
+c6d656101a6b67a4d7575ea79aeb0eea08835731 dad13783331364c0d61bd45b63206189823c9bee Sammy <seosi97@gmail.com> 1729505268 +0900	checkout: moving from develop to feature-acc
+dad13783331364c0d61bd45b63206189823c9bee c6d656101a6b67a4d7575ea79aeb0eea08835731 Sammy <seosi97@gmail.com> 1729505367 +0900	checkout: moving from feature-acc to develop
+c6d656101a6b67a4d7575ea79aeb0eea08835731 dad13783331364c0d61bd45b63206189823c9bee Sammy <seosi97@gmail.com> 1729505426 +0900	checkout: moving from develop to feature-acc
+dad13783331364c0d61bd45b63206189823c9bee c6d656101a6b67a4d7575ea79aeb0eea08835731 Sammy <seosi97@gmail.com> 1729507470 +0900	checkout: moving from feature-acc to develop
+c6d656101a6b67a4d7575ea79aeb0eea08835731 dad13783331364c0d61bd45b63206189823c9bee Sammy <seosi97@gmail.com> 1729507526 +0900	checkout: moving from develop to feature-acc
+dad13783331364c0d61bd45b63206189823c9bee 95500b8f2155c520bfaa965c4b3af485acaf3f9c Sammy <seosi97@gmail.com> 1729507667 +0900	merge origin/develop: Fast-forward
+95500b8f2155c520bfaa965c4b3af485acaf3f9c 2bf2d7d9ab0843efa5cb0e056189645563d99e60 Sammy <seosi97@gmail.com> 1729587217 +0900	commit: accomDetail add
+2bf2d7d9ab0843efa5cb0e056189645563d99e60 c6d656101a6b67a4d7575ea79aeb0eea08835731 Sammy <seosi97@gmail.com> 1729588120 +0900	checkout: moving from feature-acc to develop
+c6d656101a6b67a4d7575ea79aeb0eea08835731 b3f96692ceb9f2cbcea38b1ec574e54bb94ddda6 Sammy <seosi97@gmail.com> 1729588194 +0900	merge origin/develop: Merge made by the 'ort' strategy.
+b3f96692ceb9f2cbcea38b1ec574e54bb94ddda6 2bf2d7d9ab0843efa5cb0e056189645563d99e60 Sammy <seosi97@gmail.com> 1729588217 +0900	checkout: moving from develop to feature-acc
+2bf2d7d9ab0843efa5cb0e056189645563d99e60 b7e30b061fb4af1eab43dc9d3809948a17ed2079 Sammy <seosi97@gmail.com> 1729588238 +0900	merge origin/develop: Fast-forward
+b7e30b061fb4af1eab43dc9d3809948a17ed2079 e3d3df2b2a67746d155e158e43ebc4913c3b4842 Sammy <seosi97@gmail.com> 1729660701 +0900	commit: last merge
+e3d3df2b2a67746d155e158e43ebc4913c3b4842 b3f96692ceb9f2cbcea38b1ec574e54bb94ddda6 Sammy <seosi97@gmail.com> 1729661282 +0900	checkout: moving from feature-acc to develop
+b3f96692ceb9f2cbcea38b1ec574e54bb94ddda6 6ca51a525e281654c0980db06930fc77e4854f9b Sammy <seosi97@gmail.com> 1729661296 +0900	merge origin/develop: Merge made by the 'ort' strategy.
+6ca51a525e281654c0980db06930fc77e4854f9b e3d3df2b2a67746d155e158e43ebc4913c3b4842 Sammy <seosi97@gmail.com> 1729661310 +0900	checkout: moving from develop to feature-acc
+e3d3df2b2a67746d155e158e43ebc4913c3b4842 80676878d3e4624af2eebdb6d2fed9696edb991d Sammy <seosi97@gmail.com> 1729661330 +0900	merge origin/develop: Fast-forward
+80676878d3e4624af2eebdb6d2fed9696edb991d 80676878d3e4624af2eebdb6d2fed9696edb991d Sammy <seosi97@gmail.com> 1731137386 +0900	checkout: moving from feature-acc to feature-acc
+80676878d3e4624af2eebdb6d2fed9696edb991d 80676878d3e4624af2eebdb6d2fed9696edb991d Sammy <seosi97@gmail.com> 1731138732 +0900	checkout: moving from feature-acc to feature-acc
