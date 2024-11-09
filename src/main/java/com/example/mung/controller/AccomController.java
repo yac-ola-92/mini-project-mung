@@ -88,7 +88,7 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
 //url 요청 접수
 
 public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 매개변수로 받음
-    List<AccomDTO> acc = service.readByAccom_id(accom_id);
+    AccomDTO acc = service.readByUser(accom_id);
 
     //수정할 데이터들을 받아옴
     if(acc!=null){

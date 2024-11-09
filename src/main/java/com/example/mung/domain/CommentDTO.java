@@ -16,4 +16,6 @@ public class CommentDTO {
     private String content; // 댓글 내용
     private LocalDateTime created_at;
     private String nickname;
+    private int likeCount; // 좋아요 수
+    private int dislikeCount; // 싫어요 수
 }

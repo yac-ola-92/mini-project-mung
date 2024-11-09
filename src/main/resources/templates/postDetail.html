@@ -20,132 +20,87 @@
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <style>
         .container {
-            max-width: 1200px; /* 페이지의 최대 너비 */
-            margin: 0 auto; /* 화면 중앙 정렬 */
-            padding: 0 15px; /* 좌우 패딩 */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         header, footer {
             text-align: center;
         }
         .blog_left_sidebar, .blog_details, .comment-area {
             margin: 0 auto;
-            max-width: 800px; /* 게시글 내용 최대 너비 */
-            text-align: left; /* 본문은 왼쪽 정렬로 유지 */
+            max-width: 800px;
+            text-align: left;
         }
-        .blog_details {
-            background-color: #fff9f0;
-        }
-        .col-lg-8, .col-lg-4 {
-            flex: 1;
-            max-width: 100%;
-            padding: 15px;
-        }
-        .back-to-main {
-            margin-top: 20px; /* 필요에 따라 상단 여백 조정 */
-            padding: 10px 20px; /* 버튼 크기 조정 */
-            background-color: #f2e2cc; /* 버튼 색상 */
-            color: black; /* 텍스트 색상 */
-            border-radius: 5px; /* 모서리 둥글게 */
-            text-decoration: none; /* 링크 기본 스타일 제거 */
-        }
-        .blog_item {
-            margin-top: 20px; /* 게시글 상단 여백 조정 */
-        }
-        .back-to-main:hover {
-            background-color: #9e713b; /* 호버 시 색상 변화 */
-        }
-        .comment-form {
-            width: 100%; /* 최대 너비를 부모 요소에 맞춤 */
-            max-width: 800px; /* 통일된 너비 설정 */
-            margin: 20px auto; /* 가운데 정렬 */
-        }
-        .comment-form textarea {
-            width: 100%;
-            max-width: 800px; /* 최대 너비 제한 */
-            height: 150px;
-            margin-bottom: 10px; /* 버튼과의 간격 */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .comment-form button {
+        div.blog_details {
             background-color: #f2e2cc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .comment-form button:hover {
-            background-color: #f2e2cc;
-        }
-        .comment-area, .pagination {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .comment-area {
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
-        }
-        .search_widget {
-            width: 100%; /* 최대 너비를 부모 요소에 맞춤 */
-            max-width: 800px; /* 댓글 입력란과 비슷한 너비 */
-            margin: 20px auto; /* 가운데 정렬 */
-        }
-        .post_category_widget {
-            width: 100%; /* 최대 너비를 부모 요소에 맞춤 */
-            max-width: 800px; /* 댓글 입력란과 비슷한 너비 */
-            margin: 20px auto; /* 가운데 정렬 */
-        }
-        .comment-list .single-comment {
-            margin-bottom: 15px; /* 댓글 간의 간격 추가 */
-            padding: 10px; /* 댓글 내 여백 추가 */
-            border-bottom: 1px solid #ddd; /* 구분선 추가 */
-        }
-        .single-comment h5 {
-            font-weight: bold; /* 작성자 이름 강조 */
-        }
-        .single-comment span {
-            color: #666; /* 날짜 색상 조정 */
-            font-size: 0.9em; /* 날짜 폰트 크기 조정 */
+            padding: 20px;
+            border-radius: 10px;
         }
         .like-dislike-buttons {
             display: flex;
-            justify-content: flex-end; /* 오른쪽 정렬 */
-            margin-top: 5px; /* 위쪽 여백 추가 */
+            align-items: center;
+            margin-top: 5px;
         }
         .like-dislike-buttons button {
-            margin-left: 5px; /* 버튼 간의 간격 */
+            margin-left: 5px;
         }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-to-main {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f2e2cc;
+            color: #333;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-to-main:hover {
+            background-color: #e6d3b8;
+            color: #000;
+        }
+        .blog-image {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+        }
+
     </style>
     <script th:inline="javascript">
-        function checkLogin(event, action) {
+        function handleLikeDislike(event, action, commentId) {
+            event.preventDefault();
             var userLoginId = /*[[${userInfo != null ? userInfo.user_loginId : ''}]]*/ '';
             if (!userLoginId) {
-                event.preventDefault();
                 alert("로그인 후 " + (action === 'like' ? '좋아요' : '싫어요') + "를 할 수 있습니다.");
                 window.location.href = '/login';
-            } else {
-                // 로그인이 되어 있을 때의 로직 (예: 서버에 좋아요/싫어요 요청)
-                console.log(action + " clicked");
+                return;
             }
+            fetch(`/like/${action}/${commentId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.likeCount !== undefined && data.dislikeCount !== undefined) {
+                        document.getElementById(`like-count-${commentId}`).innerText = data.likeCount;
+                        document.getElementById(`dislike-count-${commentId}`).innerText = data.dislikeCount;
+                    } else {
+                        alert("오류가 발생했습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
     </script>
 </head>
 <body>
-<!-- Preloader Start -->
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="/assets/img/logo/logo.png" alt="Loading...">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader End -->
-
 <header>
     <div class="header-area" style="background-color: #fff9f0;">
         <div class="main-header">
@@ -174,7 +129,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
                 <div class="container">
                     <div class="row align-items-center">
@@ -195,8 +149,8 @@
                                             </ul>
                                         </li>
                                         <li><a href="about.html">마이페이지</a></li>
-                                        <li><a th:if="${session.user_id == null}" href="/login" class="btn-log">로그인</a></li>
-                                        <li><a th:if="${session.user_id != null}" href="/logout" class="btn-log">로그아웃</a></li>
+                                        <li><a th:if="${userInfo == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${userInfo != null}" href="/logout" class="btn-log">로그아웃</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -210,27 +164,36 @@
         </div>
     </div>
 </header>
-<div class="button-container" >
+<div class="button-container">
     <a class="back-to-main" href="/postMain">메인으로</a>
 </div>
-<!-- 게시판 영역 -->
+
 <section class="blog_area section-padding">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
-                    <!-- 게시글 내용 표시 -->
                     <article class="blog_item">
                         <div class="blog_details">
-                            <a href="#" class="d-inline-block">
-                                <h1 class="blog-head" th:text="${post.title}">게시글 제목</h1>
-                            </a>
+                            <h1 class="blog-head" th:text="${post.title}">게시글 제목</h1>
                             <ul class="blog-info-link">
                                 <li><span th:text="${post.nickname}">작성자</span></li>
                                 <li><span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
                                 <li><span th:text="${post.view_count}">조회수</span></li>
                             </ul>
-                            <div th:text="${post.content}" style="margin-top: 10px;"></div>
+                            <div th:if="${base64Image != null}">
+                                <!-- 이미지가 존재하면 본문에 삽입 -->
+                                <img th:src="${base64Image}" alt="Uploaded Image" class="blog-image"/>
+                            </div>
+                            <div th:utext="${post.content}"></div> <!-- 게시글 내용 -->
+                            <!-- 게시글 수정 및 삭제 버튼 -->
+                            <div th:if="${userInfo != null and userInfo.user_id == post.user_id}">
+                                <a th:href="@{/post/update/{post_id}(post_id=${post.post_id})}" class="btn btn-primary">수정</a>
+                                <form th:action="@{/post/delete/{post_id}(post_id=${post.post_id})}" method="post" style="display:inline;">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                </form>
+                            </div>
                         </div>
                     </article>
 
@@ -241,23 +204,27 @@
                             <div th:each="comment : ${post.comments}" class="single-comment">
                                 <div class="user d-flex">
                                     <div class="desc">
-                                        <h5><a href="#" th:text="${comment.nickname}"></a></h5>
+                                        <h5 th:text="${comment.nickname}"></h5>
                                         <p class="comment" th:text="${comment.content}"></p>
                                         <span th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm')}"></span>
 
                                         <!-- 댓글 좋아요/싫어요 버튼 -->
                                         <div class="like-dislike-buttons">
-                                            <button class="btn-like" onclick="checkLogin(event, 'like')">&#128077;</button>
-                                            <button class="btn-dislike" onclick="checkLogin(event, 'dislike')">&#128078;</button>
+                                            <button class="btn-like" onclick="handleLikeDislike(event, 'like', [[${comment.comment_id}]])">
+                                                &#128077;
+                                            </button>
+                                            <span id="like-count-[[${comment.comment_id}]]" th:text="${comment.likeCount}">0</span>
+                                            <button class="btn-dislike" onclick="handleLikeDislike(event, 'dislike', [[${comment.comment_id}]])">
+                                                &#128078;
+                                            </button>
+                                            <span id="dislike-count-[[${comment.comment_id}]]" th:text="${comment.dislikeCount}">0</span>
                                         </div>
 
                                         <!-- 댓글 수정/삭제 버튼 -->
-                                        <div th:if="${session.user_id != null} and ${session.user_id == comment.user_id}">
-                                            <!-- 수정 버튼 -->
+                                        <div th:if="${userInfo != null and userInfo.user_id == comment.user_id}">
                                             <form th:action="@{'/post/' + ${post.post_id} + '/comments/update/' + ${comment.comment_id}}" method="post">
                                                 <button type="submit" class="btn btn-primary">댓글 수정</button>
                                             </form>
-                                            <!-- 삭제 버튼 -->
                                             <form th:action="@{'/post/' + ${post.post_id} + '/comments/' + ${comment.comment_id}}" method="post">
                                                 <input type="hidden" name="_method" value="delete">
                                                 <button type="submit" class="btn btn-danger">댓글 삭제</button>
@@ -281,39 +248,7 @@
             </div>
         </div>
     </div>
-    <!-- Pagination -->
-            <nav class="blog-pagination justify-content-center d-flex" style="margin-top: 20px;">
-                <ul class="pagination">
-                    <li class="page-item"><a href="#" class="page-link"><i class="ti-angle-left"></i></a></li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link"><i class="ti-angle-right"></i></a></li>
-                </ul>
-            </nav>
-
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- 검색 -->
-                <aside class="single_sidebar_widget search_widget">
-                    <form action="/search" method="get">
-                        <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요">
-                        <button class="btn btn-primary w-100" style="color: black; background-color: #f2e2cc;">검색</button>
-                    </form>
-                </aside>
-                <!-- 카테고리 -->
-                <aside class="single_sidebar_widget post_category_widget">
-                    <h4 class="widget_title">카테고리</h4>
-                    <ul class="list cat-list">
-                        <li><a href="#" class="d-flex"><p>숙소 추천</p></a></li>
-                        <li><a href="#" class="d-flex"><p>자유 게시판</p></a></li>
-                        <li><a href="#" class="d-flex"><p>여행 TIP</p></a></li>
-                    </ul>
-                </aside>
-            </div>
-        </div>
-    </div>
 </section>
-
 <!-- Footer -->
 <footer>
     <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">
@@ -338,36 +273,12 @@
                     </div>
                 </div>
             </div>
-            <!-- Footer bottom -->
-            <div class="row pt-padding">
-                <div class="col-xl-7 col-lg-7 col-md-7">
-                    <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made by Colorlib</p>
-                </div>
-                <div class="col-xl-5 col-lg-5 col-md-5">
-                    <div class="footer-social f-right">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
-                        <a href="#"><i class="fas fa-globe"></i></a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </footer>
-<!-- JS Files -->
+
 <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.slicknav.min.js"></script>
-<script src="/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/js/slick.min.js"></script>
-<script src="/assets/js/wow.min.js"></script>
-<script src="/assets/js/jquery.scrollUp.min.js"></script>
-<script src="/assets/js/jquery.nice-select.min.js"></script>
-<script src="/assets/js/jquery.sticky.js"></script>
-<script src="/assets/js/jquery.magnific-popup.js"></script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/main.js"></script>
 </body>
 </html>
