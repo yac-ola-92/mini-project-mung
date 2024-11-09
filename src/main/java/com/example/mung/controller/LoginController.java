@@ -33,7 +33,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class LoginController {
 
-
     //user 정보
     @Autowired
     private UserService userService;
@@ -46,7 +45,7 @@ public class LoginController {
     @GetMapping("/login")
     public String loginView(Model model, HttpSession session) {
         if (session.getAttribute("userInfo") != null) {
-            System.out.println("세션에 담긴 값입니다."+session.getAttribute("userInfo"));
+            System.out.println("세션에 담긴 값입니다." + session.getAttribute("userInfo"));
             System.out.println("이미 로그인 되어있습니다.");
             return "redirect:/mainPage";  // 메인 페이지로 리다이렉트
         }
@@ -54,6 +53,7 @@ public class LoginController {
         System.out.println("로그인 화면 출력");
         return "/login";
     }
+
 
     //로그인 성공시 session에 로그인 정보 담기
     @PostMapping("/login")
@@ -63,7 +63,7 @@ public class LoginController {
         System.out.println(user.getPet_infoToString());
         System.out.println("user값:" + user);
 
-        HashMap<String,String>list =user.getPet_infoList();
+        HashMap<String, String> list = user.getPet_infoList();
         PetInfo petInfo = new PetInfo(list.get("이름"), list.get("종"), list.get("나이"), list.get("무게"));
         user.setPet_inform(petInfo);
 
@@ -99,7 +99,6 @@ public class LoginController {
             return "redirect:/mainPage"; // 기본 페이지로 리다이렉트
         }
     }
-
 
 
     //아이디 찾기 기능
