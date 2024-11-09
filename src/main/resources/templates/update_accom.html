@@ -164,7 +164,7 @@
 				<div class="col-lg-8 col-md-8">
 					<h3 class="mb-30">숙소</h3>
 					<hr>
-					<form id= "updateForm" th:action="/accom_update" method="post" > <!--수정할 때 불러올 값을 value에 지정-->
+					<form id= "updateForm" action="/accom_update" method="post" > <!--수정할 때 불러올 값을 value에 지정-->
 						<input type="hidden" name="accom_id" value="${accInfo.accom_id}" >
 						<div class="mt-10" style="display: flex; align-items: center;">
 							<label>숙소명 : </label><input type="text" name="accom_name" th:value="${accInfo.accom_name}" required

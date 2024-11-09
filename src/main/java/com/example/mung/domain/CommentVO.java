@@ -13,7 +13,7 @@ public class CommentVO {
     private final int user_id;
     private final String content;
     private final LocalDateTime created_at;
-    private String nickname;
+    private final String nickname;
 
     public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, String nickname) {
         this.comment_id = commentId;

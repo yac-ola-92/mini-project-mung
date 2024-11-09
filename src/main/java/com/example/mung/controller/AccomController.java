@@ -2,8 +2,10 @@ package com.example.mung.controller;
 
 import com.example.mung.domain.AccomDTO;
 import com.example.mung.domain.AccomVO;
+import com.example.mung.domain.RoomDTO;
 import com.example.mung.domain.UserVO;
 import com.example.mung.service.AccomService;
+import com.example.mung.service.RoomService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ import java.util.List;
 public class AccomController {
     @Autowired
     private AccomService service;
+
+    @Autowired
+    private RoomService rService;
 
 
     @GetMapping("/mainPage") // 메인페이지 이동
@@ -88,7 +93,7 @@ public String accom_registration(HttpServletRequest req, HttpSession session ){
 //url 요청 접수
 
 public String accom_edit(@PathVariable int accom_id, Model model){ //id값을 매개변수로 받음
-    List<AccomDTO> acc = service.readByAccom_id(accom_id);
+    AccomDTO acc = service.readByUser(accom_id);
 
     //수정할 데이터들을 받아옴
     if(acc!=null){
@@ -173,35 +178,22 @@ public String accom_list(Model model, HttpServletRequest req) {
 
     @GetMapping("/accom/{accom_id}/byAccomId")
     public String accom_getOne(@PathVariable("accom_id") int accom_id, Model model) {
-
-            System.out.println(accom_id+"진입 성공~");
-            AccomDTO dtoU = service.readByUser(accom_id);
-            List<AccomDTO> dtoR = service.readByReview(accom_id);
-            System.out.println("User와 쪼인 C:"+ dtoU);
-            System.out.println("Review와 쪼인 C :"+ dtoR);
-
-        List<String>imagesUrl = dtoU.getAccomImagesUrl();
-        if (imagesUrl != null) {
-            System.out.println(imagesUrl);
-            // 처리 로직...
-        } else {
-            // 기본 이미지 URL 또는 에러 처리
-        }
-
-        List<String>amenities = dtoU.getAccomAmenities();
-        if (amenities != null) {
-            System.out.println(amenities);
-            // 처리 로직...
-        } else {
-            // 기본 어메니티 또는 에러 처리
-        }
-
-
+        System.out.println(accom_id+"진입 성공~");
+        AccomDTO dtoU = service.readByUser(accom_id);
+        List<AccomDTO> dtoR = service.readByReview(accom_id);
+        List<RoomDTO> rmDto = rService.readByAccom_id(accom_id);
+        RoomDTO rmDtoUrl = rService.readUrl(accom_id);
+        System.out.println("User와 쪼인 C:"+ dtoU);
+        System.out.println("Review와 쪼인 C :"+ dtoR);
+        System.out.println("room 정보 C: "+rmDto);
+        System.out.println("room url정보 C : "+rmDtoUrl);
         if(dtoU !=null && dtoR !=null){
                 model.addAttribute("imgUrl", dtoU.getAccomImagesUrl());
                 model.addAttribute("amenity", dtoU.getAccomAmenities());
                 model.addAttribute("accR", dtoR);
                 model.addAttribute("accU", dtoU);
+                model.addAttribute("roomInfo",rmDto);
+                model.addAttribute("roomUrl",rmDtoUrl.getRoomImagesUrl());
             }else {
                 return "/error/404";
             }

@@ -22,9 +22,9 @@ public interface LoginService {
     //아이디 전체 출력 리스트
     List<String> idList();
 
-    public String findId (String name, String email, LocalDateTime birth);
+    String findId(String name, String email, LocalDateTime birth);
 
-    public String idCheckForModifyPassword (String id,String email, LocalDateTime birth);
+    String idCheckForModifyPassword(String id, String email, LocalDateTime birth);
 
     int updatePassword(String id, String newPassword);
     //회원 아이디로 조회

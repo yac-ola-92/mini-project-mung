@@ -41,16 +41,16 @@ public interface LoginMapper {
     @Insert("insert into user (user_name,user_loginId,user_email,password,user_phone,user_birth,user_gender,nickname,role) " +
             "values " +
             "(#{user_name},#{user_loginId},#{user_email},#{password},#{user_phone},#{user_birth},#{user_gender},#{nickname},#{role})")
-    public boolean generalJoin(UserDTO dto);
+    boolean generalJoin(UserDTO dto);
 
 
     //아이디 찾기
     @Select("select user_loginId from user where user_name = #{name} and user_email = #{email} and user_birth = #{birth}")
-    public String findId(String name,String email, LocalDateTime birth);
+    String findId(String name, String email, LocalDateTime birth);
 
     //비번 수정 전 아이디 확인
     @Select("select user_name from user where user_loginId = #{id} and user_email = #{email} and user_birth = #{birth}")
-    public String idCheckForModifyPassword(String id,String email, LocalDateTime birth);
+    String idCheckForModifyPassword(String id, String email, LocalDateTime birth);
 
     //비번 수정
     @Update("UPDATE user SET password=${newPassword} WHERE user_loginId = #{id}")

@@ -1,398 +1,487 @@
 <!doctype html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Travel HTML-5 Template </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Travel HTML-5 Template </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="/static/assets/css/flaticon.css">
-        <link rel="stylesheet" href="/static/assets/css/slicknav.css">
-        <link rel="stylesheet" href="/static/assets/css/animate.min.css">
-        <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="/static/assets/css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="/static/assets/css/themify-icons.css">
-        <link rel="stylesheet" href="/static/assets/css/slick.css">
-        <link rel="stylesheet" href="/static/assets/css/nice-select.css">
-        <link rel="stylesheet" href="/static/assets/css/style.css">
-        <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/favicon.ico"> <!-- 경로 확인 -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/flaticon.css">
+    <link rel="stylesheet" href="/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
 
-        <style>
-                ul {
-                    list-style-type: none;
-                    margin: 0;
-                    padding: 0;
-                    overflow: hidden;
-                }
-                li {
-                    float: left;
-                }
-                /*range start*/
-                #control {
-                position: relative;
-                width: 600;
-                padding: 10px; 
-            }
-            #control form div {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                height: 40px;
-            }
-            #control form div input{
-                -webkit-appearance: none;
-                width:90%;
-                height: 6px;
-                background: linear-gradient(#e69e39);
-                border-radius: 10px;
-                box-shadow : 0 0 10px 0 #c37a15,
-                0 0 10px 0 #c37a15,
-                0 0 10px 0 #c37a15;
-            }
-            #control form div input::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 40px;
-                height: 40px;
-                background: url('assets/img/icon/강쥐발바닥.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                filter:drop-shadow(0 0 5px rgb(181, 108, 19));
+    <style>
 
-            }
-            #control form div i{
-                color: #fff;
-                font-size: 25px;
-                width : 70px;
-                height: 70px;
-                background: rgb(255, 174, 0);
-                text-align: center;
-                line-height: 70px;
-            }      
-            #control form div p{
-                font-size: 18px;
-                font-weight: 600;
-                font-family: 'Courier New', Courier, monospace;
-                padding-left: 10px;
-                color: #bc915e;
-            }
-             /*range 끝*/
-            .dropdown {
-                position: relative;
-                display: inline-block;
-            }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        li {
+            float: left;
+        }
+        section{
+            margin-left : 100px;
+            margin-right : 100px;
+            display : flex;
+            justify-content : center;
+            align-items : center;
+        }
+        .modal {
+            display: none; /* 모달창 숨겨 놓기 */
+            position: fixed;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer; /* 마우스 손가락모양 */
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        /* 숙소 이미지 모달창 */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 50%;
+            height: auto;
+            max-width: 1000px;
+         }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover, .close:focus{
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-            .dropbtn {
-                background-color: #bc915e;
-                color: white;
-                padding: 16px;
-                font-size: 16px;
-                border: none;
-                border-radius: 20px;
-                cursor: pointer;
-            }
+        /* 객실 정보 모달창  */
+        .rm-modal{
+            position : absolute;
+            top : 50%;
+            left : 50%;
+            transform : translateX(-50%) translateY(-50%);
 
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-            }
+            display : flex;
+            flex-direction : column;
+            justify-content : center;
+            align-items : center;
 
-            .dropdown:hover .dropdown-content {
-                display: block;
-            }
+            width : 600px;
+            height : 700px;
+            background-color : white;
+        }
+    </style>
 
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
+</head>
 
-            .dropdown-content a:hover {
-                background-color: #f1f1f1;
-            }
-           /*드롭다운 끝*/
+<body>
+<!-- Preloader Start -->
+<!-- <div id="preloader-active">
+     <div class="preloader d-flex align-items-center justify-content-center">
+         <div class="preloader-inner position-relative">
+             <div class="preloader-circle"></div>
+             <div class="preloader-img pere-text">
+                 <img src="/assets/img/logo/munglogo.png" alt="">
+             </div>
+         </div>
+     </div>
+ </div>-->
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <!-- slider Area Start-->
+    <div class="single-slider slider-height2 d-flex align-items-center" style="background-color: #fff9f0;">
+        <div class="header-bottom  header-sticky" style="background-color:#fff9f0;">
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-xl-2 col-lg-2 col-md-1"></div>
+                <div class="logo" style="margin-left: 400px;">
+                    <a href="/mainPage"><img style="margin :auto; width : 100px;" src="/assets/img/logo/munglogo.png"></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/accom_register" style="color: #bc915e;"
+                               th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a>
+                        </li>
+                        <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
+                        <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
+                        <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
+                        <li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+                        <li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- Header End -->
+</header>
+<main>
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div th:if="${accU != null}" class="col-lg-8 posts-list" style="margin:0 auto;">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <div style="display: grid; grid-template-columns: repeat(2,1fr);grid-template-rows: auto auto; gap : 10px;">
+                                <div id="img-item" th:each="image : ${imgUrl}">
+                                    <img class="img-fluid" th:src="${image}" alt="accomImg"
+                                         style="width:100%; height:220px; object-fit:cover;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog_details">
+                            <div>
+                                <h1 th:text="${accU.accom_name}">숙소이름</h1>
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <li th:each="rmi : ${roomInfo}" th:text="${rmi.pet_kind}">
+                                        <i class="fi fi-tr-cat-dog"></i>펫 종</li>
+                                    <li th:each="ar : ${accR}" th:text="${ar.rating}"><i class="fas fa-star"></i>별점</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="blog_details">
+                            <h4 class="widget_title">편의시설</h4>
+                            <ul class="list" th:each="amen : ${amenity}">
+                                <li th:text="${amen}">
+                                </li>
+                            </ul>
+                        </div><hr>
+                        <div class="blog_details" style="padding-top:10px;">
+                            <h3 class="room_title" style="margin-bottom:20px;">객실</h3>
+                            <div class="media post_item" th:if="${roomUrl != null}">
+                                <img id="rm" th:src="${roomUrl[0]}" alt="post" style="height:300px; width:80%; object-fit:cover; margin:20px;">
+                                <div th:if="${roomInfo != null}">
+                                    <div class="room-body" th:each="rm:${roomInfo}">
+                                        <div>
+                                            <h3 id="rm_name" th:text="${rm.room_name}"
+                                                th:data-room-id="${rm.room_id}"
+                                                class="rm-name" style="cursor: pointer;">
+                                            </h3><br>
+                                                <!-- 객실 이름 안에 객실 아이디까지 숨겨놓고 같이 서버에 보냄 -->
+                                            <p th:text="${rm.room_info}" style="color:grey;">객실정보</p>
+                                        </div>
+                                        <div id="rm-price_box" style="position: absolute;">
+                                            <h4 th:text="${rm.room_price}"></h4><span style="color:grey;">/1박 요금</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr>
+                        <div>
+                            <h3>숙소 소개</h3>
+                            <p th:text="${accU.accom_description}" class="excert"></p>
+                        </div>
+                         <hr>
+                       <div>
+                            <h3>예약 시 주의사항</h3>
+                            <p th:text="${accU.accom_caution}"></p>
+                        </div><hr>
+                    </div>
+                </div>
 
-                .facility {
-                    
-                    display: flex;
-                    align-items: center;
-                    position: relative;
-                    
-                }
 
-                .toggle-btn {
-                    margin-left: 900px;
-                    background-color:#bc915e;
-                    color: white;
-                    padding: 10px;
-                    font-size: 16px;
-                    border: none;
-                    border-radius: 20px;
-                    cursor: pointer;
-                }
- 
-                .checkbox-facility {
-                    display: flex;
-                    flex-direction: column; /* 체크박스를 세로로 배치 */
-                    margin-left: 10px; /* 버튼과 체크박스 사이의 간격 */
-                    position: absolute; /* 체크박스 컨테이너의 위치를 절대적으로 설정 */
-                    left: calc(900px + 150px); /* 버튼의 오른쪽에 배치 */
-                 }
-                 .checkbox-facility label {
-                    margin-right: 10px;
-                 }
-                 #search{
-                height : 60px;
-                width : 150px;
-                background-color : #ecd9bf;
-                border : none;
-               }
+                <div class="comments-area">
+                    <h4>Review</h4>
+                    <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="desc">
+                                    <!--<div th:if="${accR != null}">
+                                        <div th:if=" room : ${accR}">
+                                          <p class="comment" th:text="${room.comment}">
+                                              주절주절
+                                          </p>
+                                        </div>
+                                    </div>-->
+                                   <!-- <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <h5 th:text="${accU.nickname}"></h5>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-               #search :hover {
-                background-color: #bc915e;
-               }
 
-            </style>
-   
-    </head>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
 
-   <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="/assets/img/logo/munglogo.png" alt="">
+                        <!-- <div class="single_sidebar_widget search_widget">
+                             <form action="#">
+                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                         type="submit">예약하기 버튼이 될지어다</button>
+                             </form>
+                         </div>   그냥 객실 상세에 추가할 예정 -->
+                        <div class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title">숙소정보</h3>
+                            <span>숙소 전화번호 : </span><p th:text="${accU.accom_phone}"></p>
+                            <span>SNS : </span><p th:text="${accU.business_sns_url}"></p>
+                            <span>숙소 위치 : </span><p id ="acc-add" th:text="${accU.accom_location}"></p>
+                            <div id="map" style="width: 300px; height: 200px;  margin: 0 0 30px 0 ;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <!-- Footer Start-->
+    <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
+        <div class="container">
+
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                    <div class="single-footer-caption mb-30">
+                        <!-- logo -->
+                        <div class="footer-logo">
+
+                            <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;"
+                                                     alt=""></a>
+                        </div>
+                        <div class="footer-tittle">
+                            <ul>
+                                <link rel="shortcut icon" type="image/x-icon"
+                                      href="https://example.com/static/assets/img/favicon.ico">
+                                <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;">고객문의</a></li>
+                                <li><a href="#" style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom -->
+            <div class="row pt-padding" style="padding: 0px;">
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i>
+                            by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-             <!-- slider Area Start-->
-        <div class="single-slider slider-height2 d-flex align-items-center" style="background-color: #fff9f0;">
-               <div class="header-bottom  header-sticky" style="background-color:#fff9f0;"> 
-                        <div class="row align-items-center" >
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2 col-md-1"></div>
-                                <div class="logo" style="margin-left: 400px;" >
-                                  <a href="/mainPage"><img style="margin :auto; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
-                                </div>
-                            <nav>
-                                <ul>
+    <!-- Footer End-->
+</footer>
 
-                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
-                                    <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
-                                    <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
-                                    <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
-                                    <li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
-                                    <li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-               </div>
-        </div>
-                         <!-- slider Area End-->
-                        <!-- Header End -->
-    </header>
-    <!--<main>
-        &lt;!&ndash; slider Area End&ndash;&gt;
-        &lt;!&ndash;================Blog Area =================&ndash;&gt;
-        <section class="blog_area single-post-area section-padding">
+<!--숙소 이미지 모달창-->
+<div class="modal" id="accom-md">
+    <span class="close">&times;</span>
+    <img class="modal-content">
+</div>
 
-            <div class="container" th:if="${accInfo != null}">
+<!--객실 정보 모달창-->
+<div class="modal" id="room-md">
+   <div class="rm-modal">
+       <span class="close" onclick="removeModal()">&times;</span>
+   </div>
+    <div class="rm-content">
 
-                <div class="row">
-                    <div class="col-lg-8 posts-list">
-                        <div class="single-post">
-                            <div class="feature-img" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                <div th:each="image : ${imgUrl}">
-                                    <img class="img-fluid" th:src="${image}" alt="">
-                                </div>
-                            </div>
-                            <div class="blog_details">
-                                <div>
-                                    <h2 th:text="${accR.accom_name}">숙소이름</h2>
-                                    <ul class="blog-info-link mt-3 mb-4">
-                                        <li><i class="fa fa-user"></i>펫 종</li>
-                                        <li th:text="${accR.rating}"><i class="fa fa-comments"></i>별점</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h3>숙소 소개</h3>
-                                        <p th:text="${accInfo.accom_description}" class="excert"></p>
-                                    <hr>
-                                </div>
-                                <div>
-                                    <h3>예약 시 주의사항</h3>
-                                    <p th:text="${accInfo.accom_caution}"></p>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+</div>
 
-                        <div class="blog-author">
-                            <div class="media align-items-center">
-                                <img src="assets/img/blog/author.png" alt="">
-                                <div class="media-body">
-                                    <h4>숙소 기본정보</h4>
-                                    <p th:text="${accInfo.accom_phone}">전화번호, 지도, sns 주소</p>
-                                    <p th:text="${accInfo.accom_location}"></p>
-                                    <p th:text="${accInfo.business_sns_url}"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="comments-area">
-                            <h4>Review</h4>
-                            <div class="comment-list">
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb" >
-                                            <img src="assets/img/comment/comment_1.png" alt="">
-                                        </div>
-                                        <div class="desc">
-                                            <div>
-                                            <p class="comment">
-                                                주절주절
-                                            </p>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <h5 th:text="${accInfo.nickname}"></h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="blog_right_sidebar">
-                                <aside class="single_sidebar_widget tag_cloud_widget">
-                                    <h4 class="widget_title">편의시설</h4>
-                                    <ul class="list" th:each="amen : ${amenity}">
-                                        <li th:text="${amen}">
-                                        </li>
-                                    </ul>
-                                </aside>
-                                <aside class="single_sidebar_widget search_widget">
-                                    <form action="#">
-                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                                type="submit">예약하기 버튼이 될지어다</button>
-                                    </form>
-                                </aside>
-                                <aside class="single_sidebar_widget popular_post_widget">
-                                    <h3 class="widget_title" th:if="${roomInfo}">객실</h3>
-                                    <div class="media post_item" th:each="rm : ${roomInfo}">
-                                        <img th:src="${rm.room_images_url.split(',')[0]}" alt="post">
-                                        <div class="media-body">
-                                            <a href="single-blog.html">
-                                                <h3 th:text="${rm.room_name}"></h3>
-                                            </a>
-                                            <p th:text="${rm.room_price}"></p>
-                                        </div>
-                                    </div>
-                                </aside>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>-->
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
-            <div class="container">
-                
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                       <div class="single-footer-caption mb-50">
-                         <div class="single-footer-caption mb-30">
-                              <!-- logo -->
-                             <div class="footer-logo">
-
-                                 <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <ul>
-                                        <link rel="shortcut icon" type="image/x-icon" href="https://example.com/static/assets/img/favicon.ico">
-                                        <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;" >고객문의</a></li>
-                                        <li><a href="#"  style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
-                                    </ul>
-                                </div>
-                       </div>
-                    </div>
-                </div>
-                <!-- Footer bottom -->
-                <div class="row pt-padding" style="padding: 0px;">
-                 <div class="col-xl-7 col-lg-7 col-md-7">
-                    <div class="footer-copy-right">
-                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                    </div>
-                 </div>
-             </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+<!-- JS here -->
 
 
-	<!-- JS here -->
+<script>
 
-  
-        <script>
-            document.querySelector('.toggle-btn').addEventListener('click', function() {
-        const checkboxContainer = document.querySelector('.checkbox-facility');
-        checkboxContainer.style.display = checkboxContainer.style.display === 'block' ? 'none' : 'block';
+    function login() {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('logout').style.display = 'block';
+    }
+
+    function logout() {
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('logout').style.display = 'none';
+    }
+
+        //---------숙소 img modal---------------
+    let modal = document.querySelector(".modal");
+    const imgs = document.querySelectorAll(".img-fluid");
+    const modalImg = document.querySelector(".modal-content");
+    const span = document.querySelector(".close");
+
+    imgs.forEach((img) => {
+        img.addEventListener('click', ()=>{
+            modalDisplay("block");
+            modalImg.src = img.src; //모달에 이미지 삽입
+        });
     });
-        </script>
-    <script>
-        function login() {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('logout').style.display = 'block';
+
+    // 모달창 닫기
+    span.addEventListener('click', ()=>{
+        modalDisplay("none");
+    });
+    modal.addEventListener('click', ()=>{
+        modalDisplay("none");
+    });
+
+    //모달 열기 닫기 설정 함수
+    function modalDisplay(text){
+        modal.style.display = text;
+        modalImg.src = '';
+        //닫을 때 데이터 초기화
+    }
+</script>
+<script>
+    //       ... ajax로 객실 모달창...
+    document.querySelector('.rm-name').addEventListener('click', async function(){
+        const room_id = this.parentElement.getAttribute('data-room-id');
+        console.log("클릭 시 받아온 객실의 아이디 :" + room_id);
+        await getRoom(room_id); //클릭 이벤트 구현해서 클릭시 서버에서 정보받는 함수 호출
+    });
+
+    // 객실 정보 서버에서 받아오기~
+    async function getRoom(room_id){
+        try{
+            const response = await fetch(`/room/${room_id}`);
+            // 서버에서 응답 받아오기
+            if (!response.ok){
+                throw new Error("서버 응답 실패");
+            }
+
+            const data = await response.json();
+            //받아온 데이터는 json형식으로 바꾸고 데이터라는 방에 넣어주기
+            console.log(data);
+            displayModal(data);
         }
-        function logout() {
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('logout').style.display = 'none';
+        catch (error){
+            console.log("오류 발생 : "+ error);
         }
-    </script>
-    <script src="/static/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/static/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/static/assets/js/popper.min.js"></script>
-    <script src="/static/assets/js/bootstrap.min.js"></script>
-    <script src="/static/assets/js/jquery.slicknav.min.js"></script>
-    <script src="/static/assets/js/owl.carousel.min.js"></script>
-    <script src="/static/assets/js/slick.min.js"></script>
-    <script src="/static/assets/js/wow.min.js"></script>
-    <script src="/static/assets/js/animated.headline.js"></script>
-    <script src="/static/assets/js/jquery.magnific-popup.js"></script>
-    <script src="/static/assets/js/jquery.scrollUp.min.js"></script>
-    <script src="/static/assets/js/jquery.nice-select.min.js"></script>
-    <script src="/static/assets/js/jquery.sticky.js"></script>
-    <script src="/static/assets/js/contact.js"></script>
-    <script src="/static/assets/js/jquery.form.js"></script>
-    <script src="/static/assets/js/jquery.validate.min.js"></script>
-    <script src="/static/assets/js/mail-script.js"></script>
-    <script src="/static/assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/static/assets/js/plugins.js"></script>
-    <script src="/static/assets/js/main.js"></script>
+    }
 
 
-   </body>
+    function displayModal(data){
+        const modalEl = document.querySelector('.modal');
+        const rmContent = document.querySelector('.rm-content');
+
+        let imgAry = data.room_images_url.split(',');
+        console.log(imgAry);
+
+        imgAry.forEach(url => {
+            // 이미지 태그를 생성
+            const imgEl = document.createElement('img');
+            imgEl.src = url.trim();  // URL을 src에 할당 (trim()은 공백을 제거)
+            imgEl.style.width = "100%"; // 필요 시 스타일 추가
+
+            // rmContent에 이미지를 추가
+            rmContent.appendChild(imgElement);
+        });
+
+        rmContent.innerHTML+=
+                            `
+                           <h3>${data.room_name}</h3>
+                           <p>${data.room_info}</p>
+                           <label><p>${data.room_price}</p>/1박 요금</label>
+                           <button>예약하기</button>
+                            `;
+        modalEl.style.display ='block';
+
+    }
+</script>
+
+<!--지도 api 불러오기-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a0da1ad2c34eab93949411401ba1e66"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    console.log(map);
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    console.log(geocoder);
+
+    var add = document.getElementById('acc-add').value;
+    console.log(add);
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(add, function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        }
+    });
+</script>
+
+<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.slicknav.min.js"></script>
+
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/animated.headline.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+<script src="/assets/js/jquery.scrollUp.min.js"></script>
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery.sticky.js"></script>
+
+<script src="/assets/js/contact.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script src="/assets/js/mail-script.js"></script>
+<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
+</body>
 </html>
