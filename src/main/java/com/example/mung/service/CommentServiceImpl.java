@@ -17,44 +17,37 @@ public class CommentServiceImpl implements CommentService {
         this.commentMapper = commentMapper;
     }
 
-    // 모든 댓글 조회
     @Override
     public List<CommentDTO> findAll() {
         return commentMapper.getAllComment();
     }
 
-    // 특정 사용자가 작성한 댓글 조회
     @Override
     public List<CommentDTO> readByUserId(int user_id) {
         return commentMapper.getCommentByUserId(user_id);
     }
 
-    // 특정 게시글에 달린 댓글 조회
     @Override
     public List<CommentDTO> readByPostId(int post_id) {
         return commentMapper.getCommentsByPostId(post_id);
     }
 
-    // 댓글 등록
     @Override
     public boolean register(CommentDTO comment) {
-        return commentMapper.insertComment(comment) > 0;  // 성공 여부를 확인
+        return commentMapper.insertComment(comment) > 0;
     }
 
-    // 댓글 수정
     @Override
     public boolean modify(CommentDTO comment) {
-        return commentMapper.updateComment(comment) > 0;  // 댓글 수정
+        return commentMapper.updateComment(comment) > 0;
     }
 
-    // 댓글 삭제
     @Transactional
     @Override
     public boolean remove(int comment_id) {
-        return commentMapper.deleteComment(comment_id) > 0;  // 댓글 삭제
+        return commentMapper.deleteComment(comment_id) > 0;
     }
 
-    // 댓글 ID로 댓글 조회
     @Override
     public CommentDTO findById(int comment_id) {
         return commentMapper.findById(comment_id);

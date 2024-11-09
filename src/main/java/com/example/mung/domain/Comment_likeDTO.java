@@ -1,8 +1,6 @@
 package com.example.mung.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,8 +11,9 @@ public class Comment_likeDTO {
     private int like_id;
     private int comment_id;
     private int user_id;
-
     private Type type = Type.LIKE; // 기본값을 LIKE로 설정
+    private int likeCount;         // 좋아요 개수
+    private int dislikeCount;      // 싫어요 개수
 
     public enum Type {
         LIKE,

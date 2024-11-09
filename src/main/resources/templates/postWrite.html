@@ -5,12 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>게시글 작성</title>
     <meta name="description" content="게시판 페이지">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+        function uploadImage() {
+            const fileInput = document.getElementById('fileUpload');
+            const contentInput = document.getElementById('content');
+
+            if (fileInput.files.length === 0) {
+                alert("파일을 선택해 주세요.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            fetch("/uploadImage", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(imageUrl => {
+                    if (imageUrl) {
+                        // 이미지 URL을 content에 추가
+                        const imgTag = `<img src="${imageUrl}" alt="Uploaded Image" />`;
+                        contentInput.value += imgTag;
+                        fileInput.value = ""; // 파일 선택 초기화
+                    } else {
+                        alert("이미지 업로드에 실패했습니다.");
+                    }
+                })
+                .catch(error => console.error("Error uploading image:", error));
+        }
+    </script>
+
 </head>
 <body>
 <!-- Preloader Start -->
@@ -95,7 +126,6 @@
         <div class="row">
             <div class="col-lg-12 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
-                    <!-- 게시글 작성 폼 -->
                     <h2>게시글 작성</h2>
                     <form id="postForm" method="post" enctype="multipart/form-data" th:action="@{/new}">
                         <div class="form-group">
@@ -106,25 +136,24 @@
                                 <option value="travel">여행 TIP</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="title">제목</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
                         </div>
+                        <div class="form-group">
+                            <label for="fileUpload">이미지 업로드</label>
+                            <input type="file" id="fileUpload" class="form-control-file">
+                            <button type="button" onclick="uploadImage()">이미지 추가</button>
+                        </div>
 
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력하세요." required></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">비밀번호 (수정/삭제시 확인용)</label>
+                            <label for="password">비밀번호 (수정/삭제 시 확인용)</label>
                             <input type="password" class="form-control" id="password" name="password" maxlength="4" placeholder="4자리 비밀번호" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="files">첨부 파일</label>
-                            <input type="file" class="form-control-file" id="files" name="files" multiple>
                         </div>
                         <button type="submit" class="btn btn-primary" style="background-color: #f2e2cc; color: black;">게시글 작성</button>
                     </form>
@@ -133,7 +162,6 @@
         </div>
     </div>
 </section>
-
 <!-- Footer -->
 <footer>
     <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">

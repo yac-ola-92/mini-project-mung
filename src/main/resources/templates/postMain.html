@@ -16,9 +16,88 @@
         .container {
             margin: 0 auto;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* 카테고리 스타일 */
+        .category-section {
+            width: 65%;
+            background-color: #fff9f0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .category-section h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .category-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .category-section li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .category-section li a:hover {
+            color: #0056b3;
+        }
+
+        /* 글 작성 버튼 */
+        .btn-write {
+            margin: 10px 0 20px;
+            padding: 12px 25px;
+            background-color: #f2e2cc;
+            color: #333;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-write:hover {
+            background-color: #e6d3b8;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* 게시글 목록 스타일 */
+        .post-list {
+            width: 65%;
+        }
+
+        /* 게시글 목록 간격 조정 */
+        .post-list li {
+            margin-bottom: 20px;
+        }
+
+        .blog_details {
+            background-color: #fff9f0;
+            border: solid 1px #f2e2cc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        /* 검색 스타일 */
         .search-container {
             display: flex;
             align-items: center;
@@ -56,88 +135,16 @@
             cursor: pointer;
             font-size: 16px;
             height: 50px;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-        }
-
-        .search-container input,
-        .search-container select,
-        .search-container button {
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 글 작성 버튼 */
-        .btn-write {
-            margin: 20px 0;
-            padding: 10px 20px;
-            background-color: #f2e2cc;
-            color: #333;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease;
         }
 
-        .btn-write:hover {
+        .search-button:hover {
             background-color: #e6d3b8;
-            color: #000;
-        }
-
-        /* 게시글 목록 스타일 */
-        .post-list {
-            width: 65%;
-            margin-right: 20px;
-        }
-
-        /* 카테고리 스타일 */
-        .category-section {
-            flex: 1;
-            background-color: #fff9f0;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            max-height: 200px;
-            text-align: center;
-            position: sticky;
-            top: 10px;
-        }
-
-        .category-section h4 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 18px;
-        }
-
-        .category-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .category-section li {
-            margin-bottom: 10px;
-        }
-
-        .category-section li a {
-            text-decoration: none;
-            color: #007bff;
-            font-size: 16px;
-        }
-
-        .category-section li a:hover {
-            text-decoration: underline;
         }
     </style>
     <script th:inline="javascript">
         function checkLogin() {
             var userLoginId = /*[[${userInfo != null ? userInfo.user_loginId : ''}]]*/ '';
-
             if (userLoginId !== '') {
                 window.location.href = '/new';  // 글 작성 페이지로 이동
             } else {
@@ -214,34 +221,9 @@
 
 <section class="blog_area section-padding">
     <div class="container">
-        <div class="post-list">
-            <!-- 글 작성 버튼 -->
-            <div>
-                <button type="button" class="btn-write" onclick=" checkLogin();">글 작성</button>
-            </div>
-            <!-- 게시글 목록 -->
-            <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
-                <li>
-                    <article class="blog_item">
-                        <div class="blog_details" style="background-color: #fff9f0; border: solid 1px #f2e2cc;">
-                            <a th:href="@{'/post/' + ${post.post_id}}">
-                                <h2 class="blog-head" th:text="${post.title}" style="color: #2d2d2d;">게시글 제목</h2>
-                            </a>
-                            <ul class="blog-info-link">
-                                <li><span th:text="${post.nickname}">작성자</span></li>
-                                <li><span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
-                                <li><span th:text="${post.view_count}">조회수</span></li>
-                            </ul>
-                        </div>
-                    </article>
-                </li>
-            </ul>
-            <p th:if="${posts == null || posts.isEmpty()}">게시글이 없습니다.</p>
-        </div>
-
         <!-- 카테고리 -->
         <div class="category-section">
-            <h4 class="widget_title">카테고리</h4>
+            <h4 class="widget_title"></h4>
             <ul class="list cat-list">
                 <li>
                     <a th:href="@{'/posts/category/rec'}">
@@ -259,6 +241,32 @@
                     </a>
                 </li>
             </ul>
+        </div>
+
+        <!-- 글 작성 버튼 -->
+        <div>
+            <button type="button" class="btn-write" onclick="checkLogin();">글 작성</button>
+        </div>
+
+        <!-- 게시글 목록 -->
+        <div class="post-list">
+            <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
+                <li>
+                    <article class="blog_item">
+                        <div class="blog_details" style="background-color: #fff9f0; border: solid 1px #f2e2cc;">
+                            <a th:href="@{'/post/' + ${post.post_id}}">
+                                <h2 class="blog-head" th:text="${post.title}" style="color: #2d2d2d;">게시글 제목</h2>
+                            </a>
+                            <ul class="blog-info-link">
+                                <li><span th:text="${post.nickname}">작성자</span></li>
+                                <li><span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
+                                <li><span th:text="${post.view_count}">조회수</span></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+            <p th:if="${posts == null || posts.isEmpty()}">게시글이 없습니다.</p>
         </div>
     </div>
 

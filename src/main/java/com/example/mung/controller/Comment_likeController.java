@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
-
 import java.util.Map;
 
 @RestController
@@ -35,27 +34,23 @@ public class Comment_likeController {
         commentLikeDTO.setComment_id(comment_id);
         commentLikeDTO.setUser_id(userInfo.getUser_id());
 
-        if (type.equalsIgnoreCase("like")) {
+        if ("like".equalsIgnoreCase(type)) {
             commentLikeDTO.setType(Comment_likeDTO.Type.LIKE);
-        } else if (type.equalsIgnoreCase("dislike")) {
+        } else if ("dislike".equalsIgnoreCase(type)) {
             commentLikeDTO.setType(Comment_likeDTO.Type.DISLIKE);
         } else {
             return ResponseEntity.badRequest().body("잘못된 타입입니다.");
         }
 
-        if (commentLikeService.likeOrDislike(commentLikeDTO)) {
-            int likeCount = commentLikeService.getLikeCount(comment_id);
-            int dislikeCount = commentLikeService.getDislikeCount(comment_id);
-            return ResponseEntity.ok(Map.of("likeCount", likeCount, "dislikeCount", dislikeCount));
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error processing like/dislike");
+        // 좋아요/싫어요 처리 후 결과 반환
+        Map<String, Integer> response = commentLikeService.likeOrDislike(commentLikeDTO);
+        return ResponseEntity.ok(response);
     }
 
     // 댓글의 좋아요/싫어요 수 조회
-    @GetMapping("/count/{comment_id}")
-    public ResponseEntity<?> getLikeDislikeCount(@PathVariable int comment_id) {
-        int likeCount = commentLikeService.getLikeCount(comment_id);
-        int dislikeCount = commentLikeService.getDislikeCount(comment_id);
-        return ResponseEntity.ok(Map.of("likeCount", likeCount, "dislikeCount", dislikeCount));
+    @GetMapping("/{commentId}/count")
+    public ResponseEntity<Map<String, Integer>> getCounts(@PathVariable int commentId) {
+        Map<String, Integer> counts = commentLikeService.getLikeAndDislikeCounts(commentId);
+        return ResponseEntity.ok(counts);
     }
 }

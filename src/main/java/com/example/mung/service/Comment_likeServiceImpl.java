@@ -5,7 +5,6 @@ import com.example.mung.mapper.Comment_likeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,26 +20,27 @@ public class Comment_likeServiceImpl implements Comment_likeService {
 
     @Override
     @Transactional
-    public boolean likeOrDislike(Comment_likeDTO commentLikeDTO) {
-        // 이미 사용자가 좋아요 또는 싫어요를 눌렀는지 확인
+    public Map<String, Integer> likeOrDislike(Comment_likeDTO commentLikeDTO) {
         Comment_likeDTO existing = commentLikeMapper.findByCommentIdAndUserId(commentLikeDTO.getComment_id(), commentLikeDTO.getUser_id());
 
         if (existing != null) {
-            // 이미 존재하면 타입을 업데이트
-            return commentLikeMapper.updateLikeDislike(commentLikeDTO) > 0;
+            commentLikeMapper.updateLikeDislike(commentLikeDTO);
         } else {
-            // 처음 누른 경우 삽입
-            return commentLikeMapper.insertLikeDislike(commentLikeDTO) > 0;
+            commentLikeMapper.insertLikeDislike(commentLikeDTO);
         }
+
+        return getLikeAndDislikeCounts(commentLikeDTO.getComment_id());
     }
 
     @Override
-    public int getLikeCount(int comment_id) {
-        return commentLikeMapper.getLikeCount(comment_id);
-    }
+    public Map<String, Integer> getLikeAndDislikeCounts(int comment_id) {
+        int likeCount = commentLikeMapper.getLikeCount(comment_id);
+        int dislikeCount = commentLikeMapper.getDislikeCount(comment_id);
 
-    @Override
-    public int getDislikeCount(int comment_id) {
-        return commentLikeMapper.getDislikeCount(comment_id);
+        Map<String, Integer> response = new HashMap<>();
+        response.put("likeCount", likeCount);
+        response.put("dislikeCount", dislikeCount);
+
+        return response;
     }
 }
