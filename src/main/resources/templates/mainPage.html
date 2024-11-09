@@ -1,0 +1,308 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org/">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Travel HTML-5 Template </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="../static/assets/img/favicon.ico">
+
+            <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="/assets/css/flaticon.css">
+            <link rel="stylesheet" href="/assets/css/slicknav.css">
+            <link rel="stylesheet" href="/assets/css/animate.min.css">
+            <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="/assets/css/themify-icons.css">
+            <link rel="stylesheet" href="/assets/css/slick.css">
+            <link rel="stylesheet" href="/assets/css/nice-select.css">
+            <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="https://example.com/static/assets/img/favicon.ico">
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 7px 5px 0 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        li {
+            float: left;
+        }
+        #login , #logout {
+            background-color: #bc915e;
+            border: none;
+            height: 35px;
+            margin-left: 2px;
+        }
+        #login :hover{
+            background-color: #fff9f0;
+            border: solid 3px  #bc915e;
+        }
+        #logout :hover{
+            background-color: #fff9f0;
+            border: solid 3px  #bc915e;
+        }
+        nav ul li {
+            height: 40px;
+            margin: 10px;
+        }
+
+
+               nav ul li :hover {
+                background-color: #fff9f0;
+                border: solid 3px  #bc915e;
+               }
+               #search{
+                height : 60px;
+                width : 150px;
+                background-color :  #ecd9bf;
+                border : none;
+               }
+
+               #search :hover {
+                background-color: #bc915e;
+               }
+            </style>
+   </head>
+
+   <body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="/assets/img/logo/munglogo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <!-- Header Start -->
+               <div class="header-bottom  header-sticky" style="background-color:#fff9f0;">
+                        <div class="row align-items-center" >
+                            <!-- Logo -->
+
+                                <div class="logo" style="margin-left: 400px;" >
+                                  <a href="/mainPage"><img style="margin : 40px; width : 100px;" src="/assets/img/logo/munglogo.png" alt=""></a>
+                                </div>
+                            <nav>
+                                <ul>
+                                    <li><a href="/accom_register" style="color: #bc915e;" th:if="${session.userInfo != null and session.userInfo.roles.contains('HOST')}">나의 숙소</a></li>
+                                    <li><a href="/accomByLocation" style="color:#bc915e;">숙소예약</a></li>
+                                    <li><a href="/postMain" style="color:#bc915e;">게시판</a></li>
+                                    <li><a href="/myPage" style="color:#bc915e;">마이페이지</a></li>
+                                    <li><a href="/login" id="login" th:if="${session.userInfo == null}">로그인</a></li>
+                                    <li><a href="/logout" id="logout" th:if="${session.userInfo != null}">로그아웃</a></li>
+                                </ul>
+                            </nav>
+
+                            <div class="col-xl-10 col-lg-10 col-md-10" style="background-color: #fff9f0;">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block" >
+
+                                </div>
+                            </div>
+                            <!-- Mobile Menu -->
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+        <!-- Header End -->
+    </header>
+
+<main>
+
+    <!-- slider Area Start-->
+    <div class="slider-area">
+        <!-- Mobile Menu -->
+        <div class="slider-active">
+            <div class="single-slider hero-overly  slider-height d-flex align-items-center"
+                 data-background="https://www.eldoradoresort.co.kr/pop/pet_villa.jpg">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-9 col-md-9">
+                        <div class="hero__caption">
+                            <h1></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Search Box -->
+                <div class="col-xl-10 col-lg-10 col-md-10">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <!-- form -->
+                            <form action="/accomByLocation" class="search-box" method="get" style="margin-left: 50px;">
+                                <div class="input-form mb-30" style="margin:0 10px 0 10px; width: 300px;">
+                                    <input name="accom_location" placeholder="지역" style="border:4px solid #bc915e;"
+                                           type="text">
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px;">
+                                    <div class="select-itms">
+                                        <input id="st_date" name="rv_start_date" style="border:4px solid #bc915e;"
+                                               type="date">
+                                    </div>
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px;">
+                                    <div class="select-itms">
+                                        <input id="lt_date" name="rv_end_date" style="border:4px solid #bc915e;"
+                                               type="date">
+                                    </div>
+                                </div>
+                                <div class="input-form mb-30" style="margin-right:10px; width: 150px;">
+                                    <input name="capacity" placeholder="인원" style="border: 4px solid #bc915e; "
+                                           type="number">
+                                </div> <!---->
+                                <div class="search-form mb-30">
+                                    <button id="search" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- Favourite Places Start -->
+    <div class="favourite-place place-padding">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center">
+                        <span>핫한 숙소</span>
+                        <h2>Accommodation</h2>
+                    </div>
+                </div>
+
+                <!--별점 순 숙소들을 출력하여 사용자에게 추천-->
+
+            <div th:if="${accomRating != null}">
+                <div class="row">
+
+                    <div  th:each=" vo, status : ${accomRating}" class="col-xl-4 col-lg-4 col-md-6" th:if="${status.index < 6}" >
+                        <div class="single-place mb-30" style="height:500px; width:330px;">
+                           <div class="single-place mb-30" >
+                                  <img th:src="${vo.accom_images_url.split(',')[0]}"  alt="accom_img" style="width: 100%; height: auto; object-fit: cover;">
+
+                            </div>
+                            <div class="place-cap">
+                                <div class="place-cap-top">
+                                    <span><i class="fas fa-star"></i><span th:text="${vo.rating}"></span> </span>
+                                     <a th:href="@{/accom/{accom_id}/byAccomId(accom_id=${vo.accom_id})}"><h3 th:text="${vo.accom_name}"></h3></a>
+
+                                    <p class="dolor" th:text="${vo.room_price}"><span>/ 1박</span></p>
+                                </div>
+                                <div class="place-cap-bottom">
+                                    <ul>
+                                        <li th:text="${vo.pet_kind}"><i class="far fa-clock"></i></li>
+                                        <li th:text="${vo.accom_location}"><i class="fas fa-map-marker-alt"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         </div>
+
+        </div>
+    </div>
+        <!-- Favourite Places End -->
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0; padding: 30px">
+            <div class="container">
+
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="/mainPage"><img src="/assets/img/logo/munglogo.png" style="width: 150px;" alt=""></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <ul>
+                                        <li><a href="#" style="color:#bc915e; font-weight: bolder; margin :50px;" >고객문의</a></li>
+                                        <li><a href="#"  style="color:#bc915e; font-weight: bolder;">제휴문의</a></li>
+                                    </ul>
+                                </div>
+                       </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom -->
+            <div class="row pt-padding" style="padding: 0px;">
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i aria-hidden="true" class="ti-heart"></i>
+                            by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Footer End-->
+</footer>
+
+
+
+	<!-- JS here -->
+	<script th:inline="javascript">
+        function check() {
+		var log ;
+		if( log == null){
+			document.getElementById('login').style.display = 'block';
+        	document.getElementById('logout').style.display = 'none';
+		}else{
+			 document.getElementById('login').style.display = 'none';
+      		 document.getElementById('logout').style.display = 'block';
+    	}
+        }
+
+    </script>
+
+
+
+      <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+
+		<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="/assets/js/popper.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/jquery.slicknav.min.js"></script>
+
+        <script src="/assets/js/owl.carousel.min.js"></script>
+        <script src="/assets/js/slick.min.js"></script>
+        <script src="/assets/js/wow.min.js"></script>
+		<script src="/assets/js/animated.headline.js"></script>
+        <script src="/assets/js/jquery.magnific-popup.js"></script>
+
+        <script src="/assets/js/jquery.scrollUp.min.js"></script>
+        <script src="/assets/js/jquery.nice-select.min.js"></script>
+		<script src="/assets/js/jquery.sticky.js"></script>
+
+        <script src="/assets/js/contact.js"></script>
+        <script src="/assets/js/jquery.form.js"></script>
+        <script src="/assets/js/jquery.validate.min.js"></script>
+        <script src="/assets/js/mail-script.js"></script>
+        <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+        <script src="/assets/js/plugins.js"></script>
+        <script src="/assets/js/main.js"></script>
+
+    </body>
+
+</html>

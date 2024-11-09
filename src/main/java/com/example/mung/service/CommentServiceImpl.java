@@ -4,12 +4,13 @@ import com.example.mung.domain.CommentDTO;
 import com.example.mung.mapper.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    private CommentMapper commentMapper;
+
+    private final CommentMapper commentMapper;
 
     @Autowired
     public CommentServiceImpl(CommentMapper commentMapper) {
@@ -18,32 +19,37 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDTO> findAll() {
-        return commentMapper.getList();
+        return commentMapper.getAllComment();
     }
 
     @Override
     public List<CommentDTO> readByUserId(int user_id) {
-        return commentMapper.getListByUserId(user_id);
+        return commentMapper.getCommentByUserId(user_id);
     }
 
     @Override
     public List<CommentDTO> readByPostId(int post_id) {
-        return commentMapper.getListByPostId(post_id);
+        return commentMapper.getCommentsByPostId(post_id);
     }
 
     @Override
     public boolean register(CommentDTO comment) {
-        return commentMapper.insert(comment);
+        return commentMapper.insertComment(comment) > 0;
     }
 
     @Override
     public boolean modify(CommentDTO comment) {
-        return commentMapper.update(comment);
+        return commentMapper.updateComment(comment) > 0;
+    }
+
+    @Transactional
+    @Override
+    public boolean remove(int comment_id) {
+        return commentMapper.deleteComment(comment_id) > 0;
     }
 
     @Override
-    public boolean remove(int comment_id) {
-        return commentMapper.delete(comment_id);
+    public CommentDTO findById(int comment_id) {
+        return commentMapper.findById(comment_id);
     }
-
 }

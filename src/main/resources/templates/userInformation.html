@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html
+        class="light-style layout-menu-fixed"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+            name="viewport"
+    />
+    <title>회원 정보</title>
+    <th:block th:replace="fragment/settings.html :: link"></th:block>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+    <link class="template-customizer-core-css" href="/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <th:block th:replace="fragment/settings.html :: style"></th:block>
+</head>
+
+<body>
+<th:block th:replace="fragment/settings.html :: preloader"></th:block>
+<th:block th:replace="fragment/settings.html :: header"></th:block>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Profile Details</h5>
+                    <!-- Account -->
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <!-- 기본 이미지 심어야함 -->
+                            <img
+                                    alt="user-avatar"
+                                    class="d-block rounded"
+                                    height="100"
+                                    id="uploadedAvatar"
+                                    src="/images/dang.jfif"
+                                    width="100"
+                            />
+                            <div class="button-wrapper">
+                                <label class="btn btn-primary me-2 mb-4" for="upload" tabindex="0">
+                                    <span class="d-none d-sm-block">프로필 사진 등록</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input
+                                            accept="image/png, image/jpeg"
+                                            class="account-file-input"
+                                            hidden
+                                            id="upload"
+                                            type="file"
+                                    />
+                                </label>
+                                <button class="btn btn-outline-secondary account-image-reset mb-4" type="button">
+                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">초기화</span>
+                                </button>
+
+                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-0"/>
+                    <div class="card-body">
+                        <form id="formAccountSettings" method="POST" action="/updateUser">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="user_loginId">사용자 이름</label>
+                                    <input
+                                            autofocus
+                                            class="form-control"
+                                            id="user_loginId"
+                                            name="user_loginId"
+                                            readonly
+                                            th:value="${session.userInfo != null ? session.userInfo.user_loginId : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="name1">반려견 이름</label>
+                                    <input class="form-control" id="name1" name="name"
+                                           th:value="${session.userInfo.pet_infoList['이름'] != null ? session.userInfo.pet_infoList['이름'] : ''}"
+                                           th:placeholder="${session.userInfo.pet_infoList['이름'] == null ? '반려견 이름을 입력하세요.' : ''}"
+
+                                           type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="nickname">별명</label>
+                                    <input
+                                            class="form-control"
+                                            id="nickname"
+                                            name="nickname"
+                                            readonly
+                                            th:value="${session.userInfo != null ? session.userInfo.nickname : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="type1">반려견 종류</label>
+                                    <input
+                                            class="form-control"
+                                            id="type1"
+                                            name="type"
+                                            th:value="${session.userInfo.pet_infoList['종'] != null ? session.userInfo.pet_infoList['종'] : ''}"
+                                            th:placeholder="${session.userInfo.pet_infoList['종'] == null ? '견종을 입력하세요.' : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="user_birth">생년월일</label>
+                                    <input
+                                            class="form-control"
+                                            id="user_birth"
+                                            name="user_birth"
+                                            readonly
+                                            th:value="${session.userInfo != null ? #temporals.format(session.userInfo.user_birth, 'yyMMdd') + ' - ' + session.userInfo.user_gender : ''}"
+
+
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="age1">반려견 나이</label>
+                                    <input class="form-control" id="age1" name="age"
+                                           th:value="${session.userInfo.pet_infoList['나이'] != null ? session.userInfo.pet_infoList['나이'] : ''}"
+                                           th:placeholder="${session.userInfo.pet_infoList['나이'] == null ? '반려견 나이를 입력하세요.' : ''}"
+                                           type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="user_email">이메일</label>
+                                    <input
+                                            class="form-control"
+                                            id="user_email"
+                                            name="user_email"
+                                            readonly
+                                            th:value="${session.userInfo != null ? session.userInfo.user_email : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="weight1">반려견 몸무게</label>
+                                    <input
+                                            class="form-control"
+                                            id="weight1"
+                                            name="weight"
+                                            th:value="${session.userInfo.pet_infoList['무게'] != null ? session.userInfo.pet_infoList['무게'] : ''}"
+                                            th:placeholder="${session.userInfo.pet_infoList['무게'] == null ? '몸무게를 정확하게 입력하세요.' : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="user_phone">전화번호</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text">ROK (+82)</span>
+                                        <input
+                                                class="form-control"
+                                                id="user_phone"
+                                                name="user_phone"
+                                                readonly
+                                                th:value="${session.userInfo != null ? session.userInfo.user_phone : ''}"
+                                                type="text"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="business_number1">사업자 번호</label>
+                                    <input
+                                            class="form-control"
+                                            id="business_number1"
+                                            name="business_number"
+                                            placeholder="없음"
+                                            readonly
+                                            th:value="${session.userInfo != null ? session.userInfo.business_number : ''}"
+                                            type="text"
+                                    />
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button class="btn btn-primary me-2" type="submit">수정</button>
+                                <button class="btn btn-outline-secondary" type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Account -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+
+
+</div>
+<!-- Content wrapper -->
+<th:block th:replace="fragment/settings.html :: footer"></th:block>
+<th:block th:replace="fragment/settings.html :: script"></th:block>
+<script src="/assets/vendor/js/menu.js"></script>
+<script src="/assets/js/main1.js"></script>
+<script src="/assets/js/pages-account-settings-account.js"></script>
+
+</body>
+</html>

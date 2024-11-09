@@ -31,6 +31,17 @@ public class RoomServiceimpl implements RoomService {
         System.out.println(pet_kind+"까지 예약가능한 숙소입니다");
         return roomDAO.getListByPet_kind(pet_kind);
     }
+    @Override
+    public RoomDTO readUrl(int accom_id){
+        System.out.println("url 가져올게요");
+        return roomDAO.getUrl(accom_id);
+    }
+
+    @Override
+    public RoomDTO readOne(int room_id) {
+        System.out.println(room_id+"객실 정보 불러옵니다...");
+        return roomDAO.getOne(room_id);
+    }
 
     @Override  //숙소의 객실 등록
     public boolean register(RoomVO vo){

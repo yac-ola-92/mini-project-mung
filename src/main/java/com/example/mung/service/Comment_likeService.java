@@ -1,13 +1,12 @@
 package com.example.mung.service;
 
 import com.example.mung.domain.Comment_likeDTO;
-
-import java.util.List;
+import java.util.Map;
 
 public interface Comment_likeService {
-    List<Comment_likeDTO> findAll();
-    List<Comment_likeDTO> readByUserId(int user_id);
-    boolean register(Comment_likeDTO comment_likeDTO);
-    boolean modify(Comment_likeDTO comment_likeDTO);
-    boolean remove(int comment_id, int user_id);
+    // 좋아요/싫어요 추가 또는 업데이트 후 최신 개수를 반환
+    Map<String, Integer> likeOrDislike(Comment_likeDTO commentLikeDTO);
+
+    // 댓글의 좋아요 및 싫어요 카운트 조회
+    Map<String, Integer> getLikeAndDislikeCounts(int comment_id);
 }

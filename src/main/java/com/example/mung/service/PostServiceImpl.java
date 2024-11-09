@@ -1,78 +1,104 @@
 package com.example.mung.service;
 
+import com.example.mung.domain.CommentDTO;
 import com.example.mung.domain.PostDTO;
 import com.example.mung.exception.PostNotFoundException;
+import com.example.mung.mapper.CommentMapper;
 import com.example.mung.mapper.PostMapper;
+import com.example.mung.service.PostService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
+    private final CommentMapper commentMapper;
+    private final String uploadDir = "/uploads/";
 
-    public PostServiceImpl(PostMapper postMapper) {
+    public PostServiceImpl(PostMapper postMapper, CommentMapper commentMapper) {
         this.postMapper = postMapper;
+        this.commentMapper = commentMapper;
     }
-// 전체 게시글 조회
+
     @Override
     public List<PostDTO> findAll() {
         return postMapper.getList();
     }
-// 페이징 처리된 게시글 목록 조회
+
     @Override
     public List<PostDTO> findAll(int page, int size) {
         int offset = (page - 1) * size;
         return postMapper.getPagedPost(size, offset);
     }
 
-    //특정 제목의 게시글 조회
     @Override
-    public PostDTO readByTitle(String title) {
-        PostDTO post = postMapper.getOneByTitle(title);
-        if (post == null) {
-            throw new PostNotFoundException("게시글을 찾을 수 없습니다: " + title);
-        }
-        return post;
-    }
-// 특정 게시글에 속한 게시글 목록 조회
-    @Override
-    public List<PostDTO> findByCategory(PostDTO.Category category) {
-        return postMapper.getPostByCategory(category); // 수정된 부분
+    public List<PostDTO> getPostsByCategory(String category) {
+        return postMapper.getPostByCategory(category);
     }
 
     @Override
+    @Transactional
     public boolean modify(PostDTO post) {
-        return postMapper.update(post);
+        return postMapper.update(post) > 0;
     }
 
     @Override
+    @Transactional
+    public boolean createPost(PostDTO postDTO) {
+        return postMapper.insertPost(postDTO) > 0;
+    }
+
+    @Override
+    @Transactional
     public boolean remove(int post_id) {
-        return postMapper.delete(post_id);
+        return postMapper.delete(post_id) > 0;
     }
 
-    @Override
-    public boolean register(PostDTO post) {
-        return postMapper.insert(post);
-    }
-
-    // 특정 게시글의 조회수 1증가
     @Override
     public boolean increaseViewCount(int post_id) {
-        return postMapper.increaseViewCount(post_id); // 조회수 증가 메서드로 변경
+        return postMapper.increaseViewCount(post_id) > 0;
     }
 
-    // 키워드를 통해 게시글 검색(제목, 내용, 작성자)
     @Override
-    public List<PostDTO> searchPosts(String keyword, String type) {
-        return postMapper.searchPost(keyword, type);
+    public List<PostDTO> searchByTitle(String keyword) {
+        return postMapper.findByTitle(keyword);
     }
 
-    // 비밀번호 확인 로직
     @Override
-    public  boolean checkPassword(int post_id, String password) {
-        String checkPw = postMapper.findPasswordById(post_id);
-        return checkPw != null && checkPw.equals(password);
+    public List<PostDTO> searchByContent(String keyword) {
+        return postMapper.findByContent(keyword);
+    }
+
+    @Override
+    public List<PostDTO> searchByNickname(String nickname) {
+        return postMapper.findByNickname(nickname);
+    }
+
+    @Override
+    public boolean checkPassword(int post_id, String password) {
+        String storedPassword = postMapper.findPasswordById(post_id);
+        return storedPassword != null && storedPassword.equals(password);
+    }
+
+    @Override
+    public PostDTO readById(int post_id) {
+        PostDTO post = postMapper.getOneById(post_id);
+        if (post == null) {
+            throw new PostNotFoundException("게시글을 찾을 수 없습니다: " + post_id);
+        }
+        List<CommentDTO> comments = commentMapper.getCommentsByPostId(post_id);
+        post.setComments(comments);
+        return post;
     }
 }

@@ -9,17 +9,23 @@ import java.util.List;
 public interface UserService {
 
     //회원 전체 조회
-    List<UserDTO> findAll();
+    List<UserVO> findAll();
 
     //회원 번호로 조회
     UserDTO read(int id);
 
-    //회원 등록
+    //일반회원 등록
     boolean register(UserVO vo);
+
+    //사업자회원 등록
+    boolean register_b(UserVO vo);
 
     //회원 수정
     boolean modify(UserVO vo);
 
     //회원 삭제
     boolean remove(int id);
+
+    //펫 정보 수정
+    boolean modify_pet(UserVO vo);
 }

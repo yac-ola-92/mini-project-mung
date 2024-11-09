@@ -1,7 +1,6 @@
 package com.example.mung.service;
 
 import com.example.mung.domain.CommentDTO;
-
 import java.util.List;
 
 public interface CommentService {
@@ -11,4 +10,5 @@ public interface CommentService {
     boolean register(CommentDTO comment);
     boolean modify(CommentDTO comment);
     boolean remove(int comment_id);
+    CommentDTO findById(int comment_id);
 }

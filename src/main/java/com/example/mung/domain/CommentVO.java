@@ -13,14 +13,20 @@ public class CommentVO {
     private final int user_id;
     private final String content;
     private final LocalDateTime created_at;
-    private int parent_comment_id;
+    private final String nickname;
 
-    public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, int parentCommentId) {
-        comment_id = commentId;
-        post_id = postId;
-        user_id = userId;
+    private final int likeCount;     // 좋아요 수
+    private final int dislikeCount;  // 싫어요 수
+
+
+    public CommentVO(int commentId, int postId, int userId, String content, LocalDateTime createdAt, String nickname, int likeCount, int dislikeCount) {
+        this.comment_id = commentId;
+        this.post_id = postId;
+        this.user_id = userId;
         this.content = content;
-        created_at = createdAt;
-        parent_comment_id = parentCommentId;
+        this.created_at = createdAt;
+        this.nickname = nickname;
+        this.likeCount = likeCount;
+        this.dislikeCount = dislikeCount;
     }
 }

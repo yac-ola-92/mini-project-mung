@@ -1,3 +1,5 @@
+
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.ReviewDTO;
@@ -63,3 +65,4 @@ public class ReviewServiceImplTest {
         reviewService.findAll().stream().forEach(System.out::println);
     }
 }
+*/

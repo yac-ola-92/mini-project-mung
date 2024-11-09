@@ -4,40 +4,43 @@ import com.example.mung.domain.Comment_likeDTO;
 import com.example.mung.mapper.Comment_likeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class Comment_likeServiceImpl implements Comment_likeService {
-    private Comment_likeMapper comment_likeMapper;
+
+    private final Comment_likeMapper commentLikeMapper;
 
     @Autowired
-    public Comment_likeServiceImpl(Comment_likeMapper comment_likeMapper) {
-        this.comment_likeMapper = comment_likeMapper;
+    public Comment_likeServiceImpl(Comment_likeMapper commentLikeMapper) {
+        this.commentLikeMapper = commentLikeMapper;
     }
 
     @Override
-    public List<Comment_likeDTO> findAll() {
-        return comment_likeMapper.getAllLike();
+    @Transactional
+    public Map<String, Integer> likeOrDislike(Comment_likeDTO commentLikeDTO) {
+        Comment_likeDTO existing = commentLikeMapper.findByCommentIdAndUserId(commentLikeDTO.getComment_id(), commentLikeDTO.getUser_id());
+
+        if (existing != null) {
+            commentLikeMapper.updateLikeDislike(commentLikeDTO);
+        } else {
+            commentLikeMapper.insertLikeDislike(commentLikeDTO);
+        }
+
+        return getLikeAndDislikeCounts(commentLikeDTO.getComment_id());
     }
 
     @Override
-    public List<Comment_likeDTO>  readByUserId(int user_id) {
-        return comment_likeMapper.getLikeByUserId(user_id);
-    }
+    public Map<String, Integer> getLikeAndDislikeCounts(int comment_id) {
+        int likeCount = commentLikeMapper.getLikeCount(comment_id);
+        int dislikeCount = commentLikeMapper.getDislikeCount(comment_id);
 
-    @Override
-    public boolean register(Comment_likeDTO comment_likeDTO) {
-        return comment_likeMapper.insert(comment_likeDTO);
-    }
+        Map<String, Integer> response = new HashMap<>();
+        response.put("likeCount", likeCount);
+        response.put("dislikeCount", dislikeCount);
 
-    @Override
-    public boolean modify(Comment_likeDTO comment_likeDTO) {
-        return comment_likeMapper.update(comment_likeDTO);
-    }
-
-    @Override
-    public boolean remove(int comment_id, int user_id) {
-        return comment_likeMapper.delete(comment_id,user_id);
+        return response;
     }
 }

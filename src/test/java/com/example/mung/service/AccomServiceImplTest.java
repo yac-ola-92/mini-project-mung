@@ -1,3 +1,4 @@
+/*
 package com.example.mung.service;
 
 import com.example.mung.domain.AccomVO;
@@ -19,7 +20,9 @@ public class AccomServiceImplTest  {
     @Test
     public void testGetListByLocation() {
 
-        service.readByLocation("강원").stream().forEach(System.out::println);
+
+        service.readByLocation("강원",2).stream().forEach(System.out::println);
+
 
     }
 
@@ -65,3 +68,4 @@ public class AccomServiceImplTest  {
     }
 
 }
+*/

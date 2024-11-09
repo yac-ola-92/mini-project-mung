@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>게시판</title>
+    <meta name="description" content="게시판 페이지">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <script src="https://kit.fontawesome.com/748b44d03f.js" crossorigin="anonymous"></script>
+    <style>
+        .container {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 카테고리 스타일 */
+        .category-section {
+            width: 65%;
+            background-color: #fff9f0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .category-section h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .category-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .category-section li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .category-section li a:hover {
+            color: #0056b3;
+        }
+
+        /* 글 작성 버튼 */
+        .btn-write {
+            margin: 10px 0 20px;
+            padding: 12px 25px;
+            background-color: #f2e2cc;
+            color: #333;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-write:hover {
+            background-color: #e6d3b8;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* 게시글 목록 스타일 */
+        .post-list {
+            width: 65%;
+        }
+
+        /* 게시글 목록 간격 조정 */
+        .post-list li {
+            margin-bottom: 20px;
+        }
+
+        .blog_details {
+            background-color: #fff9f0;
+            border: solid 1px #f2e2cc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        /* 검색 스타일 */
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-select {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            background-color: #f2f2f2;
+            font-size: 16px;
+            color: #333;
+            height: 50px;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 0;
+            background-color: #f2f2f2;
+            font-size: 16px;
+            color: #333;
+            width: 300px;
+            height: 50px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #f2e2cc;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            color: black;
+            cursor: pointer;
+            font-size: 16px;
+            height: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #e6d3b8;
+        }
+    </style>
+    <script th:inline="javascript">
+        function checkLogin() {
+            var userLoginId = /*[[${userInfo != null ? userInfo.user_loginId : ''}]]*/ '';
+            if (userLoginId !== '') {
+                window.location.href = '/new';  // 글 작성 페이지로 이동
+            } else {
+                alert('로그인 후 글을 작성할 수 있습니다.');
+                window.location.href = '/login';  // 로그인 페이지로 이동
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <div class="header-area" style="background-color: #fff9f0;">
+        <div class="main-header">
+            <div class="header-top top-bg d-none d-lg-block" style="background-color: #f2e2cc;">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-8">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li>needhelp@gotrip.com</li>
+                                    <li>666 569 025077</li>
+                                    <li>Brooklyn Street, New York</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="header-info-right f-right">
+                                <ul class="header-social">
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom header-sticky" style="background-color: #fff9f0;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="main.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a th:href="@{/index}">숙소 예약</a></li>
+                                        <li><a th:href="@{/postMain}">게시판</a>
+                                            <ul class="submenu">
+                                                <li><a th:href="@{/postMain}">게시판</a></li>
+                                                <li><a th:href="@{/reviews}">후기 게시판</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">마이페이지</a></li>
+                                        <li><a th:if="${userInfo == null}" href="/login" class="btn-log">로그인</a></li>
+                                        <li><a th:if="${userInfo != null}" href="/logout" class="btn-log">로그아웃</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="blog_area section-padding">
+    <div class="container">
+        <!-- 카테고리 -->
+        <div class="category-section">
+            <h4 class="widget_title"></h4>
+            <ul class="list cat-list">
+                <li>
+                    <a th:href="@{'/posts/category/rec'}">
+                        <p>숙소 추천</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/posts/category/general'}">
+                        <p>자유 게시판</p>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/posts/category/travel'}">
+                        <p>여행 TIP</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 글 작성 버튼 -->
+        <div>
+            <button type="button" class="btn-write" onclick="checkLogin();">글 작성</button>
+        </div>
+
+        <!-- 게시글 목록 -->
+        <div class="post-list">
+            <ul th:if="${posts != null && !posts.isEmpty()}" th:each="post : ${posts}">
+                <li>
+                    <article class="blog_item">
+                        <div class="blog_details" style="background-color: #fff9f0; border: solid 1px #f2e2cc;">
+                            <a th:href="@{'/post/' + ${post.post_id}}">
+                                <h2 class="blog-head" th:text="${post.title}" style="color: #2d2d2d;">게시글 제목</h2>
+                            </a>
+                            <ul class="blog-info-link">
+                                <li><span th:text="${post.nickname}">작성자</span></li>
+                                <li><span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}">작성일</span></li>
+                                <li><span th:text="${post.view_count}">조회수</span></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+            <p th:if="${posts == null || posts.isEmpty()}">게시글이 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 검색 필터 -->
+    <div class="search-container">
+        <form th:action="@{/posts/search}" method="get" class="search-box">
+            <select name="type" class="search-select">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="nickname">작성자</option>
+            </select>
+            <input type="text" class="search-input" name="keyword" placeholder="검색어를 입력하세요">
+            <button type="submit" class="search-button">검색
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- 페이징 -->
+    <nav class="blog-pagination justify-content-center d-flex" th:if="${page != null}">
+        <ul class="pagination">
+            <li th:if="${page.hasPrevious()}" th:classappend="${page.hasPrevious()} ? '' : 'disabled'">
+                <a th:href="@{'/posts?page=' + ${page.number - 1}}" class="page-link" aria-label="Previous">
+                    <i class="ti-angle-left"></i>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+                th:classappend="${i == page.number + 1} ? 'active' : ''">
+                <a th:href="@{'/posts?page=' + ${i - 1}}" class="page-link" th:text="${i}">1</a>
+            </li>
+            <li th:if="${page.hasNext()}" th:classappend="${page.hasNext()} ? '' : 'disabled'">
+                <a th:href="@{'/posts?page=' + ${page.number + 1}}" class="page-link" aria-label="Next">
+                    <i class="ti-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-area footer-padding footer-bg" style="background-color: #fff9f0;">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="/assets/img/logo/logo.png" alt="Logo" style="height: 5em;"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                    <div class="footer-tittle">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Report a Payment Issue</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+</body>
+</html>
