@@ -9,7 +9,8 @@
 <br/> [<img src="https://img.shields.io/badge/프로젝트 기간-2024.10.14~2024.10.23-green?style=flat&logo=&logoColor=white" />]()
 
 </div> 
-
+https://velog.io/@colorful-stars/Github-%ED%94%84%EB%A1%9C%ED%95%84-%EA%BE%B8%EB%AF%B8%EA%B8%B0
+리드미 참고 주소
 ## 📝 소개
 반려견 동반 숙소 예약 사이트 개발
 
