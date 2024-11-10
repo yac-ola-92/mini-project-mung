@@ -5,7 +5,7 @@
 
 ### Back-end Reamd.me ✅
 
-[<img src="https://img.shields.io/badge/-spring-boot-important?style=flat&logo=springboot&logoColor=#6DB33F" />]() [<img src="https://img.shields.io/badge/-java-blue?style=flat&logo=google-chrome&logoColor=white" />]() [<img src="https://img.shields.io/badge/release-v0.0.0-yellow?style=flat&logo=google-chrome&logoColor=white" />]() 
+[<img src="https://img.shields.io/badge/Velog-20c997?style=flat-square&logo=Vimeo&logoColor=white"/>]() [<img src="https://img.shields.io/badge/-java-blue?style=flat&logo=google-chrome&logoColor=white" />]() [<img src="https://img.shields.io/badge/release-v0.0.0-yellow?style=flat&logo=google-chrome&logoColor=white" />]() 
 <br/> [<img src="https://img.shields.io/badge/프로젝트 기간-2024.10.14~2024.10.23-green?style=flat&logo=&logoColor=white" />]()
 
 </div> 
